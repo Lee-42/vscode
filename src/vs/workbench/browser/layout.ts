@@ -24,6 +24,7 @@ import { IHostService } from 'vs/workbench/services/host/browser/host';
 import { IBrowserWorkbenchEnvironmentService } from 'vs/workbench/services/environment/browser/environmentService';
 import { IEditorService } from 'vs/workbench/services/editor/common/editorService';
 import { IHeaderBarService } from 'vs/workbench/services/headerBar/browser/headerBarService';
+import { ISimulatorService } from 'vs/workbench/services/simulator/browser/simulatorService';
 import { EditorGroupLayout, GroupsOrder, IEditorGroupsService } from 'vs/workbench/services/editor/common/editorGroupsService';
 import { SerializableGrid, ISerializableView, ISerializedGrid, Orientation, ISerializedNode, ISerializedLeafNode, Direction, IViewSize, Sizing } from 'vs/base/browser/ui/grid/grid';
 import { Part } from 'vs/workbench/browser/part';
@@ -260,6 +261,7 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 	private workbenchGrid!: SerializableGrid<ISerializableView>;
 
 	private headerBarPartView!: ISerializableView;
+	private simulatorPartView!: ISerializableView;
 	private titleBarPartView!: ISerializableView;
 	private bannerPartView!: ISerializableView;
 	private activityBarPartView!: ISerializableView;
@@ -286,6 +288,7 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 	private themeService!: IThemeService;
 	private statusBarService!: IStatusbarService;
 	private headerBarService!: IHeaderBarService;
+	private simulatorService!: ISimulatorService;
 	private logService!: ILogService;
 	private telemetryService!: ITelemetryService;
 	private auxiliaryWindowService!: IAuxiliaryWindowService;
@@ -326,6 +329,7 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 		this.notificationService = accessor.get(INotificationService);
 		this.statusBarService = accessor.get(IStatusbarService);
 		this.headerBarService = accessor.get(IHeaderBarService);
+		this.simulatorService = accessor.get(ISimulatorService);
 		accessor.get(IBannerService); // not used, but called to ensure instantiated
 
 		// Listeners
@@ -1183,6 +1187,9 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 		} else if (part === Parts.HEADERBAR_PART) {
 			// partCandidate = this.headerBarService.getPart(this.getContainerFromDocument(targetWindow.document));
 			partCandidate = this.getPart(Parts.HEADERBAR_PART).getContainer();
+		} else if (part === Parts.SIMULATOR_PART) {
+			// partCandidate = this.headerBarService.getPart(this.getContainerFromDocument(targetWindow.document));
+			partCandidate = this.getPart(Parts.SIDEBAR_PART).getContainer();
 		}
 
 		if (partCandidate instanceof Part) {
@@ -1478,9 +1485,9 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 		const sideBar = this.getPart(Parts.SIDEBAR_PART);
 		const statusBar = this.getPart(Parts.STATUSBAR_PART);
 		const headerBar = this.getPart(Parts.HEADERBAR_PART);
+		const simulator = this.getPart(Parts.SIMULATOR_PART);
 
 		// View references for all parts
-		this.headerBarPartView = headerBar;
 		this.titleBarPartView = titleBar;
 		this.bannerPartView = bannerPart;
 		this.sideBarPartView = sideBar;
@@ -1489,9 +1496,12 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 		this.panelPartView = panelPart;
 		this.auxiliaryBarPartView = auxiliaryBarPart;
 		this.statusBarPartView = statusBar;
+		this.headerBarPartView = headerBar;
+		this.simulatorPartView = simulator;
 
 		const viewMap = {
 			[Parts.HEADERBAR_PART]: this.headerBarPartView,
+			[Parts.SIMULATOR_PART]: this.simulatorPartView,
 			[Parts.ACTIVITYBAR_PART]: this.activityBarPartView,
 			[Parts.BANNER_PART]: this.bannerPartView,
 			[Parts.TITLEBAR_PART]: this.titleBarPartView,
@@ -1537,6 +1547,8 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 					? this.workbenchGrid.getViewCachedVisibleSize(this.sideBarPartView)
 					: this.workbenchGrid.getViewSize(this.sideBarPartView).width;
 				this.stateModel.setInitializationValue(LayoutStateKeys.SIDEBAR_SIZE, sideBarSize as number);
+
+				// Todo coco simulator size
 
 				// Panel Size
 				const panelSize = this.stateModel.getRuntimeValue(LayoutStateKeys.PANEL_HIDDEN)
@@ -2235,11 +2247,13 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 		};
 	}
 
-	private arrangeMiddleSectionNodes(nodes: { editor: ISerializedNode; panel: ISerializedNode; activityBar: ISerializedNode; sideBar: ISerializedNode; auxiliaryBar: ISerializedNode }, availableWidth: number, availableHeight: number): ISerializedNode[] {
+	private arrangeMiddleSectionNodes(nodes: { editor: ISerializedNode; panel: ISerializedNode; activityBar: ISerializedNode; sideBar: ISerializedNode; auxiliaryBar: ISerializedNode; simulator: ISerializedNode }, availableWidth: number, availableHeight: number): ISerializedNode[] {
 		const activityBarSize = this.stateModel.getRuntimeValue(LayoutStateKeys.ACTIVITYBAR_HIDDEN) ? 0 : nodes.activityBar.size;
 		const sideBarSize = this.stateModel.getRuntimeValue(LayoutStateKeys.SIDEBAR_HIDDEN) ? 0 : nodes.sideBar.size;
 		const auxiliaryBarSize = this.stateModel.getRuntimeValue(LayoutStateKeys.AUXILIARYBAR_HIDDEN) ? 0 : nodes.auxiliaryBar.size;
 		const panelSize = this.stateModel.getInitializationValue(LayoutStateKeys.PANEL_SIZE) ? 0 : nodes.panel.size;
+		// Todo get simulator width
+		const simulatorSize = this.simulatorPartView.minimumWidth;
 
 		const result = [] as ISerializedNode[];
 		if (this.stateModel.getRuntimeValue(LayoutStateKeys.PANEL_POSITION) !== Position.BOTTOM) {
@@ -2261,18 +2275,20 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 				result.push(nodes.activityBar);
 			}
 		} else {
+			// Todo 补充panel不在底部时, simulatorde计算
 			const panelAlignment = this.stateModel.getRuntimeValue(LayoutStateKeys.PANEL_ALIGNMENT);
 			const sideBarPosition = this.stateModel.getRuntimeValue(LayoutStateKeys.SIDEBAR_POSITON);
 			const sideBarNextToEditor = !(panelAlignment === 'center' || (sideBarPosition === Position.LEFT && panelAlignment === 'right') || (sideBarPosition === Position.RIGHT && panelAlignment === 'left'));
 			const auxiliaryBarNextToEditor = !(panelAlignment === 'center' || (sideBarPosition === Position.RIGHT && panelAlignment === 'right') || (sideBarPosition === Position.LEFT && panelAlignment === 'left'));
 
-			const editorSectionWidth = availableWidth - activityBarSize - (sideBarNextToEditor ? 0 : sideBarSize) - (auxiliaryBarNextToEditor ? 0 : auxiliaryBarSize);
+			// Todo 动态的模拟器宽度
+			const editorSectionWidth = availableWidth - activityBarSize - simulatorSize - (sideBarNextToEditor ? 0 : sideBarSize) - (auxiliaryBarNextToEditor ? 0 : auxiliaryBarSize);
 			result.push({
 				type: 'branch',
 				data: [this.arrangeEditorNodes({
 					editor: nodes.editor,
 					sideBar: sideBarNextToEditor ? nodes.sideBar : undefined,
-					auxiliaryBar: auxiliaryBarNextToEditor ? nodes.auxiliaryBar : undefined
+					auxiliaryBar: auxiliaryBarNextToEditor ? nodes.auxiliaryBar : undefined,
 				}, availableHeight - panelSize, editorSectionWidth), nodes.panel],
 				size: editorSectionWidth
 			});
@@ -2298,6 +2314,8 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 			} else {
 				result.push(nodes.activityBar);
 			}
+			// Todo left and right
+			result.push(nodes.simulator);
 		}
 
 		return result;
@@ -2313,7 +2331,9 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 		const bannerHeight = this.bannerPartView.minimumHeight;
 		const statusBarHeight = this.statusBarPartView.minimumHeight;
 		const activityBarWidth = this.activityBarPartView.minimumWidth;
-		// todo add headerbar height
+		// Todo simualtor width
+		const simulatorSize = this.simulatorPartView.minimumWidth;
+		// Todo add headerbar height
 		const headerBarHeight = this.headerBarPartView.minimumHeight;
 		const middleSectionHeight = height - titleBarHeight - headerBarHeight - statusBarHeight;
 
@@ -2367,13 +2387,22 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 			visible: !this.stateModel.getRuntimeValue(LayoutStateKeys.PANEL_HIDDEN)
 		};
 
+		// Todo visiable
+		const simulatorNode: ISerializedLeafNode = {
+			type: 'leaf',
+			data: { type: Parts.SIMULATOR_PART },
+			size: simulatorSize,
+			visible: true
+		};
+
 
 		const middleSection: ISerializedNode[] = this.arrangeMiddleSectionNodes({
 			activityBar: activityBarNode,
 			auxiliaryBar: auxiliaryBarNode,
 			editor: editorNode,
 			panel: panelNode,
-			sideBar: sideBarNode
+			sideBar: sideBarNode,
+			simulator: simulatorNode,
 		}, width, middleSectionHeight);
 
 		const result: ISerializedGrid = {

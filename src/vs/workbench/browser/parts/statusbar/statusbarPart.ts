@@ -359,8 +359,6 @@ class StatusbarPart extends Part implements IStatusbarEntryContainer {
 		// Initial status bar entries
 		this.createInitialStatusbarEntries();
 
-
-		console.log('this.element: ', this.element);
 		return this.element;
 	}
 

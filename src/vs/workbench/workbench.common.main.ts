@@ -47,6 +47,7 @@ import 'vs/workbench/browser/parts/paneCompositePartService';
 import 'vs/workbench/browser/parts/banner/bannerPart';
 import 'vs/workbench/browser/parts/statusbar/statusbarPart';
 import 'vs/workbench/browser/parts/headerbar/headerbarPart';
+import 'vs/workbench/browser/parts/simulator/simulatorPart';
 
 //#endregion
 

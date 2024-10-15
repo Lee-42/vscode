@@ -2,14 +2,12 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
+import { createDecorator } from 'vs/platform/instantiation/common/instantiation';
 
-.header-wrapper {
-	width: 100%;
-	height: 100%;
-	font-size: 30px;
-	font-weight: 600;
-	color: white;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+export const ISimulatorService = createDecorator<ISimulatorService>(
+	'simualtorService'
+);
+
+export interface ISimulatorService {
+	readonly _serviceBrand: undefined;
 }

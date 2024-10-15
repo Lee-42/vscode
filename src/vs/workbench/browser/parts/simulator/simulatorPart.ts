@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import 'vs/css!./media/headerbarpart';
+import 'vs/css!./media/simulatorpart';
 import { Part } from 'vs/workbench/browser/part';
 import { addClass } from 'vs/base/browser/dom';
 import {
@@ -15,17 +15,17 @@ import {
 } from 'vs/workbench/services/layout/browser/layoutService';
 import { IStorageService } from 'vs/platform/storage/common/storage';
 import { IThemeService } from 'vs/platform/theme/common/themeService';
-import { IHeaderBarService } from 'vs/workbench/services/headerBar/browser/headerBarService';
+import { ISimulatorService } from 'vs/workbench/services/simulator/browser/simulatorService';
 import { InstantiationType, registerSingleton } from 'vs/platform/instantiation/common/extensions';
 import { ACTIVITY_BAR_BACKGROUND } from 'vs/workbench/common/theme';
 
-export class HeaderbarPart extends Part implements IHeaderBarService {
+export class SimulatorPart extends Part implements ISimulatorService {
 	declare readonly _serviceBrand: undefined;
 
-	readonly minimumWidth: number = 0;
-	readonly maximumWidth!: number;
-	readonly minimumHeight: number = 80;
-	readonly maximumHeight: number = 80;
+	readonly minimumWidth: number = 100;
+	readonly maximumWidth: number = Number.POSITIVE_INFINITY;
+	readonly minimumHeight: number = 77;
+	readonly maximumHeight: number = Number.POSITIVE_INFINITY;
 
 	constructor(
 		@IStorageService storageService: IStorageService,
@@ -34,7 +34,7 @@ export class HeaderbarPart extends Part implements IHeaderBarService {
 		@IInstantiationService instantiationService: IInstantiationService
 	) {
 		super(
-			Parts.HEADERBAR_PART,
+			Parts.SIMULATOR_PART,
 			{ hasTitle: false },
 			themeService,
 			storageService,
@@ -45,8 +45,8 @@ export class HeaderbarPart extends Part implements IHeaderBarService {
 	protected override createContentArea(parent: HTMLElement): HTMLElement {
 		this.element = parent;
 		const content = document.createElement('div');
-		content.innerText = 'header-bar';
-		addClass(content, 'header-wrapper');
+		content.innerText = 'simulator';
+		addClass(content, 'simulator-wrapper');
 		this.element.appendChild(content);
 
 		return this.element;
@@ -65,9 +65,9 @@ export class HeaderbarPart extends Part implements IHeaderBarService {
 
 	toJSON(): object {
 		return {
-			type: Parts.HEADERBAR_PART
+			type: Parts.SIMULATOR_PART
 		};
 	}
 }
 
-registerSingleton(IHeaderBarService, HeaderbarPart, InstantiationType.Eager);
+registerSingleton(ISimulatorService, SimulatorPart, InstantiationType.Eager);
