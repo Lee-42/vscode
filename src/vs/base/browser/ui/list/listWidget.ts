@@ -776,6 +776,7 @@ export class MouseController<T> implements IDisposable {
 	}
 
 	protected onDoubleClick(e: IListMouseEvent<T>): void {
+		console.log('onDoubleClick');
 		if (isInputElement(e.browserEvent.target as HTMLElement) || isMonacoEditor(e.browserEvent.target as HTMLElement)) {
 			return;
 		}

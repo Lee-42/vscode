@@ -121,5 +121,4 @@
 		console.trace('perf-util defined in UNKNOWN context (neither requirejs or commonjs)');
 		sharedObj.perf = _factory(sharedObj);
 	}
-
 })();

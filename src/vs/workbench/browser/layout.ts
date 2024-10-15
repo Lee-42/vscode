@@ -23,6 +23,7 @@ import { getMenuBarVisibility, IPath, hasNativeTitlebar, hasCustomTitlebar, Titl
 import { IHostService } from 'vs/workbench/services/host/browser/host';
 import { IBrowserWorkbenchEnvironmentService } from 'vs/workbench/services/environment/browser/environmentService';
 import { IEditorService } from 'vs/workbench/services/editor/common/editorService';
+import { IHeaderBarService } from 'vs/workbench/services/headerBar/browser/headerBarService';
 import { EditorGroupLayout, GroupsOrder, IEditorGroupsService } from 'vs/workbench/services/editor/common/editorGroupsService';
 import { SerializableGrid, ISerializableView, ISerializedGrid, Orientation, ISerializedNode, ISerializedLeafNode, Direction, IViewSize, Sizing } from 'vs/base/browser/ui/grid/grid';
 import { Part } from 'vs/workbench/browser/part';
@@ -251,12 +252,14 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 
 	//#endregion
 
-	private readonly parts = new Map<string, Part>();
+	// private readonly parts = new Map<string, Part>();
+	parts = new Map<string, Part>();
 	private readonly auxWindowStylesLoaded = new Map</* container */ HTMLElement, Promise<void>>();
 
 	private initialized = false;
 	private workbenchGrid!: SerializableGrid<ISerializableView>;
 
+	private headerBarPartView!: ISerializableView;
 	private titleBarPartView!: ISerializableView;
 	private bannerPartView!: ISerializableView;
 	private activityBarPartView!: ISerializableView;
@@ -282,6 +285,7 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 	private notificationService!: INotificationService;
 	private themeService!: IThemeService;
 	private statusBarService!: IStatusbarService;
+	private headerBarService!: IHeaderBarService;
 	private logService!: ILogService;
 	private telemetryService!: ITelemetryService;
 	private auxiliaryWindowService!: IAuxiliaryWindowService;
@@ -321,7 +325,8 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 		this.titleService = accessor.get(ITitleService);
 		this.notificationService = accessor.get(INotificationService);
 		this.statusBarService = accessor.get(IStatusbarService);
-		accessor.get(IBannerService);
+		this.headerBarService = accessor.get(IHeaderBarService);
+		accessor.get(IBannerService); // not used, but called to ensure instantiated
 
 		// Listeners
 		this.registerLayoutListeners();
@@ -1098,7 +1103,6 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 	registerPart(part: Part): IDisposable {
 		const id = part.getId();
 		this.parts.set(id, part);
-
 		return toDisposable(() => this.parts.delete(id));
 	}
 
@@ -1107,7 +1111,6 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 		if (!part) {
 			throw new Error(`Unknown part ${key}`);
 		}
-
 		return part;
 	}
 
@@ -1177,6 +1180,9 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 			partCandidate = this.statusBarService.getPart(this.getContainerFromDocument(targetWindow.document));
 		} else if (part === Parts.TITLEBAR_PART) {
 			partCandidate = this.titleService.getPart(this.getContainerFromDocument(targetWindow.document));
+		} else if (part === Parts.HEADERBAR_PART) {
+			// partCandidate = this.headerBarService.getPart(this.getContainerFromDocument(targetWindow.document));
+			partCandidate = this.getPart(Parts.HEADERBAR_PART).getContainer();
 		}
 
 		if (partCandidate instanceof Part) {
@@ -1212,6 +1218,7 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 					return !this.stateModel.getRuntimeValue(LayoutStateKeys.EDITOR_HIDDEN);
 				case Parts.BANNER_PART:
 					return this.workbenchGrid.isViewVisible(this.bannerPartView);
+				// todo case
 				default:
 					return false; // any other part cannot be hidden
 			}
@@ -1470,8 +1477,10 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 		const auxiliaryBarPart = this.getPart(Parts.AUXILIARYBAR_PART);
 		const sideBar = this.getPart(Parts.SIDEBAR_PART);
 		const statusBar = this.getPart(Parts.STATUSBAR_PART);
+		const headerBar = this.getPart(Parts.HEADERBAR_PART);
 
 		// View references for all parts
+		this.headerBarPartView = headerBar;
 		this.titleBarPartView = titleBar;
 		this.bannerPartView = bannerPart;
 		this.sideBarPartView = sideBar;
@@ -1482,6 +1491,7 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 		this.statusBarPartView = statusBar;
 
 		const viewMap = {
+			[Parts.HEADERBAR_PART]: this.headerBarPartView,
 			[Parts.ACTIVITYBAR_PART]: this.activityBarPartView,
 			[Parts.BANNER_PART]: this.bannerPartView,
 			[Parts.TITLEBAR_PART]: this.titleBarPartView,
@@ -1504,7 +1514,7 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 		this.workbenchGrid = workbenchGrid;
 		this.workbenchGrid.edgeSnapping = this.state.runtime.mainWindowFullscreen;
 
-		for (const part of [titleBar, editorPart, activityBar, panelPart, sideBar, statusBar, auxiliaryBarPart, bannerPart]) {
+		for (const part of [headerBar, titleBar, editorPart, activityBar, panelPart, sideBar, statusBar, auxiliaryBarPart, bannerPart]) {
 			this._register(part.onDidVisibilityChange((visible) => {
 				if (part === sideBar) {
 					this.setSideBarHidden(!visible, true);
@@ -2303,7 +2313,9 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 		const bannerHeight = this.bannerPartView.minimumHeight;
 		const statusBarHeight = this.statusBarPartView.minimumHeight;
 		const activityBarWidth = this.activityBarPartView.minimumWidth;
-		const middleSectionHeight = height - titleBarHeight - statusBarHeight;
+		// todo add headerbar height
+		const headerBarHeight = this.headerBarPartView.minimumHeight;
+		const middleSectionHeight = height - titleBarHeight - headerBarHeight - statusBarHeight;
 
 		const titleAndBanner: ISerializedNode[] = [
 			{
@@ -2371,6 +2383,12 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 				data: [
 					...(this.shouldShowBannerFirst() ? titleAndBanner.reverse() : titleAndBanner),
 					{
+						type: 'leaf',
+						data: { type: Parts.HEADERBAR_PART },
+						size: headerBarHeight,
+						visible: true
+					},
+					{
 						type: 'branch',
 						data: middleSection,
 						size: middleSectionHeight
@@ -2394,6 +2412,7 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 			auxiliaryBarVisible: boolean;
 			panelVisible: boolean;
 			statusbarVisible: boolean;
+			headerVisible: boolean;
 			sideBarPosition: string;
 			panelPosition: string;
 		};
@@ -2406,6 +2425,7 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 			auxiliaryBarVisible: { classification: 'SystemMetaData'; purpose: 'FeatureInsight'; isMeasurement: true; comment: 'Whether or the not the secondary side bar is visible' };
 			panelVisible: { classification: 'SystemMetaData'; purpose: 'FeatureInsight'; isMeasurement: true; comment: 'Whether or the not the panel is visible' };
 			statusbarVisible: { classification: 'SystemMetaData'; purpose: 'FeatureInsight'; isMeasurement: true; comment: 'Whether or the not the status bar is visible' };
+			headerVisible: { classification: 'SystemMetaData'; purpose: 'FeatureInsight'; isMeasurement: true; comment: 'Whether or the not the header bar is visible' };
 			sideBarPosition: { classification: 'SystemMetaData'; purpose: 'FeatureInsight'; comment: 'Whether the primary side bar is on the left or right' };
 			panelPosition: { classification: 'SystemMetaData'; purpose: 'FeatureInsight'; comment: 'Whether the panel is on the bottom, left, or right' };
 		};
@@ -2418,10 +2438,12 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 			statusbarVisible: !this.stateModel.getRuntimeValue(LayoutStateKeys.STATUSBAR_HIDDEN),
 			sideBarPosition: positionToString(this.stateModel.getRuntimeValue(LayoutStateKeys.SIDEBAR_POSITON)),
 			panelPosition: positionToString(this.stateModel.getRuntimeValue(LayoutStateKeys.PANEL_POSITION)),
+			headerVisible: true
 		};
 
 		this.telemetryService.publicLog2<StartupLayoutEvent, StartupLayoutEventClassification>('startupLayout', layoutDescriptor);
 
+		// todo what is result
 		return result;
 	}
 

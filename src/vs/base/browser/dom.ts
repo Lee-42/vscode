@@ -155,6 +155,7 @@ class DomListener implements IDisposable {
 		this._node = null!;
 		this._handler = null!;
 	}
+
 }
 
 export function addDisposableListener<K extends keyof GlobalEventHandlersEventMap>(node: EventTarget, type: K, handler: (event: GlobalEventHandlersEventMap[K]) => void, useCapture?: boolean): IDisposable;
@@ -2372,4 +2373,17 @@ export function trackAttributes(from: Element, to: Element, filter?: string[]): 
 	}));
 
 	return disposables;
+}
+
+
+/**
+ * Adds a class to the specified DOM element.
+ *
+ * @param element - The DOM element to which the class will be added.
+ * @param className - The class name to add to the element.
+ */
+export function addClass(element: HTMLElement, className: string): void {
+	if (element && className) {
+		element.classList.add(className);
+	}
 }

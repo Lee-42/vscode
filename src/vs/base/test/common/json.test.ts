@@ -115,7 +115,7 @@ suite('JSON', () => {
 		assertKinds('-0.1', SyntaxKind.NumericLiteral);
 		assertKinds('-1', SyntaxKind.NumericLiteral);
 		assertKinds('1', SyntaxKind.NumericLiteral);
-		assertKinds('123456789', SyntaxKind.NumericLiteral);
+		assertKinds('Show All Commands', SyntaxKind.NumericLiteral);
 		assertKinds('10', SyntaxKind.NumericLiteral);
 		assertKinds('90', SyntaxKind.NumericLiteral);
 		assertKinds('90E+123', SyntaxKind.NumericLiteral);

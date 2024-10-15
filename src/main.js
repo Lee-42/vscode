@@ -180,10 +180,12 @@ function startup(codeCachePath, nlsConfig) {
 	});
 }
 
+
 async function onReady() {
 	perf.mark('code/mainAppReady');
 
 	try {
+		// 读取用户语言配置
 		const [, nlsConfig] = await Promise.all([mkdirpIgnoreError(codeCachePath), resolveNlsConfiguration()]);
 
 		startup(codeCachePath, nlsConfig);

@@ -336,7 +336,6 @@ class StatusbarPart extends Part implements IStatusbarEntryContainer {
 
 	protected override createContentArea(parent: HTMLElement): HTMLElement {
 		this.element = parent;
-
 		// Track focus within container
 		const scopedContextKeyService = this._register(this.contextKeyService.createScoped(this.element));
 		StatusBarFocused.bindTo(scopedContextKeyService).set(true);
@@ -360,6 +359,8 @@ class StatusbarPart extends Part implements IStatusbarEntryContainer {
 		// Initial status bar entries
 		this.createInitialStatusbarEntries();
 
+
+		console.log('this.element: ', this.element);
 		return this.element;
 	}
 

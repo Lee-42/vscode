@@ -113,7 +113,7 @@ suite('NotebookCommon', () => {
 
 	test('diff test small source', async () => {
 		await withTestNotebookDiffModel([
-			['123456789', 'javascript', CellKind.Code, [], {}]
+			['Show All Commands', 'javascript', CellKind.Code, [], {}]
 		], [
 			['987654321', 'javascript', CellKind.Code, [], {}],
 		], (model, disposables, accessor) => {

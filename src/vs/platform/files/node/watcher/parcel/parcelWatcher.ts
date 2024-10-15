@@ -666,6 +666,7 @@ export class ParcelWatcher extends BaseWatcher implements IRecursiveWatcher {
 	}
 
 	protected trace(message: string, watcher?: IParcelWatcherInstance): void {
+		console.log('trace: ', message);
 		if (this.verboseLogging) {
 			this._onDidLogMessage.fire({ type: 'trace', message: this.toMessage(message, watcher) });
 		}

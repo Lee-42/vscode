@@ -133,7 +133,7 @@ export class OpenFileFolderAction extends Action2 {
 
 	override async run(accessor: ServicesAccessor, data?: ITelemetryData): Promise<void> {
 		const fileDialogService = accessor.get(IFileDialogService);
-
+		console.log('OpenFileFolderAction');
 		return fileDialogService.pickFileFolderAndOpen({ forceNewWindow: false, telemetryExtraData: data });
 	}
 }

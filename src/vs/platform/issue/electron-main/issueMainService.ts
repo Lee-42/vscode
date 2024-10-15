@@ -172,7 +172,6 @@ export class IssueMainService implements IIssueMainService {
 					},
 					product
 				});
-
 				this.issueReporterWindow.loadURL(
 					FileAccess.asBrowserUri(`vs/code/electron-sandbox/issue/issueReporter${this.environmentMainService.isBuilt ? '' : '-dev'}.html`).toString(true)
 				);
@@ -223,7 +222,6 @@ export class IssueMainService implements IIssueMainService {
 					data,
 					product
 				});
-
 				this.processExplorerWindow.loadURL(
 					FileAccess.asBrowserUri(`vs/code/electron-sandbox/processExplorer/processExplorer${this.environmentMainService.isBuilt ? '' : '-dev'}.html`).toString(true)
 				);

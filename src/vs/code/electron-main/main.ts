@@ -98,7 +98,7 @@ class CodeMain {
 		// default electron error dialog popping up
 		setUnexpectedErrorHandler(err => console.error(err));
 
-		// Create services
+		// Create services 使用创建的 services 创建「实例服务」
 		const [instantiationService, instanceEnvironment, environmentMainService, configurationService, stateMainService, bufferLogService, productService, userDataProfilesMainService] = this.createServices();
 
 		try {
@@ -149,6 +149,7 @@ class CodeMain {
 		}
 	}
 
+	// 创建 Services
 	private createServices(): [IInstantiationService, IProcessEnvironment, IEnvironmentMainService, ConfigurationService, StateService, BufferLogger, IProductService, UserDataProfilesMainService] {
 		const services = new ServiceCollection();
 		const disposables = new DisposableStore();
@@ -158,12 +159,12 @@ class CodeMain {
 		const productService = { _serviceBrand: undefined, ...product };
 		services.set(IProductService, productService);
 
-		// Environment
+		// Environment 运行环境服务 可以获取程序的：启动目录、日志目录、操作系统、配置文件目录、快捷键绑定配置路径
 		const environmentMainService = new EnvironmentMainService(this.resolveArgs(), productService);
 		const instanceEnvironment = this.patchEnvironment(environmentMainService); // Patch `process.env` with the instance's environment
 		services.set(IEnvironmentMainService, environmentMainService);
 
-		// Logger
+		// Logger 日志服务: 默认是用的控制台输出日志
 		const loggerService = new LoggerMainService(getLogLevel(environmentMainService), environmentMainService.logsHome);
 		services.set(ILoggerMainService, loggerService);
 
@@ -184,7 +185,8 @@ class CodeMain {
 		const uriIdentityService = new UriIdentityService(fileService);
 		services.set(IUriIdentityService, uriIdentityService);
 
-		// State
+		// State 状态服务
+		// 在storage.json里记录一些与程序运行状态有关的键值对（也可以删除）
 		const stateService = new StateService(SaveStrategy.DELAYED, environmentMainService, logService, fileService);
 		services.set(IStateReadService, stateService);
 		services.set(IStateService, stateService);
@@ -203,20 +205,30 @@ class CodeMain {
 				: new NullPolicyService();
 		services.set(IPolicyService, policyService);
 
-		// Configuration
+		// Configuration 配置服务
+		// 1.从运行环境服务（environmentService）里，拿到配置文件的路径
+		// 2.读出配置文件的内容，然后提供配置项的读写功能；
+		// 3.配置项变更的时候，会有相应的事件触发出来；
 		const configurationService = new ConfigurationService(userDataProfilesMainService.defaultProfile.settingsResource, fileService, policyService, logService);
 		services.set(IConfigurationService, configurationService);
 
-		// Lifecycle
+		// Lifecycle 生命周期服务
+		// 1.监听了一系列的electron的事件。比如：
+		// 2.before-quit、window-all-closed、will-quit等
+		// 3.事件被触发的时候，做了下面一些事情。记日志、屏蔽electron默认的处理逻辑、执行自己的逻辑
+
 		services.set(ILifecycleMainService, new SyncDescriptor(LifecycleMainService, undefined, false));
 
-		// Request
+		// Request 请求服务
+		// 使用electron提供的net.request方法，发起请求（支持代理和SSL）
 		services.set(IRequestService, new SyncDescriptor(RequestMainService, undefined, true));
 
-		// Themes
+		// Themes 界面主题服务
+		// 获取背景色、设置背景色。数据通过stateService保存
 		services.set(IThemeMainService, new SyncDescriptor(ThemeMainService));
 
-		// Signing
+		// Signing 程序签名服务
+		// 服务为程序的签名提供帮助
 		services.set(ISignService, new SyncDescriptor(SignService, undefined, false /* proxied to other processes */));
 
 		// Tunnel
@@ -225,6 +237,7 @@ class CodeMain {
 		// Protocol (instantiated early and not using sync descriptor for security reasons)
 		services.set(IProtocolMainService, new ProtocolMainService(environmentMainService, userDataProfilesMainService, logService));
 
+		// 实例化服务: 这个服务提供了反射、实例化的一些方法; 用于创建具体的类型的实例
 		return [new InstantiationService(services, true), instanceEnvironment, environmentMainService, configurationService, stateService, bufferLogger, productService, userDataProfilesMainService];
 	}
 
@@ -248,7 +261,7 @@ class CodeMain {
 	private async initServices(environmentMainService: IEnvironmentMainService, userDataProfilesMainService: UserDataProfilesMainService, configurationService: ConfigurationService, stateService: StateService, productService: IProductService): Promise<void> {
 		await Promises.settled<unknown>([
 
-			// Environment service (paths)
+			// Environment service (paths) 创建了一大堆目录
 			Promise.all<string | undefined>([
 				this.allowWindowsUNCPath(environmentMainService.extensionsPath), // enable extension paths on UNC drives...
 				environmentMainService.codeCachePath,							 // ...other user-data-derived paths should already be enlisted from `main.js`
@@ -364,7 +377,8 @@ class CodeMain {
 			const otherInstanceLaunchMainService = ProxyChannel.toService<ILaunchMainService>(client.getChannel('launch'), { disableMarshalling: true });
 			const otherInstanceDiagnosticsMainService = ProxyChannel.toService<IDiagnosticsMainService>(client.getChannel('diagnostics'), { disableMarshalling: true });
 
-			// Process Info
+			// Process Info 诊断服务
+			// 根据不同的操作系统，计算CPU消耗、内存消耗、GPU消耗等
 			if (environmentMainService.args.status) {
 				return instantiationService.invokeFunction(async () => {
 					const diagnosticsService = new DiagnosticsService(NullTelemetryService, productService);
