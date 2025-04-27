@@ -328,6 +328,7 @@ export class Workbench extends Layout {
 
 		// Create Parts
 		for (const { id, role, classes, options } of [
+			{ id: Parts.HEADERBAR_PART, role: 'headerbar', classes: ['headerbar'] },
 			{ id: Parts.TITLEBAR_PART, role: 'none', classes: ['titlebar'] },
 			{ id: Parts.BANNER_PART, role: 'banner', classes: ['banner'] },
 			{ id: Parts.ACTIVITYBAR_PART, role: 'none', classes: ['activitybar', this.getSideBarPosition() === Position.LEFT ? 'left' : 'right'] }, // Use role 'none' for some parts to make screen readers less chatty #114892

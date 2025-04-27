@@ -23,6 +23,7 @@ import { getMenuBarVisibility, IPath, hasNativeTitlebar, hasCustomTitlebar, Titl
 import { IHostService } from '../services/host/browser/host.js';
 import { IBrowserWorkbenchEnvironmentService } from '../services/environment/browser/environmentService.js';
 import { IEditorService } from '../services/editor/common/editorService.js';
+import { IHeaderBarService } from '../services/headerBar/browser/headerBarService.js';
 import { EditorGroupLayout, GroupOrientation, GroupsOrder, IEditorGroupsService } from '../services/editor/common/editorGroupsService.js';
 import { SerializableGrid, ISerializableView, ISerializedGrid, Orientation, ISerializedNode, ISerializedLeafNode, Direction, IViewSize, Sizing } from '../../base/browser/ui/grid/grid.js';
 import { Part } from './part.js';
@@ -262,6 +263,7 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 	private initialized = false;
 	private workbenchGrid!: SerializableGrid<ISerializableView>;
 
+	private headerBarPartView!: ISerializableView;
 	private titleBarPartView!: ISerializableView;
 	private bannerPartView!: ISerializableView;
 	private activityBarPartView!: ISerializableView;
@@ -287,6 +289,7 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 	private notificationService!: INotificationService;
 	private themeService!: IThemeService;
 	private statusBarService!: IStatusbarService;
+	private headerBarService!: IHeaderBarService;
 	private logService!: ILogService;
 	private telemetryService!: ITelemetryService;
 	private auxiliaryWindowService!: IAuxiliaryWindowService;
@@ -318,6 +321,7 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 		this.auxiliaryWindowService = accessor.get(IAuxiliaryWindowService);
 
 		// Parts
+		this.headerBarService = accessor.get(IHeaderBarService);
 		this.editorService = accessor.get(IEditorService);
 		this.mainPartEditorService = this.editorService.createScoped('main', this._store);
 		this.editorGroupService = accessor.get(IEditorGroupsService);
@@ -1513,6 +1517,7 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 	}
 
 	protected createWorkbenchLayout(): void {
+		const headerBar = this.getPart(Parts.HEADERBAR_PART);
 		const titleBar = this.getPart(Parts.TITLEBAR_PART);
 		const bannerPart = this.getPart(Parts.BANNER_PART);
 		const editorPart = this.getPart(Parts.EDITOR_PART);
@@ -1523,6 +1528,7 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 		const statusBar = this.getPart(Parts.STATUSBAR_PART);
 
 		// View references for all parts
+		this.headerBarPartView = headerBar;
 		this.titleBarPartView = titleBar;
 		this.bannerPartView = bannerPart;
 		this.sideBarPartView = sideBar;
@@ -1533,6 +1539,7 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 		this.statusBarPartView = statusBar;
 
 		const viewMap = {
+			[Parts.HEADERBAR_PART]: this.headerBarPartView,
 			[Parts.ACTIVITYBAR_PART]: this.activityBarPartView,
 			[Parts.BANNER_PART]: this.bannerPartView,
 			[Parts.TITLEBAR_PART]: this.titleBarPartView,
@@ -2382,11 +2389,12 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 		const auxiliaryBarPartSize = this.stateModel.getInitializationValue(LayoutStateKeys.AUXILIARYBAR_SIZE);
 		const panelSize = this.stateModel.getInitializationValue(LayoutStateKeys.PANEL_SIZE);
 
+		const headerBarHeight = this.headerBarPartView.minimumHeight;
 		const titleBarHeight = this.titleBarPartView.minimumHeight;
 		const bannerHeight = this.bannerPartView.minimumHeight;
 		const statusBarHeight = this.statusBarPartView.minimumHeight;
 		const activityBarWidth = this.activityBarPartView.minimumWidth;
-		const middleSectionHeight = height - titleBarHeight - statusBarHeight;
+		const middleSectionHeight = height - titleBarHeight - statusBarHeight - headerBarHeight;
 
 		const titleAndBanner: ISerializedNode[] = [
 			{
@@ -2453,6 +2461,12 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 				data: [
 					...(this.shouldShowBannerFirst() ? titleAndBanner.reverse() : titleAndBanner),
 					{
+						type: 'leaf',
+						data: { type: Parts.HEADERBAR_PART },
+						size: headerBarHeight,
+						visible: true
+					},
+					{
 						type: 'branch',
 						data: middleSection,
 						size: middleSectionHeight
@@ -2471,6 +2485,7 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 		};
 
 		type StartupLayoutEvent = {
+			headerVisible: boolean;
 			activityBarVisible: boolean;
 			sideBarVisible: boolean;
 			auxiliaryBarVisible: boolean;
@@ -2483,6 +2498,7 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 		type StartupLayoutEventClassification = {
 			owner: 'benibenj';
 			comment: 'Information about the layout of the workbench during statup';
+			headerVisible: { classification: 'SystemMetaData'; purpose: 'FeatureInsight'; isMeasurement: true; comment: 'Whether or the not the header bar is visible' };
 			activityBarVisible: { classification: 'SystemMetaData'; purpose: 'FeatureInsight'; comment: 'Whether or the not the activity bar is visible' };
 			sideBarVisible: { classification: 'SystemMetaData'; purpose: 'FeatureInsight'; comment: 'Whether or the not the primary side bar is visible' };
 			auxiliaryBarVisible: { classification: 'SystemMetaData'; purpose: 'FeatureInsight'; comment: 'Whether or the not the secondary side bar is visible' };
@@ -2493,6 +2509,7 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 		};
 
 		const layoutDescriptor: StartupLayoutEvent = {
+			headerVisible: true,
 			activityBarVisible: !this.stateModel.getRuntimeValue(LayoutStateKeys.ACTIVITYBAR_HIDDEN),
 			sideBarVisible: !this.stateModel.getRuntimeValue(LayoutStateKeys.SIDEBAR_HIDDEN),
 			auxiliaryBarVisible: !this.stateModel.getRuntimeValue(LayoutStateKeys.AUXILIARYBAR_HIDDEN),

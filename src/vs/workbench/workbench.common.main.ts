@@ -41,6 +41,7 @@ import './api/browser/viewsExtensionPoint.js';
 
 //#region --- workbench parts
 
+import './browser/parts/headerbar/headerbarPart.js';
 import './browser/parts/editor/editor.contribution.js';
 import './browser/parts/editor/editorParts.js';
 import './browser/parts/paneCompositePartService.js';
