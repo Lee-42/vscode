@@ -1352,7 +1352,8 @@ export class GettingStartedPage extends EditorPane {
 			if (linkedText.nodes.length === 1 && typeof linkedText.nodes[0] !== 'string') {
 				const node = linkedText.nodes[0];
 				const buttonContainer = append(container, $('.button-container'));
-				const button = new Button(buttonContainer, { title: node.title, supportIcons: true, ...defaultButtonStyles });
+				const options = { title: node.title, supportIcons: true, ...defaultButtonStyles };
+				const button = new Button(buttonContainer, options);
 
 				const isCommand = node.href.startsWith('command:');
 				const command = node.href.replace(/command:(toSide:)?/, 'command:');

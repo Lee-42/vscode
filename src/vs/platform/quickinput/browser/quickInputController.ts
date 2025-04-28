@@ -186,6 +186,8 @@ export class QuickInputController extends Disposable {
 		inlineActionBar.domNode.classList.add('quick-input-inline-action-bar');
 
 		const okContainer = dom.append(headerContainer, $('.quick-input-action'));
+		console.log('okContainer: ', okContainer);
+		console.log('this.styles.button: ', this.styles.button);
 		const ok = this._register(new Button(okContainer, this.styles.button));
 		ok.label = localize('ok', "OK");
 		this._register(ok.onDidClick(e => {

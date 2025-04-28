@@ -3,13 +3,61 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
- .header-wrapper {
-	width: 100%;
+.headerbar-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 	height: 100%;
-	font-size: 30px;
-	font-weight: 600;
-	color: white;
+	padding: 0 16px;
+}
+
+.headerbar-left,
+.headerbar-center,
+.headerbar-right {
 	display: flex;
 	align-items: center;
+}
+
+.headerbar-left {
+	justify-content: flex-start;
+}
+
+.headerbar-center {
 	justify-content: center;
+}
+
+.headerbar-right {
+	justify-content: flex-end;
+}
+
+.header-title {
+	font-size: 16px;
+	font-weight: 600;
+	color: var(--vscode-foreground);
+}
+
+.avatar-container {
+	width: 32px;
+	height: 32px;
+	object-fit: cover;
+}
+
+.i-button,
+.editor-button {
+	margin-left: 8px;
+}
+
+.i-button .monaco-button {
+	width: fit-content;
+	display: flex;
+	align-items: center;
+	min-width: max-content;
+	padding: 4px;
+}
+
+.editor-button .monaco-button {
+	width: fit-content;
+	display: flex;
+	align-items: center;
+	min-width: max-content;
 }
