@@ -328,6 +328,7 @@ export class Workbench extends Layout {
 
 		// Create Parts
 		for (const { id, role, classes, options } of [
+			{ id: Parts.SIMULATOR_PART, role: 'simulator', classes: ['simulator'] },
 			{ id: Parts.HEADERBAR_PART, role: 'headerbar', classes: ['headerbar'] },
 			{ id: Parts.TITLEBAR_PART, role: 'none', classes: ['titlebar'] },
 			{ id: Parts.BANNER_PART, role: 'banner', classes: ['banner'] },

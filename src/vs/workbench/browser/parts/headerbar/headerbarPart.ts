@@ -13,7 +13,6 @@ import { IThemeService } from '../../../../platform/theme/common/themeService.js
 import { IHeaderBarService } from '../../../../workbench/services/headerBar/browser/headerBarService.js';
 import { InstantiationType, registerSingleton } from '../../../../platform/instantiation/common/extensions.js';
 import { ACTIVITY_BAR_BACKGROUND, ACTIVITY_BAR_TOP_BACKGROUND } from '../../../common/theme.js';
-import { unthemedButtonStyles } from '../../../../base/browser/ui/button/button.js';
 import { Codicon } from '../../../../base/common/codicons.js';
 import { ICommandService } from '../../../../platform/commands/common/commands.js';
 import { IContextKeyService } from '../../../../platform/contextkey/common/contextkey.js';

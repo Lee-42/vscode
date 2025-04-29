@@ -23,6 +23,7 @@ import { getMenuBarVisibility, IPath, hasNativeTitlebar, hasCustomTitlebar, Titl
 import { IHostService } from '../services/host/browser/host.js';
 import { IBrowserWorkbenchEnvironmentService } from '../services/environment/browser/environmentService.js';
 import { IEditorService } from '../services/editor/common/editorService.js';
+import { ISimulatorService } from '../services/simulator/browser/simulatorService.js';
 import { IHeaderBarService } from '../services/headerBar/browser/headerBarService.js';
 import { EditorGroupLayout, GroupOrientation, GroupsOrder, IEditorGroupsService } from '../services/editor/common/editorGroupsService.js';
 import { SerializableGrid, ISerializableView, ISerializedGrid, Orientation, ISerializedNode, ISerializedLeafNode, Direction, IViewSize, Sizing } from '../../base/browser/ui/grid/grid.js';
@@ -263,6 +264,7 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 	private initialized = false;
 	private workbenchGrid!: SerializableGrid<ISerializableView>;
 
+	private simulatorPartView!: ISerializableView;
 	private headerBarPartView!: ISerializableView;
 	private titleBarPartView!: ISerializableView;
 	private bannerPartView!: ISerializableView;
@@ -289,6 +291,7 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 	private notificationService!: INotificationService;
 	private themeService!: IThemeService;
 	private statusBarService!: IStatusbarService;
+	private simulatorService!: ISimulatorService;
 	private headerBarService!: IHeaderBarService;
 	private logService!: ILogService;
 	private telemetryService!: ITelemetryService;
@@ -321,6 +324,7 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 		this.auxiliaryWindowService = accessor.get(IAuxiliaryWindowService);
 
 		// Parts
+		this.simulatorService = accessor.get(ISimulatorService);
 		this.headerBarService = accessor.get(IHeaderBarService);
 		this.editorService = accessor.get(IEditorService);
 		this.mainPartEditorService = this.editorService.createScoped('main', this._store);
@@ -1229,6 +1233,10 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 			partCandidate = this.statusBarService.getPart(this.getContainerFromDocument(targetWindow.document));
 		} else if (part === Parts.TITLEBAR_PART) {
 			partCandidate = this.titleService.getPart(this.getContainerFromDocument(targetWindow.document));
+		} else if (part === Parts.HEADERBAR_PART) {
+			partCandidate = this.getPart(Parts.HEADERBAR_PART).getContainer();
+		} else if (part === Parts.SIMULATOR_PART) {
+			partCandidate = this.getPart(Parts.SIDEBAR_PART).getContainer();
 		}
 
 		if (partCandidate instanceof Part) {
@@ -1517,6 +1525,7 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 	}
 
 	protected createWorkbenchLayout(): void {
+		const simulator = this.getPart(Parts.SIMULATOR_PART);
 		const headerBar = this.getPart(Parts.HEADERBAR_PART);
 		const titleBar = this.getPart(Parts.TITLEBAR_PART);
 		const bannerPart = this.getPart(Parts.BANNER_PART);
@@ -1528,6 +1537,7 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 		const statusBar = this.getPart(Parts.STATUSBAR_PART);
 
 		// View references for all parts
+		this.simulatorPartView = simulator;
 		this.headerBarPartView = headerBar;
 		this.titleBarPartView = titleBar;
 		this.bannerPartView = bannerPart;
@@ -1539,6 +1549,7 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 		this.statusBarPartView = statusBar;
 
 		const viewMap = {
+			[Parts.SIMULATOR_PART]: this.simulatorPartView,
 			[Parts.HEADERBAR_PART]: this.headerBarPartView,
 			[Parts.ACTIVITYBAR_PART]: this.activityBarPartView,
 			[Parts.BANNER_PART]: this.bannerPartView,
@@ -2310,11 +2321,12 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 		};
 	}
 
-	private arrangeMiddleSectionNodes(nodes: { editor: ISerializedNode; panel: ISerializedNode; activityBar: ISerializedNode; sideBar: ISerializedNode; auxiliaryBar: ISerializedNode }, availableWidth: number, availableHeight: number): ISerializedNode[] {
+	private arrangeMiddleSectionNodes(nodes: { editor: ISerializedNode; panel: ISerializedNode; activityBar: ISerializedNode; sideBar: ISerializedNode; auxiliaryBar: ISerializedNode; simulator: ISerializedNode }, availableWidth: number, availableHeight: number): ISerializedNode[] {
 		const activityBarSize = this.stateModel.getRuntimeValue(LayoutStateKeys.ACTIVITYBAR_HIDDEN) ? 0 : nodes.activityBar.size;
 		const sideBarSize = this.stateModel.getRuntimeValue(LayoutStateKeys.SIDEBAR_HIDDEN) ? 0 : nodes.sideBar.size;
 		const auxiliaryBarSize = this.stateModel.getRuntimeValue(LayoutStateKeys.AUXILIARYBAR_HIDDEN) ? 0 : nodes.auxiliaryBar.size;
 		const panelSize = this.stateModel.getInitializationValue(LayoutStateKeys.PANEL_SIZE) ? 0 : nodes.panel.size;
+		const simulatorSize = this.simulatorPartView.minimumWidth;
 
 		const panelPostion = this.stateModel.getRuntimeValue(LayoutStateKeys.PANEL_POSITION);
 		const sideBarPosition = this.stateModel.getRuntimeValue(LayoutStateKeys.SIDEBAR_POSITON);
@@ -2343,17 +2355,17 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 			const sideBarNextToEditor = !(panelAlignment === 'center' || (sideBarPosition === Position.LEFT && panelAlignment === 'right') || (sideBarPosition === Position.RIGHT && panelAlignment === 'left'));
 			const auxiliaryBarNextToEditor = !(panelAlignment === 'center' || (sideBarPosition === Position.RIGHT && panelAlignment === 'right') || (sideBarPosition === Position.LEFT && panelAlignment === 'left'));
 
-			const editorSectionWidth = availableWidth - activityBarSize - (sideBarNextToEditor ? 0 : sideBarSize) - (auxiliaryBarNextToEditor ? 0 : auxiliaryBarSize);
+			const editorSectionWidth = availableWidth - activityBarSize - simulatorSize - (sideBarNextToEditor ? 0 : sideBarSize) - (auxiliaryBarNextToEditor ? 0 : auxiliaryBarSize);
 
 			const editorNodes = this.arrangeEditorNodes({
 				editor: nodes.editor,
 				sideBar: sideBarNextToEditor ? nodes.sideBar : undefined,
-				auxiliaryBar: auxiliaryBarNextToEditor ? nodes.auxiliaryBar : undefined
-			}, availableHeight - panelSize, editorSectionWidth);
+				auxiliaryBar: auxiliaryBarNextToEditor ? nodes.auxiliaryBar : undefined,
+			}, availableHeight - panelSize, editorSectionWidth)
 
 			result.push({
 				type: 'branch',
-				data: panelPostion === Position.BOTTOM ? [editorNodes, nodes.panel] : [nodes.panel, editorNodes],
+				data: [editorNodes, nodes.panel],
 				size: editorSectionWidth
 			});
 
@@ -2378,6 +2390,7 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 			} else {
 				result.push(nodes.activityBar);
 			}
+			result.push(nodes.simulator);
 		}
 
 		return result;
@@ -2389,6 +2402,7 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 		const auxiliaryBarPartSize = this.stateModel.getInitializationValue(LayoutStateKeys.AUXILIARYBAR_SIZE);
 		const panelSize = this.stateModel.getInitializationValue(LayoutStateKeys.PANEL_SIZE);
 
+		const simulatorSize = this.simulatorPartView.minimumWidth;
 		const headerBarHeight = this.headerBarPartView.minimumHeight;
 		const titleBarHeight = this.titleBarPartView.minimumHeight;
 		const bannerHeight = this.bannerPartView.minimumHeight;
@@ -2446,12 +2460,21 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 			visible: !this.stateModel.getRuntimeValue(LayoutStateKeys.PANEL_HIDDEN)
 		};
 
+		// Todo visiable
+		const simulatorNode: ISerializedLeafNode = {
+			type: 'leaf',
+			data: { type: Parts.SIMULATOR_PART },
+			size: simulatorSize,
+			visible: true
+		};
+
 		const middleSection: ISerializedNode[] = this.arrangeMiddleSectionNodes({
 			activityBar: activityBarNode,
 			auxiliaryBar: auxiliaryBarNode,
 			editor: editorNode,
 			panel: panelNode,
-			sideBar: sideBarNode
+			sideBar: sideBarNode,
+			simulator: simulatorNode,
 		}, width, middleSectionHeight);
 
 		const result: ISerializedGrid = {
