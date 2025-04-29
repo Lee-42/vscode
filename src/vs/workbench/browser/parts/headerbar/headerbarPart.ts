@@ -13,8 +13,12 @@ import { IThemeService } from '../../../../platform/theme/common/themeService.js
 import { IHeaderBarService } from '../../../../workbench/services/headerBar/browser/headerBarService.js';
 import { InstantiationType, registerSingleton } from '../../../../platform/instantiation/common/extensions.js';
 import { ACTIVITY_BAR_BACKGROUND, ACTIVITY_BAR_TOP_BACKGROUND } from '../../../common/theme.js';
-import { Button, ButtonWithIcon, unthemedButtonStyles } from '../../../../base/browser/ui/button/button.js';
+import { unthemedButtonStyles } from '../../../../base/browser/ui/button/button.js';
 import { Codicon } from '../../../../base/common/codicons.js';
+import { ICommandService } from '../../../../platform/commands/common/commands.js';
+import { IContextKeyService } from '../../../../platform/contextkey/common/contextkey.js';
+import { AuxiliaryBarVisibleContext } from '../../../common/contextkeys.js';
+import { ButtonWithIconAndDescription } from '../../../../base/browser/ui/button/custom-button.js';
 
 export class HeaderbarPart extends Part implements IHeaderBarService {
 	declare readonly _serviceBrand: undefined;
@@ -28,12 +32,16 @@ export class HeaderbarPart extends Part implements IHeaderBarService {
 	private leftContainer: HTMLElement | undefined;
 	private centerContainer: HTMLElement | undefined;
 	private rightContainer: HTMLElement | undefined;
+	private readonly commandService: ICommandService;
+	private readonly contextKeyService: IContextKeyService;
 
 	constructor(
 		@IStorageService storageService: IStorageService,
 		@IThemeService themeService: IThemeService,
 		@IWorkbenchLayoutService layoutService: IWorkbenchLayoutService,
-		@IInstantiationService instantiationService: IInstantiationService
+		@IInstantiationService instantiationService: IInstantiationService,
+		@ICommandService commandService: ICommandService,
+		@IContextKeyService contextKeyService: IContextKeyService
 	) {
 		super(
 			Parts.HEADERBAR_PART,
@@ -42,6 +50,9 @@ export class HeaderbarPart extends Part implements IHeaderBarService {
 			storageService,
 			layoutService
 		);
+
+		this.commandService = commandService;
+		this.contextKeyService = contextKeyService;
 
 		// 注册主题变更监听
 		this._register(this.themeService.onDidColorThemeChange(() => this.updateStyles()));
@@ -69,14 +80,86 @@ export class HeaderbarPart extends Part implements IHeaderBarService {
 		this.leftContainer = document.createElement('div');
 		this.leftContainer.className = 'headerbar-left';
 
+		this.avatar(this.leftContainer);
+		this.simulatorSwitcher(this.leftContainer);
+		this.editortSwitcher(this.leftContainer);
+		this.devtoolSwitcher(this.leftContainer);
+
+		// 将左中右区域添加到主容器
+		container.appendChild(this.leftContainer);
+	}
+
+	private avatar(container: HTMLElement) {
 		// 添加头像
 		const img = document.createElement('img');
 		img.className = 'avatar-container';
 		img.src = 'https://avatars.githubusercontent.com/u/95179300?v=4&size=64';
-		this.leftContainer.appendChild(img);
-		// 将左中右区域添加到主容器
-		container.appendChild(this.leftContainer);
+		container.appendChild(img);
 	}
+
+
+	private simulatorSwitcher(container: HTMLElement) {
+		// 添加图标描述按钮示例
+		const buttonContainer = append(container, $('.simulator-button'));
+		const iconDescButton = new ButtonWithIconAndDescription(buttonContainer, {
+			supportIcons: true,
+		});
+		iconDescButton.icon = Codicon.deviceMobile;
+		iconDescButton.description = '模拟器';
+
+		// 获取第二侧边栏可见性上下文
+		const auxiliaryBarVisible = AuxiliaryBarVisibleContext.bindTo(this.contextKeyService);
+
+		// 更新按钮状态
+		const updateButtonState = () => {
+			if (auxiliaryBarVisible.get()) {
+				iconDescButton.active();
+			} else {
+				iconDescButton.inactive();
+			}
+		};
+
+		// 监听状态变化
+		this._register(this.contextKeyService.onDidChangeContext(e => {
+			if (e.affectsSome(new Set(['auxiliaryBarVisible']))) {
+				updateButtonState();
+			}
+		}));
+
+		// 初始化按钮状态
+		updateButtonState();
+
+		iconDescButton.onDidClick(() => {
+			this.commandService.executeCommand('workbench.action.toggleAuxiliaryBar');
+		});
+	}
+
+	private editortSwitcher(container: HTMLElement) {
+		const buttonContainer = append(container, $('.editor-button'));
+		const iconDescButton = new ButtonWithIconAndDescription(buttonContainer, {
+			supportIcons: true,
+		});
+		iconDescButton.icon = Codicon.edit;
+		iconDescButton.description = '编辑器';
+		iconDescButton.onDidClick(() => {
+			console.log('切换编辑器');
+		});
+
+	}
+	private devtoolSwitcher(container: HTMLElement) {
+		const buttonContainer = append(container, $('.devtool-button'));
+		const iconDescButton = new ButtonWithIconAndDescription(buttonContainer, {
+			supportIcons: true,
+			// ...unthemedButtonStyles
+		});
+		iconDescButton.icon = Codicon.terminal;
+		iconDescButton.description = '调试器';
+		iconDescButton.onDidClick(() => {
+			console.log('切换调试器');
+		});
+
+	}
+
 
 	// 初始化中区域的内容
 	private initCenterContent(container: HTMLElement): void {
@@ -96,23 +179,6 @@ export class HeaderbarPart extends Part implements IHeaderBarService {
 		this.rightContainer = document.createElement('div');
 		this.rightContainer.className = 'headerbar-right';
 
-		// 添加登录按钮
-		const buttonContainer = append(this.rightContainer, $('.i-button'));
-		const button = new Button(buttonContainer, {
-			...unthemedButtonStyles
-		});
-		button.label = '登录';
-		button.onDidClick(() => {
-			console.log('登录按钮被点击');
-		});
-
-		// 添加用户按钮
-		const userButtonContainer = append(this.rightContainer, $('.editor-button'));
-		const userButton = new ButtonWithIcon(userButtonContainer, {
-			supportIcons: true,
-			...unthemedButtonStyles,
-		});
-		userButton.icon = Codicon.person;
 		container.appendChild(this.rightContainer);
 	}
 

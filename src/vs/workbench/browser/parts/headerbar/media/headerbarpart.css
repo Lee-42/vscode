@@ -37,22 +37,10 @@
 }
 
 .avatar-container {
-	width: 32px;
-	height: 32px;
+	width: 36px;
+	height: 36px;
 	object-fit: cover;
-}
-
-.i-button,
-.editor-button {
-	margin-left: 8px;
-}
-
-.i-button .monaco-button {
-	width: fit-content;
-	display: flex;
-	align-items: center;
-	min-width: max-content;
-	padding: 4px;
+	margin-right: 30px;
 }
 
 .editor-button .monaco-button {
@@ -60,4 +48,20 @@
 	display: flex;
 	align-items: center;
 	min-width: max-content;
+}
+
+
+/* 模拟器按钮 */
+.simulator-button {
+
+}
+
+/* 编辑器按钮 */
+.editor-button {
+
+}
+
+/* 调试器按钮 */
+.devtool-button {
+
 }

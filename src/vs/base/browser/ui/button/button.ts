@@ -666,3 +666,4 @@ export class ButtonWithIcon extends Button {
 		this._setAriaLabel();
 	}
 }
+
