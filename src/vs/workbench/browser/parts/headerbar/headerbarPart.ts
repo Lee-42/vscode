@@ -16,7 +16,7 @@ import { ACTIVITY_BAR_BACKGROUND, ACTIVITY_BAR_TOP_BACKGROUND } from '../../../c
 import { Codicon } from '../../../../base/common/codicons.js';
 import { ICommandService } from '../../../../platform/commands/common/commands.js';
 import { IContextKeyService } from '../../../../platform/contextkey/common/contextkey.js';
-import { AuxiliaryBarVisibleContext } from '../../../common/contextkeys.js';
+import { AuxiliaryBarVisibleContext, PanelVisibleContext } from '../../../common/contextkeys.js';
 import { ButtonWithIconAndDescription } from '../../../../base/browser/ui/button/custom-button.js';
 
 export class HeaderbarPart extends Part implements IHeaderBarService {
@@ -100,11 +100,11 @@ export class HeaderbarPart extends Part implements IHeaderBarService {
 	private simulatorSwitcher(container: HTMLElement) {
 		// 添加图标描述按钮示例
 		const buttonContainer = append(container, $('.simulator-button'));
-		const iconDescButton = new ButtonWithIconAndDescription(buttonContainer, {
+		const button = new ButtonWithIconAndDescription(buttonContainer, {
 			supportIcons: true,
 		});
-		iconDescButton.icon = Codicon.deviceMobile;
-		iconDescButton.description = '模拟器';
+		button.icon = Codicon.deviceMobile;
+		button.description = '模拟器';
 
 		// 获取第二侧边栏可见性上下文
 		const auxiliaryBarVisible = AuxiliaryBarVisibleContext.bindTo(this.contextKeyService);
@@ -112,9 +112,9 @@ export class HeaderbarPart extends Part implements IHeaderBarService {
 		// 更新按钮状态
 		const updateButtonState = () => {
 			if (auxiliaryBarVisible.get()) {
-				iconDescButton.active();
+				button.active();
 			} else {
-				iconDescButton.inactive();
+				button.inactive();
 			}
 		};
 
@@ -128,35 +128,56 @@ export class HeaderbarPart extends Part implements IHeaderBarService {
 		// 初始化按钮状态
 		updateButtonState();
 
-		iconDescButton.onDidClick(() => {
+		button.onDidClick(() => {
 			this.commandService.executeCommand('workbench.action.toggleAuxiliaryBar');
 		});
 	}
 
 	private editortSwitcher(container: HTMLElement) {
 		const buttonContainer = append(container, $('.editor-button'));
-		const iconDescButton = new ButtonWithIconAndDescription(buttonContainer, {
+		const button = new ButtonWithIconAndDescription(buttonContainer, {
 			supportIcons: true,
 		});
-		iconDescButton.icon = Codicon.edit;
-		iconDescButton.description = '编辑器';
-		iconDescButton.onDidClick(() => {
+		button.icon = Codicon.edit;
+		button.description = '编辑器';
+		button.onDidClick(() => {
 			console.log('切换编辑器');
 		});
 
 	}
 	private devtoolSwitcher(container: HTMLElement) {
 		const buttonContainer = append(container, $('.devtool-button'));
-		const iconDescButton = new ButtonWithIconAndDescription(buttonContainer, {
+		const button = new ButtonWithIconAndDescription(buttonContainer, {
 			supportIcons: true,
-			// ...unthemedButtonStyles
 		});
-		iconDescButton.icon = Codicon.terminal;
-		iconDescButton.description = '调试器';
-		iconDescButton.onDidClick(() => {
-			console.log('切换调试器');
-		});
+		button.icon = Codicon.terminal;
+		button.description = '调试器';
 
+		// 获取底部面板可见性上下文
+		const panelVisible = PanelVisibleContext.bindTo(this.contextKeyService);
+
+		// 更新按钮状态
+		const updateButtonState = () => {
+			if (panelVisible.get()) {
+				button.active();
+			} else {
+				button.inactive();
+			}
+		};
+
+		// 监听状态变化
+		this._register(this.contextKeyService.onDidChangeContext(e => {
+			if (e.affectsSome(new Set(['panelVisible']))) {
+				updateButtonState();
+			}
+		}));
+
+		// 初始化按钮状态
+		updateButtonState();
+
+		button.onDidClick(() => {
+			this.commandService.executeCommand('workbench.action.togglePanel');
+		});
 	}
 
 
@@ -177,8 +198,6 @@ export class HeaderbarPart extends Part implements IHeaderBarService {
 	private initRightContent(container: HTMLElement): void {
 		this.rightContainer = document.createElement('div');
 		this.rightContainer.className = 'headerbar-right';
-
-		container.appendChild(this.rightContainer);
 	}
 
 	public override updateStyles(): void {

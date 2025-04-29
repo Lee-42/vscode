@@ -3,15 +3,29 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-.simulator-wrapper {
-	writing-mode: vertical-rl;
+.simulator-container {
 	width: 100%;
 	height: 100%;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	font-size: 30px;
-	font-weight: 600;
 	display: flex;
-	align-items: center;
-	justify-content: center;
+	flex-direction: column;
+}
+
+.simulator-header {
+	height: 34px;
+	background-color: var(--vscode-editor-background);
+}
+
+.simulator-body {
+	flex: 1;
+	overflow: auto;
+	padding: 10px;
+}
+
+.simulator-footer {
+	height: 22px;
+	background-color: var(--vscode-editor-background);
+}
+
+.simulator-container .monaco-dropdown {
+	width: 200px;
 }

@@ -2361,7 +2361,7 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 				editor: nodes.editor,
 				sideBar: sideBarNextToEditor ? nodes.sideBar : undefined,
 				auxiliaryBar: auxiliaryBarNextToEditor ? nodes.auxiliaryBar : undefined,
-			}, availableHeight - panelSize, editorSectionWidth)
+			}, availableHeight - panelSize, editorSectionWidth);
 
 			result.push({
 				type: 'branch',

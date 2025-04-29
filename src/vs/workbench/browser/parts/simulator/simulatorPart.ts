@@ -12,6 +12,9 @@ import { IThemeService } from '../../../../platform/theme/common/themeService.js
 import { ISimulatorService } from '../../../services/simulator/browser/simulatorService.js';
 import { InstantiationType, registerSingleton } from '../../../../platform/instantiation/common/extensions.js';
 import { ACTIVITY_BAR_BACKGROUND } from '../../../common/theme.js';
+import { SelectBox } from '../../../../base/browser/ui/selectBox/selectBox.js';
+import { IContextViewService } from '../../../../platform/contextview/browser/contextView.js';
+import { defaultSelectBoxStyles } from '../../../../platform/theme/browser/defaultStyles.js';
 
 
 export class SimulatorPart extends Part implements ISimulatorService {
@@ -22,11 +25,15 @@ export class SimulatorPart extends Part implements ISimulatorService {
 	readonly minimumHeight: number = 77;
 	readonly maximumHeight: number = Number.POSITIVE_INFINITY;
 
+	private readonly instantiationService: IInstantiationService;
+	private readonly contextViewService: IContextViewService;
+
 	constructor(
 		@IStorageService storageService: IStorageService,
 		@IThemeService themeService: IThemeService,
 		@IWorkbenchLayoutService layoutService: IWorkbenchLayoutService,
-		@IInstantiationService instantiationService: IInstantiationService
+		@IInstantiationService instantiationService: IInstantiationService,
+		@IContextViewService contextViewService: IContextViewService
 	) {
 		super(
 			Parts.SIMULATOR_PART,
@@ -35,16 +42,60 @@ export class SimulatorPart extends Part implements ISimulatorService {
 			storageService,
 			layoutService
 		);
+		this.instantiationService = instantiationService;
+		this.contextViewService = contextViewService;
 	}
 
 	protected override createContentArea(parent: HTMLElement): HTMLElement {
 		this.element = parent;
-		const content = document.createElement('div');
-		content.innerText = '模拟器';
-		// addClass(content, 'simulator-wrapper');
-		this.element.appendChild(content);
+		const container = document.createElement('div');
+		container.className = 'simulator-container';
 
+		this.initHeader(container);
+		this.initBody(container);
+		this.initFooter(container);
+
+		this.element.appendChild(container);
 		return this.element;
+	}
+
+	protected useSelectBox(container: HTMLElement) {
+		const options = [
+			{ text: '请选择模拟器', value: '' },
+			{ text: 'iOS 模拟器', value: 'ios' },
+			{ text: 'Android 模拟器', value: 'android' }
+		];
+
+		const selectBox = new SelectBox(
+			options,
+			0,
+			this.contextViewService,
+			defaultSelectBoxStyles
+		);
+
+		selectBox.render(container);
+	}
+
+	// 渲染模拟器头部
+	protected initHeader(container: HTMLElement) {
+		const content = document.createElement('div');
+		content.className = 'simulator-header';
+		container.appendChild(content);
+		// this.useSelectBox(content);
+	}
+
+	// 渲染模拟器主体
+	protected initBody(container: HTMLElement) {
+		const content = document.createElement('div');
+		content.className = 'simulator-body';
+		container.appendChild(content);
+	}
+
+	// 渲染模拟器底部
+	protected initFooter(container: HTMLElement) {
+		const content = document.createElement('div');
+		content.className = 'simulator-footer';
+		container.appendChild(content);
 	}
 
 	override updateStyles(): void {
