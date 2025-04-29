@@ -129,7 +129,7 @@ export class HeaderbarPart extends Part implements IHeaderBarService {
 		updateButtonState();
 
 		button.onDidClick(() => {
-			this.commandService.executeCommand('workbench.action.toggleAuxiliaryBar');
+			this.commandService.executeCommand('workbench.action.toggleSimulator');
 		});
 	}
 
@@ -212,6 +212,12 @@ export class HeaderbarPart extends Part implements IHeaderBarService {
 
 	override layout(width: number, height: number): void {
 		super.layoutContents(width, height);
+	}
+
+	public toggle(): void {
+		if (this.element) {
+			this.element.style.display = this.element.style.display === 'none' ? '' : 'none';
+		}
 	}
 
 	toJSON(): object {

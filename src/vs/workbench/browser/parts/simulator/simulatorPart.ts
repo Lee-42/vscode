@@ -15,7 +15,8 @@ import { ACTIVITY_BAR_BACKGROUND } from '../../../common/theme.js';
 import { SelectBox } from '../../../../base/browser/ui/selectBox/selectBox.js';
 import { IContextViewService } from '../../../../platform/contextview/browser/contextView.js';
 import { defaultSelectBoxStyles } from '../../../../platform/theme/browser/defaultStyles.js';
-
+import { FileAccess } from '../../../../base/common/network.js';
+import './simulator.contribution.js';
 
 export class SimulatorPart extends Part implements ISimulatorService {
 	declare readonly _serviceBrand: undefined;
@@ -80,14 +81,21 @@ export class SimulatorPart extends Part implements ISimulatorService {
 	protected initHeader(container: HTMLElement) {
 		const content = document.createElement('div');
 		content.className = 'simulator-header';
+		this.useSelectBox(content);
 		container.appendChild(content);
-		// this.useSelectBox(content);
 	}
 
 	// 渲染模拟器主体
 	protected initBody(container: HTMLElement) {
 		const content = document.createElement('div');
 		content.className = 'simulator-body';
+
+		const image = document.createElement('img');
+		image.className = 'simulator-image';
+		image.src = FileAccess.asFileUri('vs/workbench/browser/parts/simulator/resources/iphone-x.png').path; // 这里需要替换为实际的图片路径
+		image.alt = '模拟器预览';
+
+		content.appendChild(image);
 		container.appendChild(content);
 	}
 
@@ -113,6 +121,13 @@ export class SimulatorPart extends Part implements ISimulatorService {
 		return {
 			type: Parts.SIMULATOR_PART
 		};
+	}
+
+	// 切换显示/隐藏
+	public toggle(): void {
+		if (this.element) {
+			this.element.style.display = this.element.style.display === 'none' ? '' : 'none';
+		}
 	}
 }
 

@@ -10,4 +10,5 @@ export const ISimulatorService = createDecorator<ISimulatorService>(
 
 export interface ISimulatorService {
 	readonly _serviceBrand: undefined;
+	toggle(): void;
 }
