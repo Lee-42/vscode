@@ -96,6 +96,7 @@ interface ILayoutState {
 }
 
 enum LayoutClasses {
+	SIMULATOR_HIDDEN = 'nosimulator',
 	SIDEBAR_HIDDEN = 'nosidebar',
 	MAIN_EDITOR_AREA_HIDDEN = 'nomaineditorarea',
 	PANEL_HIDDEN = 'nopanel',
@@ -1255,6 +1256,8 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 		}
 
 		switch (part) {
+			case Parts.SIMULATOR_PART:
+				return !this.stateModel.getRuntimeValue(LayoutStateKeys.SIMULATOR_HIDDEN);
 			case Parts.TITLEBAR_PART:
 				return this.initialized ?
 					this.workbenchGrid.isViewVisible(this.titleBarPartView) :
@@ -1573,7 +1576,7 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 		this.workbenchGrid = workbenchGrid;
 		this.workbenchGrid.edgeSnapping = this.state.runtime.mainWindowFullscreen;
 
-		for (const part of [titleBar, editorPart, activityBar, panelPart, sideBar, statusBar, auxiliaryBarPart, bannerPart]) {
+		for (const part of [titleBar, editorPart, activityBar, panelPart, sideBar, statusBar, auxiliaryBarPart, bannerPart, simulator]) {
 			this._register(part.onDidVisibilityChange((visible) => {
 				if (part === sideBar) {
 					this.setSideBarHidden(!visible);
@@ -1583,6 +1586,8 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 					this.setAuxiliaryBarHidden(!visible, true);
 				} else if (part === editorPart) {
 					this.setEditorHidden(!visible);
+				} else if (part === simulator) {
+					this.setSimulatorHidden(!visible);
 				}
 				this._onDidChangePartVisibility.fire();
 				this.handleContainerDidLayout(this.mainContainer, this._mainContainerDimension);
@@ -2071,8 +2076,22 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 		this.workbenchGrid.setViewVisible(this.auxiliaryBarPartView, !hidden);
 	}
 
+	private setSimulatorHidden(hidden: boolean): void {
+		this.stateModel.setRuntimeValue(LayoutStateKeys.SIMULATOR_HIDDEN, hidden);
+
+		// Adjust CSS
+		if (hidden) {
+			this.mainContainer.classList.add(LayoutClasses.AUXILIARYBAR_HIDDEN);
+		} else {
+			this.mainContainer.classList.remove(LayoutClasses.AUXILIARYBAR_HIDDEN);
+		}
+		this.workbenchGrid.setViewVisible(this.simulatorPartView, !hidden);
+	}
+
 	setPartHidden(hidden: boolean, part: Parts): void {
 		switch (part) {
+			case Parts.SIMULATOR_PART:
+				return this.setSimulatorHidden(hidden);
 			case Parts.ACTIVITYBAR_PART:
 				return this.setActivityBarHidden(hidden);
 			case Parts.SIDEBAR_PART:
@@ -2460,12 +2479,11 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 			visible: !this.stateModel.getRuntimeValue(LayoutStateKeys.PANEL_HIDDEN)
 		};
 
-		// Todo visiable
 		const simulatorNode: ISerializedLeafNode = {
 			type: 'leaf',
 			data: { type: Parts.SIMULATOR_PART },
 			size: simulatorSize,
-			visible: true
+			visible: !this.stateModel.getRuntimeValue(LayoutStateKeys.SIMULATOR_HIDDEN)
 		};
 
 		const middleSection: ISerializedNode[] = this.arrangeMiddleSectionNodes({
@@ -2637,6 +2655,7 @@ const LayoutStateKeys = {
 	PANEL_ALIGNMENT: new RuntimeStateKey<PanelAlignment>('panel.alignment', StorageScope.PROFILE, StorageTarget.USER, 'center'),
 
 	// Part Visibility
+	SIMULATOR_HIDDEN: new RuntimeStateKey<boolean>('simulator.hidden', StorageScope.WORKSPACE, StorageTarget.MACHINE, true),
 	ACTIVITYBAR_HIDDEN: new RuntimeStateKey<boolean>('activityBar.hidden', StorageScope.WORKSPACE, StorageTarget.MACHINE, false, true),
 	SIDEBAR_HIDDEN: new RuntimeStateKey<boolean>('sideBar.hidden', StorageScope.WORKSPACE, StorageTarget.MACHINE, false),
 	EDITOR_HIDDEN: new RuntimeStateKey<boolean>('editor.hidden', StorageScope.WORKSPACE, StorageTarget.MACHINE, false),

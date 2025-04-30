@@ -21,6 +21,7 @@ import { IDialogService } from '../../../platform/dialogs/common/dialogs.js';
 import { IPaneCompositePartService } from '../../services/panecomposite/browser/panecomposite.js';
 import { ToggleAuxiliaryBarAction } from '../parts/auxiliarybar/auxiliaryBarActions.js';
 import { TogglePanelAction } from '../parts/panel/panelActions.js';
+import { ToggleSimulatorAction } from '../parts/simulator/simulatorActions.js';
 import { ICommandService } from '../../../platform/commands/common/commands.js';
 import { AuxiliaryBarVisibleContext, PanelAlignmentContext, PanelVisibleContext, SideBarVisibleContext, FocusedViewContext, InEditorZenModeContext, IsMainEditorCenteredLayoutContext, MainEditorAreaVisibleContext, IsMainWindowFullscreenContext, PanelPositionContext, IsAuxiliaryWindowFocusedContext, TitleBarStyleContext, IsAuxiliaryTitleBarContext } from '../../common/contextkeys.js';
 import { Codicon } from '../../../base/common/codicons.js';
@@ -1398,6 +1399,7 @@ ToggleVisibilityActions.push(...[
 	CreateToggleLayoutItem(ToggleSidebarVisibilityAction.ID, SideBarVisibleContext, localize('sideBar', "Primary Side Bar"), { whenA: ContextKeyExpr.equals('config.workbench.sideBar.location', 'left'), iconA: panelLeftIcon, iconB: panelRightIcon }),
 	CreateToggleLayoutItem(ToggleAuxiliaryBarAction.ID, AuxiliaryBarVisibleContext, localize('secondarySideBar', "Secondary Side Bar"), { whenA: ContextKeyExpr.equals('config.workbench.sideBar.location', 'left'), iconA: panelRightIcon, iconB: panelLeftIcon }),
 	CreateToggleLayoutItem(TogglePanelAction.ID, PanelVisibleContext, localize('panel', "Panel"), panelIcon),
+	CreateToggleLayoutItem(ToggleSimulatorAction.ID, PanelVisibleContext, localize('panel', "Panel"), panelIcon),
 	CreateToggleLayoutItem(ToggleStatusbarVisibilityAction.ID, ContextKeyExpr.equals('config.workbench.statusBar.visible', true), localize('statusBar', "Status Bar"), statusBarIcon),
 ]);
 

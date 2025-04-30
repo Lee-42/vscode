@@ -87,6 +87,7 @@ registerAction2(class extends Action2 {
 		});
 	}
 	run(accessor: ServicesAccessor) {
+		console.log('12312')
 		accessor.get(IWorkbenchLayoutService).setPartHidden(true, Parts.PANEL_PART);
 	}
 });

@@ -142,6 +142,12 @@ export const AuxiliaryBarVisibleContext = new RawContextKey<boolean>('auxiliaryB
 
 //#endregion
 
+//#region < --- Simulator --- >
+
+export const SimulatorVisibleContext = new RawContextKey<boolean>('simulatorVisible', false, localize('simulatorVisible', "Whether the simulator is visible"));
+
+//#endregion
+
 
 //#region < --- Panel --- >
 

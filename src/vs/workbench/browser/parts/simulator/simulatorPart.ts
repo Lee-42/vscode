@@ -16,17 +16,16 @@ import { SelectBox } from '../../../../base/browser/ui/selectBox/selectBox.js';
 import { IContextViewService } from '../../../../platform/contextview/browser/contextView.js';
 import { defaultSelectBoxStyles } from '../../../../platform/theme/browser/defaultStyles.js';
 import { FileAccess } from '../../../../base/common/network.js';
-import './simulator.contribution.js';
 
 export class SimulatorPart extends Part implements ISimulatorService {
 	declare readonly _serviceBrand: undefined;
 
-	readonly minimumWidth: number = 100;
+	readonly minimumWidth: number = 300;
 	readonly maximumWidth: number = Number.POSITIVE_INFINITY;
 	readonly minimumHeight: number = 77;
 	readonly maximumHeight: number = Number.POSITIVE_INFINITY;
 
-	private readonly instantiationService: IInstantiationService;
+	// private readonly instantiationService: IInstantiationService;
 	private readonly contextViewService: IContextViewService;
 
 	constructor(
@@ -43,7 +42,7 @@ export class SimulatorPart extends Part implements ISimulatorService {
 			storageService,
 			layoutService
 		);
-		this.instantiationService = instantiationService;
+		// this.instantiationService = instantiationService;
 		this.contextViewService = contextViewService;
 	}
 

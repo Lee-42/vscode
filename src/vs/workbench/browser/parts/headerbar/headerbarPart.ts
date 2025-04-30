@@ -16,7 +16,7 @@ import { ACTIVITY_BAR_BACKGROUND, ACTIVITY_BAR_TOP_BACKGROUND } from '../../../c
 import { Codicon } from '../../../../base/common/codicons.js';
 import { ICommandService } from '../../../../platform/commands/common/commands.js';
 import { IContextKeyService } from '../../../../platform/contextkey/common/contextkey.js';
-import { AuxiliaryBarVisibleContext, PanelVisibleContext } from '../../../common/contextkeys.js';
+import { PanelVisibleContext, SimulatorVisibleContext } from '../../../common/contextkeys.js';
 import { ButtonWithIconAndDescription } from '../../../../base/browser/ui/button/custom-button.js';
 
 export class HeaderbarPart extends Part implements IHeaderBarService {
@@ -96,7 +96,6 @@ export class HeaderbarPart extends Part implements IHeaderBarService {
 		container.appendChild(img);
 	}
 
-
 	private simulatorSwitcher(container: HTMLElement) {
 		// 添加图标描述按钮示例
 		const buttonContainer = append(container, $('.simulator-button'));
@@ -106,12 +105,12 @@ export class HeaderbarPart extends Part implements IHeaderBarService {
 		button.icon = Codicon.deviceMobile;
 		button.description = '模拟器';
 
-		// 获取第二侧边栏可见性上下文
-		const auxiliaryBarVisible = AuxiliaryBarVisibleContext.bindTo(this.contextKeyService);
 
 		// 更新按钮状态
 		const updateButtonState = () => {
-			if (auxiliaryBarVisible.get()) {
+			const isVisible = this.layoutService.isVisible(Parts.SIMULATOR_PART);
+			console.log('siomulatorVisible: ', isVisible);
+			if (isVisible) {
 				button.active();
 			} else {
 				button.inactive();
@@ -120,7 +119,7 @@ export class HeaderbarPart extends Part implements IHeaderBarService {
 
 		// 监听状态变化
 		this._register(this.contextKeyService.onDidChangeContext(e => {
-			if (e.affectsSome(new Set(['auxiliaryBarVisible']))) {
+			if (e.affectsSome(new Set(['simulatorVisible']))) {
 				updateButtonState();
 			}
 		}));
@@ -153,12 +152,10 @@ export class HeaderbarPart extends Part implements IHeaderBarService {
 		button.icon = Codicon.terminal;
 		button.description = '调试器';
 
-		// 获取底部面板可见性上下文
-		const panelVisible = PanelVisibleContext.bindTo(this.contextKeyService);
-
 		// 更新按钮状态
 		const updateButtonState = () => {
-			if (panelVisible.get()) {
+			const isVisible = this.layoutService.isVisible(Parts.PANEL_PART);
+			if (isVisible) {
 				button.active();
 			} else {
 				button.inactive();

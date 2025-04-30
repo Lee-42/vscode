@@ -37,10 +37,25 @@
 }
 
 .avatar-container {
-	width: 36px;
-	height: 36px;
+	width: 40px;
+	height: 40px;
 	object-fit: cover;
 	margin-right: 30px;
+	margin-top: -10px;
+	border-radius: 4px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+	transition: all 0.3s ease;
+	cursor: pointer;
+	border: 2px solid var(--vscode-activityBar-activeBorder);
+}
+
+.avatar-container:hover {
+	transform: scale(1.05);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.avatar-container:active {
+	transform: scale(0.95);
 }
 
 .editor-button .monaco-button {
