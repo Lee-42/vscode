@@ -86,20 +86,74 @@ export class SimulatorPart extends Part implements ISimulatorService {
 
 	// 渲染模拟器主体
 	protected initBody(container: HTMLElement) {
-		const content = document.createElement('div');
-		content.className = 'simulator-body';
 
-		// 在 Electron 环境中使用 webview 标签
-		const webview = document.createElement('webview');
-		webview.className = 'simulator-webview';
-		webview.src = 'https://www.baidu.com';
-		webview.setAttribute('allowpopups', '');
-		webview.setAttribute('webpreferences', 'contextIsolation=yes');
-		webview.style.width = '100%';
-		webview.style.height = '100%';
-		content.appendChild(webview);
+		// const initFrame = (container: HTMLElement) => {
+		// 	const content = document.createElement('div');
+		// 	content.className = 'simulator-frame';
 
-		container.appendChild(content);
+		// 	const image = document.createElement('img');
+		// 	image.className = 'simulator-image';
+		// 	image.src = FileAccess.asFileUri('vs/workbench/browser/parts/simulator/resources/iphone-x.png').path; // 这里需要替换为实际的图片路径
+		// 	image.alt = '模拟器预览';
+		// };
+
+		// initFrame(container);
+
+
+		// const content = document.createElement('webview');
+		// content.className = 'simulator-body';
+
+		// const image = document.createElement('iframe');
+		// image.className = 'simulator-image';
+		// image.src = 'https://www.baidu.com';
+
+		// content.appendChild(image);
+		// container.appendChild(content);
+
+		const initBodyContainer = (container: HTMLElement) => {
+			const body = document.createElement('div');
+			body.className = 'simulator-body';
+			container.appendChild(body);
+
+			const bodyContainer = document.createElement('div');
+			bodyContainer.className = 'simulator-body-container';
+
+			// const backgroundImage = FileAccess.asFileUri('vs/workbench/browser/parts/simulator/resources/iphone-x.png').path;
+			// bodyContainer.style.backgroundImage = `url(${backgroundImage})`;
+			// bodyContainer.style.backgroundSize = 'cover';
+			// bodyContainer.style.backgroundPosition = 'center';
+			// bodyContainer.style.backgroundRepeat = 'no-repeat';
+
+			body.appendChild(bodyContainer);
+
+			initStatusBar(bodyContainer);
+			initNavigationBar(bodyContainer);
+			initWebview(bodyContainer);
+		};
+
+
+		const initStatusBar = (container: HTMLElement) => {
+			const content = document.createElement('div');
+			content.className = 'simulator-status-bar';
+			content.innerText = '状态栏';
+			container.appendChild(content);
+		};
+
+		const initNavigationBar = (container: HTMLElement) => {
+			const content = document.createElement('div');
+			content.className = 'simulator-navigation-bar';
+			content.innerText = '导航栏';
+			container.appendChild(content);
+		};
+		const initWebview = (container: HTMLElement) => {
+			const content = document.createElement('webview');
+			content.className = 'simulator-webview';
+			content.src = 'http://www.baidu.com';
+
+			container.appendChild(content);
+		};
+
+		initBodyContainer(container);
 	}
 
 	// 渲染模拟器底部
