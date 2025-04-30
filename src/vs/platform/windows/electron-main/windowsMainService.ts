@@ -590,14 +590,12 @@ export class WindowsMainService extends Disposable implements IWindowsMainServic
 
 				const remoteAuthority = workspaceToOpen.remoteAuthority;
 				const filesToOpenInWindow = isEqualAuthority(filesToOpen?.remoteAuthority, remoteAuthority) ? filesToOpen : undefined;
-
 				// Do open folder
 				addUsedWindow(await this.doOpenFolderOrWorkspace(openConfig, workspaceToOpen, openFolderInNewWindow, filesToOpenInWindow), !!filesToOpenInWindow);
 
 				openFolderInNewWindow = true; // any other folders to open must open in new window then
 			}
 		}
-
 		// Handle folders to open (instructed and to restore)
 		const allFoldersToOpen = distinct(foldersToOpen, folder => extUriBiasedIgnorePathCase.getComparisonKey(folder.workspace.uri)); // prevent duplicates
 		if (allFoldersToOpen.length > 0) {
@@ -625,11 +623,9 @@ export class WindowsMainService extends Disposable implements IWindowsMainServic
 
 				// Do open folder
 				addUsedWindow(await this.doOpenFolderOrWorkspace(openConfig, folderToOpen, openFolderInNewWindow, filesToOpenInWindow), !!filesToOpenInWindow);
-
 				openFolderInNewWindow = true; // any other folders to open must open in new window then
 			}
 		}
-
 		// Handle empty to restore
 		const allEmptyToRestore = distinct(emptyToRestore, info => info.backupFolder); // prevent duplicates
 		if (allEmptyToRestore.length > 0) {

@@ -195,6 +195,16 @@ export class HeaderbarPart extends Part implements IHeaderBarService {
 	private initRightContent(container: HTMLElement): void {
 		this.rightContainer = document.createElement('div');
 		this.rightContainer.className = 'headerbar-right';
+
+		// 添加图标描述按钮示例
+		const buttonContainer = append(container, $('.simulator-button'));
+		const button = new ButtonWithIconAndDescription(buttonContainer, {
+			supportIcons: true,
+		});
+		button.icon = Codicon.window;
+		button.description = '窗口';
+		button.onDidClick(() => {
+		});
 	}
 
 	public override updateStyles(): void {
