@@ -126,6 +126,7 @@ export interface IDefaultBrowserWindowOptionsOverrides {
 }
 
 export function defaultBrowserWindowOptions(accessor: ServicesAccessor, windowState: IWindowState, overrides?: IDefaultBrowserWindowOptionsOverrides, webPreferences?: electron.WebPreferences): electron.BrowserWindowConstructorOptions & { experimentalDarkMode: boolean } {
+	console.log('defaultBrowserWindowOptionsdefaultBrowserWindowOptionsdefaultBrowserWindowOptionsdefaultBrowserWindowOptionsdefaultBrowserWindowOptions: ',)
 	const themeMainService = accessor.get(IThemeMainService);
 	const productService = accessor.get(IProductService);
 	const configurationService = accessor.get(IConfigurationService);
@@ -156,6 +157,7 @@ export function defaultBrowserWindowOptions(accessor: ServicesAccessor, windowSt
 			// TODO(deepak1556): Should be removed once migration is complete
 			// https://github.com/microsoft/vscode/issues/239228
 			enableDeprecatedPaste: true,
+			webviewTag: true,
 		},
 		experimentalDarkMode: true
 	};

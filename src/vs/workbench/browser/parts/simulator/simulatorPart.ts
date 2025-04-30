@@ -89,12 +89,16 @@ export class SimulatorPart extends Part implements ISimulatorService {
 		const content = document.createElement('div');
 		content.className = 'simulator-body';
 
-		const image = document.createElement('img');
-		image.className = 'simulator-image';
-		image.src = FileAccess.asFileUri('vs/workbench/browser/parts/simulator/resources/iphone-x.png').path; // 这里需要替换为实际的图片路径
-		image.alt = '模拟器预览';
+		// 在 Electron 环境中使用 webview 标签
+		const webview = document.createElement('webview');
+		webview.className = 'simulator-webview';
+		webview.src = 'https://www.baidu.com';
+		webview.setAttribute('allowpopups', '');
+		webview.setAttribute('webpreferences', 'contextIsolation=yes');
+		webview.style.width = '100%';
+		webview.style.height = '100%';
+		content.appendChild(webview);
 
-		content.appendChild(image);
 		container.appendChild(content);
 	}
 
