@@ -10,7 +10,7 @@ import { performance } from 'perf_hooks';
 import { configurePortable } from './bootstrap-node.js';
 import { bootstrapESM } from './bootstrap-esm.js';
 import { fileURLToPath } from 'url';
-import { app, protocol, crashReporter, Menu, contentTracing } from 'electron';
+import { app, protocol, crashReporter, Menu, contentTracing, BrowserWindow } from 'electron';
 import minimist from 'minimist';
 import { product } from './bootstrap-meta.js';
 import { parse } from './vs/base/common/jsonc.js';
@@ -186,18 +186,26 @@ app.once('ready', function () {
 });
 
 async function onReady() {
-	perf.mark('code/mainAppReady');
 
-	try {
-		const [, nlsConfig] = await Promise.all([
-			mkdirpIgnoreError(codeCachePath),
-			resolveNlsConfiguration()
-		]);
+	console.log('onReady');
 
-		await startup(codeCachePath, nlsConfig);
-	} catch (error) {
-		console.error(error);
-	}
+	const win = new BrowserWindow({
+		width: 330,
+		height: 470,
+	});
+	win.loadURL('https://www.baidu.com');
+
+	// perf.mark('code/mainAppReady');
+
+	// try {
+	// 	const [, nlsConfig] = await Promise.all([
+	// 		mkdirpIgnoreError(codeCachePath),
+	// 		resolveNlsConfiguration()
+	// 	]);
+	// 	await startup(codeCachePath, nlsConfig);
+	// } catch (error) {
+	// 	console.error(error);
+	// }
 }
 
 /**

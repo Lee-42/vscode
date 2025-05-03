@@ -1,0 +1,742 @@
+{
+  "_": [],
+  "diff": false,
+  "merge": false,
+  "add": false,
+  "remove": false,
+  "goto": false,
+  "new-window": false,
+  "reuse-window": false,
+  "wait": false,
+  "help": false,
+  "list-extensions": false,
+  "show-versions": false,
+  "pre-release": false,
+  "update-extensions": false,
+  "version": false,
+  "verbose": false,
+  "status": false,
+  "prof-startup": false,
+  "no-cached-data": false,
+  "prof-v8-extensions": false,
+  "disable-extensions": false,
+  "disable-extension": [
+    "vscode.vscode-api-tests"
+  ],
+  "disable-lcd-text": false,
+  "disable-gpu": false,
+  "disable-chromium-sandbox": false,
+  "sandbox": false,
+  "telemetry": false,
+  "debugRenderer": false,
+  "enable-smoke-test-driver": false,
+  "logExtensionHostCommunication": false,
+  "skip-release-notes": false,
+  "skip-welcome": false,
+  "disable-telemetry": false,
+  "disable-updates": false,
+  "use-inmemory-secretstorage": false,
+  "disable-workspace-trust": false,
+  "disable-crash-reporter": false,
+  "skip-add-to-recently-opened": false,
+  "open-url": false,
+  "file-write": false,
+  "file-chmod": false,
+  "force": false,
+  "do-not-sync": false,
+  "do-not-include-pack-dependencies": false,
+  "trace": false,
+  "trace-memory-infra": false,
+  "preserve-env": false,
+  "force-user-env": false,
+  "force-disable-user-env": false,
+  "open-devtools": false,
+  "disable-gpu-sandbox": false,
+  "__enable-file-policy": false,
+  "enable-coi": false,
+  "no-proxy-server": false,
+  "no-sandbox": false,
+  "nolazy": false,
+  "force-renderer-accessibility": false,
+  "ignore-certificate-errors": false,
+  "allow-insecure-localhost": false,
+  "disable-dev-shm-usage": false,
+  "profile-temp": false,
+  "logsPath": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250503T233539",
+  "machineId": "93a65419073b63d34e1199a5f3dcf90c762bc6a5e8df2be4beaf63e6d253a749",
+  "sqmId": "",
+  "devDeviceId": "b9504a95-f01d-42b5-87d6-a0a59836d5eb",
+  "windowId": 1,
+  "mainPid": 13342,
+  "appRoot": "/Users/lee/Project/vscode",
+  "execPath": "/Users/lee/Project/vscode/.build/electron/Code - OSS.app/Contents/MacOS/Electron",
+  "backupPath": "/Users/lee/Library/Application Support/code-oss-dev/Backups/2909721be095db19faa2c906b07fe896",
+  "profiles": {
+    "home": {
+      "$mid": 1,
+      "path": "/Users/lee/Library/Application Support/code-oss-dev/User/profiles",
+      "scheme": "vscode-userdata"
+    },
+    "all": [
+      {
+        "id": "__default__profile__",
+        "name": "Default",
+        "location": {
+          "$mid": 1,
+          "path": "/Users/lee/Library/Application Support/code-oss-dev/User",
+          "scheme": "vscode-userdata"
+        },
+        "isDefault": true,
+        "globalStorageHome": {
+          "$mid": 1,
+          "path": "/Users/lee/Library/Application Support/code-oss-dev/User/globalStorage",
+          "scheme": "vscode-userdata"
+        },
+        "settingsResource": {
+          "$mid": 1,
+          "path": "/Users/lee/Library/Application Support/code-oss-dev/User/settings.json",
+          "scheme": "vscode-userdata"
+        },
+        "keybindingsResource": {
+          "$mid": 1,
+          "path": "/Users/lee/Library/Application Support/code-oss-dev/User/keybindings.json",
+          "scheme": "vscode-userdata"
+        },
+        "tasksResource": {
+          "$mid": 1,
+          "path": "/Users/lee/Library/Application Support/code-oss-dev/User/tasks.json",
+          "scheme": "vscode-userdata"
+        },
+        "snippetsHome": {
+          "$mid": 1,
+          "path": "/Users/lee/Library/Application Support/code-oss-dev/User/snippets",
+          "scheme": "vscode-userdata"
+        },
+        "promptsHome": {
+          "$mid": 1,
+          "path": "/Users/lee/Library/Application Support/code-oss-dev/User/prompts",
+          "scheme": "vscode-userdata"
+        },
+        "extensionsResource": {
+          "$mid": 1,
+          "path": "/Users/lee/.vscode-oss-dev/extensions/extensions.json",
+          "scheme": "vscode-userdata"
+        },
+        "cacheHome": {
+          "$mid": 1,
+          "path": "/Users/lee/Library/Application Support/code-oss-dev/CachedProfilesData/__default__profile__",
+          "scheme": "file"
+        },
+        "workspaces": [
+          {
+            "$mid": 1,
+            "path": "/Users/lee",
+            "scheme": "file"
+          },
+          {
+            "$mid": 1,
+            "path": "/Users/lee/Project/coco",
+            "scheme": "file"
+          },
+          {
+            "$mid": 1,
+            "path": "/Volumes/T7/ide_vue",
+            "scheme": "file"
+          },
+          {
+            "$mid": 1,
+            "path": "/Users/lee/Documents",
+            "scheme": "file"
+          },
+          {
+            "$mid": 1,
+            "path": "/Volumes/T7/900",
+            "scheme": "file"
+          },
+          {
+            "$mid": 1,
+            "path": "/Users/lee/Project/vscode",
+            "scheme": "file"
+          },
+          {
+            "$mid": 1,
+            "path": "/Users/lee/Project/aechoterm",
+            "scheme": "file"
+          }
+        ]
+      }
+    ],
+    "profile": {
+      "id": "__default__profile__",
+      "name": "Default",
+      "location": {
+        "$mid": 1,
+        "path": "/Users/lee/Library/Application Support/code-oss-dev/User",
+        "scheme": "vscode-userdata"
+      },
+      "isDefault": true,
+      "globalStorageHome": {
+        "$mid": 1,
+        "path": "/Users/lee/Library/Application Support/code-oss-dev/User/globalStorage",
+        "scheme": "vscode-userdata"
+      },
+      "settingsResource": {
+        "$mid": 1,
+        "path": "/Users/lee/Library/Application Support/code-oss-dev/User/settings.json",
+        "scheme": "vscode-userdata"
+      },
+      "keybindingsResource": {
+        "$mid": 1,
+        "path": "/Users/lee/Library/Application Support/code-oss-dev/User/keybindings.json",
+        "scheme": "vscode-userdata"
+      },
+      "tasksResource": {
+        "$mid": 1,
+        "path": "/Users/lee/Library/Application Support/code-oss-dev/User/tasks.json",
+        "scheme": "vscode-userdata"
+      },
+      "snippetsHome": {
+        "$mid": 1,
+        "path": "/Users/lee/Library/Application Support/code-oss-dev/User/snippets",
+        "scheme": "vscode-userdata"
+      },
+      "promptsHome": {
+        "$mid": 1,
+        "path": "/Users/lee/Library/Application Support/code-oss-dev/User/prompts",
+        "scheme": "vscode-userdata"
+      },
+      "extensionsResource": {
+        "$mid": 1,
+        "path": "/Users/lee/.vscode-oss-dev/extensions/extensions.json",
+        "scheme": "vscode-userdata"
+      },
+      "cacheHome": {
+        "$mid": 1,
+        "path": "/Users/lee/Library/Application Support/code-oss-dev/CachedProfilesData/__default__profile__",
+        "scheme": "file"
+      },
+      "workspaces": [
+        {
+          "$mid": 1,
+          "path": "/Users/lee",
+          "scheme": "file"
+        },
+        {
+          "$mid": 1,
+          "path": "/Users/lee/Project/coco",
+          "scheme": "file"
+        },
+        {
+          "$mid": 1,
+          "path": "/Volumes/T7/ide_vue",
+          "scheme": "file"
+        },
+        {
+          "$mid": 1,
+          "path": "/Users/lee/Documents",
+          "scheme": "file"
+        },
+        {
+          "$mid": 1,
+          "path": "/Volumes/T7/900",
+          "scheme": "file"
+        },
+        {
+          "$mid": 1,
+          "path": "/Users/lee/Project/vscode",
+          "scheme": "file"
+        },
+        {
+          "$mid": 1,
+          "path": "/Users/lee/Project/aechoterm",
+          "scheme": "file"
+        }
+      ]
+    }
+  },
+  "homeDir": "/Users/lee",
+  "tmpDir": "/var/folders/br/f8xfsmv50_d493ly1xfzxzlh0000gn/T",
+  "userDataDir": "/Users/lee/Library/Application Support/code-oss-dev",
+  "workspace": {
+    "id": "27407758fdd0f5cd358945a6b8612976",
+    "uri": {
+      "$mid": 1,
+      "fsPath": "/Users/lee/Project/aechoterm",
+      "external": "file:///Users/lee/Project/aechoterm",
+      "path": "/Users/lee/Project/aechoterm",
+      "scheme": "file"
+    }
+  },
+  "userEnv": {
+    "VSCODE_IPC_HOOK": "/Users/lee/Library/Application Support/code-oss-dev/1.10-main.sock",
+    "VSCODE_NLS_CONFIG": "{\"userLocale\":\"zh-cn\",\"osLocale\":\"zh-cn\",\"resolvedLanguage\":\"en\",\"defaultMessagesFile\":\"/Users/lee/Project/vscode/out/nls.messages.json\",\"locale\":\"zh-cn\",\"availableLanguages\":{}}"
+  },
+  "nls": {
+    "language": "en"
+  },
+  "logLevel": 3,
+  "loggers": [
+    {
+      "resource": {
+        "$mid": 1,
+        "fsPath": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250503T233539/main.log",
+        "external": "file:///Users/lee/Library/Application%20Support/code-oss-dev/logs/20250503T233539/main.log",
+        "path": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250503T233539/main.log",
+        "scheme": "file"
+      },
+      "id": "main",
+      "name": "Main"
+    }
+  ],
+  "product": {
+    "nameShort": "Code - OSS Dev",
+    "nameLong": "Code - OSS Dev",
+    "applicationName": "code-oss",
+    "dataFolderName": ".vscode-oss-dev",
+    "win32MutexName": "vscodeoss",
+    "licenseName": "MIT",
+    "licenseUrl": "https://github.com/microsoft/vscode/blob/main/LICENSE.txt",
+    "serverLicenseUrl": "https://github.com/microsoft/vscode/blob/main/LICENSE.txt",
+    "serverGreeting": [],
+    "serverLicense": [],
+    "serverLicensePrompt": "",
+    "serverApplicationName": "code-server-oss",
+    "serverDataFolderName": ".vscode-server-oss-dev",
+    "tunnelApplicationName": "code-tunnel-oss",
+    "win32DirName": "Microsoft Code OSS",
+    "win32NameVersion": "Microsoft Code OSS",
+    "win32RegValueName": "CodeOSS",
+    "win32x64AppId": "{{D77B7E06-80BA-4137-BCF4-654B95CCEBC5}",
+    "win32arm64AppId": "{{D1ACE434-89C5-48D1-88D3-E2991DF85475}",
+    "win32x64UserAppId": "{{CC6B787D-37A0-49E8-AE24-8559A032BE0C}",
+    "win32arm64UserAppId": "{{3AEBF0C8-F733-4AD4-BADE-FDB816D53D7B}",
+    "win32AppUserModelId": "Microsoft.CodeOSS",
+    "win32ShellNameShort": "C&ode - OSS",
+    "win32TunnelServiceMutex": "vscodeoss-tunnelservice",
+    "win32TunnelMutex": "vscodeoss-tunnel",
+    "darwinBundleIdentifier": "com.visualstudio.code.oss",
+    "darwinProfileUUID": "47827DD9-4734-49A0-AF80-7E19B11495CC",
+    "darwinProfilePayloadUUID": "CF808BE7-53F3-46C6-A7E2-7EDB98A5E959",
+    "linuxIconName": "code-oss",
+    "licenseFileName": "LICENSE.txt",
+    "reportIssueUrl": "https://github.com/microsoft/vscode/issues/new",
+    "nodejsRepository": "https://nodejs.org",
+    "urlProtocol": "code-oss",
+    "webviewContentExternalBaseUrlTemplate": "https://{{uuid}}.vscode-cdn.net/insider/ef65ac1ba57f57f2a3961bfe94aa20481caca4c6/out/vs/workbench/contrib/webview/browser/pre/",
+    "builtInExtensions": [
+      {
+        "name": "ms-vscode.js-debug-companion",
+        "version": "1.1.3",
+        "sha256": "7380a890787452f14b2db7835dfa94de538caf358ebc263f9d46dd68ac52de93",
+        "repo": "https://github.com/microsoft/vscode-js-debug-companion",
+        "metadata": {
+          "id": "99cb0b7f-7354-4278-b8da-6cc79972169d",
+          "publisherId": {
+            "publisherId": "5f5636e7-69ed-4afe-b5d6-8d231fb3d3ee",
+            "publisherName": "ms-vscode",
+            "displayName": "Microsoft",
+            "flags": "verified"
+          },
+          "publisherDisplayName": "Microsoft"
+        }
+      },
+      {
+        "name": "ms-vscode.js-debug",
+        "version": "1.97.1",
+        "sha256": "977dd854805547702e312e176f68a1b142fa123f228258f47f0964560ad32496",
+        "repo": "https://github.com/microsoft/vscode-js-debug",
+        "metadata": {
+          "id": "25629058-ddac-4e17-abba-74678e126c5d",
+          "publisherId": {
+            "publisherId": "5f5636e7-69ed-4afe-b5d6-8d231fb3d3ee",
+            "publisherName": "ms-vscode",
+            "displayName": "Microsoft",
+            "flags": "verified"
+          },
+          "publisherDisplayName": "Microsoft"
+        }
+      },
+      {
+        "name": "ms-vscode.vscode-js-profile-table",
+        "version": "1.0.10",
+        "sha256": "7361748ddf9fd09d8a2ed1f2a2d7376a2cf9aae708692820b799708385c38e08",
+        "repo": "https://github.com/microsoft/vscode-js-profile-visualizer",
+        "metadata": {
+          "id": "7e52b41b-71ad-457b-ab7e-0620f1fc4feb",
+          "publisherId": {
+            "publisherId": "5f5636e7-69ed-4afe-b5d6-8d231fb3d3ee",
+            "publisherName": "ms-vscode",
+            "displayName": "Microsoft",
+            "flags": "verified"
+          },
+          "publisherDisplayName": "Microsoft"
+        }
+      }
+    ],
+    "version": "1.100.0"
+  },
+  "isInitialStartup": true,
+  "perfMarks": [
+    {
+      "name": "code/timeOrigin",
+      "startTime": 1746286539491.242
+    },
+    {
+      "name": "code/didStartMain",
+      "startTime": 1746286539669
+    },
+    {
+      "name": "code/willLoadMainBundle",
+      "startTime": 1746286539491
+    },
+    {
+      "name": "code/didLoadMainBundle",
+      "startTime": 1746286539669
+    },
+    {
+      "name": "code/willStartCrashReporter",
+      "startTime": 1746286539670
+    },
+    {
+      "name": "code/didStartCrashReporter",
+      "startTime": 1746286539693
+    },
+    {
+      "name": "code/mainAppReady",
+      "startTime": 1746286539727
+    },
+    {
+      "name": "code/willGenerateNls",
+      "startTime": 1746286539727
+    },
+    {
+      "name": "code/didGenerateNls",
+      "startTime": 1746286539727
+    },
+    {
+      "name": "code/willLoadNls",
+      "startTime": 1746286539728
+    },
+    {
+      "name": "code/registerFilesystem/file",
+      "startTime": 1746286539907
+    },
+    {
+      "name": "code/registerFilesystem/vscode-userdata",
+      "startTime": 1746286539908
+    },
+    {
+      "name": "code/didRunMainBundle",
+      "startTime": 1746286539925
+    },
+    {
+      "name": "code/willStartMainServer",
+      "startTime": 1746286539934
+    },
+    {
+      "name": "code/didStartMainServer",
+      "startTime": 1746286539937
+    }
+  ],
+  "os": {
+    "release": "22.3.0",
+    "hostname": "LeedeMBP",
+    "arch": "arm64"
+  },
+  "autoDetectHighContrast": true,
+  "autoDetectColorScheme": false,
+  "accessibilitySupport": false,
+  "colorScheme": {
+    "dark": false,
+    "highContrast": false
+  },
+  "policiesData": {
+    "UpdateMode": {
+      "definition": {
+        "type": "string"
+      }
+    },
+    "TelemetryLevel": {
+      "definition": {
+        "type": "string"
+      }
+    },
+    "EnableFeedback": {
+      "definition": {
+        "type": "boolean"
+      }
+    },
+    "AllowedExtensions": {
+      "definition": {
+        "type": "string"
+      }
+    }
+  },
+  "cssModules": [
+    "vs/base/browser/ui/actionbar/actionbar.css",
+    "vs/base/browser/ui/aria/aria.css",
+    "vs/base/browser/ui/breadcrumbs/breadcrumbsWidget.css",
+    "vs/base/browser/ui/button/button.css",
+    "vs/base/browser/ui/button/custom-button.css",
+    "vs/base/browser/ui/codicons/codicon/codicon-modifiers.css",
+    "vs/base/browser/ui/codicons/codicon/codicon.css",
+    "vs/base/browser/ui/contextview/contextview.css",
+    "vs/base/browser/ui/countBadge/countBadge.css",
+    "vs/base/browser/ui/dialog/dialog.css",
+    "vs/base/browser/ui/dnd/dnd.css",
+    "vs/base/browser/ui/dropdown/dropdown.css",
+    "vs/base/browser/ui/findinput/findInput.css",
+    "vs/base/browser/ui/grid/gridview.css",
+    "vs/base/browser/ui/hover/hoverWidget.css",
+    "vs/base/browser/ui/iconLabel/iconlabel.css",
+    "vs/base/browser/ui/icons/iconSelectBox.css",
+    "vs/base/browser/ui/inputbox/inputBox.css",
+    "vs/base/browser/ui/keybindingLabel/keybindingLabel.css",
+    "vs/base/browser/ui/list/list.css",
+    "vs/base/browser/ui/menu/menubar.css",
+    "vs/base/browser/ui/mouseCursor/mouseCursor.css",
+    "vs/base/browser/ui/progressbar/progressbar.css",
+    "vs/base/browser/ui/radio/radio.css",
+    "vs/base/browser/ui/sash/sash.css",
+    "vs/base/browser/ui/scrollbar/media/scrollbars.css",
+    "vs/base/browser/ui/selectBox/selectBox.css",
+    "vs/base/browser/ui/selectBox/selectBoxCustom.css",
+    "vs/base/browser/ui/severityIcon/media/severityIcon.css",
+    "vs/base/browser/ui/splitview/paneview.css",
+    "vs/base/browser/ui/splitview/splitview.css",
+    "vs/base/browser/ui/table/table.css",
+    "vs/base/browser/ui/toggle/toggle.css",
+    "vs/base/browser/ui/toolbar/toolbar.css",
+    "vs/base/browser/ui/tree/media/paneviewlet.css",
+    "vs/base/browser/ui/tree/media/tree.css",
+    "vs/base/test/node/pfs/fixtures/site.css",
+    "vs/code/electron-sandbox/processExplorer/media/processExplorer.css",
+    "vs/editor/browser/controller/editContext/native/nativeEditContext.css",
+    "vs/editor/browser/controller/editContext/textArea/textAreaEditContext.css",
+    "vs/editor/browser/gpu/css/media/decorationCssRuleExtractor.css",
+    "vs/editor/browser/services/hoverService/hover.css",
+    "vs/editor/browser/viewParts/blockDecorations/blockDecorations.css",
+    "vs/editor/browser/viewParts/currentLineHighlight/currentLineHighlight.css",
+    "vs/editor/browser/viewParts/decorations/decorations.css",
+    "vs/editor/browser/viewParts/glyphMargin/glyphMargin.css",
+    "vs/editor/browser/viewParts/gpuMark/gpuMark.css",
+    "vs/editor/browser/viewParts/indentGuides/indentGuides.css",
+    "vs/editor/browser/viewParts/lineNumbers/lineNumbers.css",
+    "vs/editor/browser/viewParts/linesDecorations/linesDecorations.css",
+    "vs/editor/browser/viewParts/margin/margin.css",
+    "vs/editor/browser/viewParts/marginDecorations/marginDecorations.css",
+    "vs/editor/browser/viewParts/minimap/minimap.css",
+    "vs/editor/browser/viewParts/overlayWidgets/overlayWidgets.css",
+    "vs/editor/browser/viewParts/rulers/rulers.css",
+    "vs/editor/browser/viewParts/scrollDecoration/scrollDecoration.css",
+    "vs/editor/browser/viewParts/selections/selections.css",
+    "vs/editor/browser/viewParts/viewCursors/viewCursors.css",
+    "vs/editor/browser/viewParts/viewLines/viewLines.css",
+    "vs/editor/browser/viewParts/whitespace/whitespace.css",
+    "vs/editor/browser/widget/codeEditor/editor.css",
+    "vs/editor/browser/widget/diffEditor/components/accessibleDiffViewer.css",
+    "vs/editor/browser/widget/diffEditor/style.css",
+    "vs/editor/browser/widget/markdownRenderer/browser/renderedMarkdown.css",
+    "vs/editor/browser/widget/multiDiffEditor/style.css",
+    "vs/editor/contrib/anchorSelect/browser/anchorSelect.css",
+    "vs/editor/contrib/bracketMatching/browser/bracketMatching.css",
+    "vs/editor/contrib/codeAction/browser/lightBulbWidget.css",
+    "vs/editor/contrib/codelens/browser/codelensWidget.css",
+    "vs/editor/contrib/colorPicker/browser/colorPicker.css",
+    "vs/editor/contrib/dnd/browser/dnd.css",
+    "vs/editor/contrib/dropOrPasteInto/browser/postEditWidget.css",
+    "vs/editor/contrib/find/browser/findOptionsWidget.css",
+    "vs/editor/contrib/find/browser/findWidget.css",
+    "vs/editor/contrib/folding/browser/folding.css",
+    "vs/editor/contrib/gotoError/browser/media/gotoErrorWidget.css",
+    "vs/editor/contrib/gotoSymbol/browser/link/goToDefinitionAtPosition.css",
+    "vs/editor/contrib/gotoSymbol/browser/peek/referencesWidget.css",
+    "vs/editor/contrib/hover/browser/hover.css",
+    "vs/editor/contrib/inPlaceReplace/browser/inPlaceReplace.css",
+    "vs/editor/contrib/inlineCompletions/browser/hintsWidget/inlineCompletionsHintsWidget.css",
+    "vs/editor/contrib/inlineCompletions/browser/view/ghostText/ghostTextView.css",
+    "vs/editor/contrib/inlineCompletions/browser/view/inlineEdits/view.css",
+    "vs/editor/contrib/inlineProgress/browser/inlineProgressWidget.css",
+    "vs/editor/contrib/linkedEditing/browser/linkedEditing.css",
+    "vs/editor/contrib/links/browser/links.css",
+    "vs/editor/contrib/message/browser/messageController.css",
+    "vs/editor/contrib/parameterHints/browser/parameterHints.css",
+    "vs/editor/contrib/peekView/browser/media/peekViewWidget.css",
+    "vs/editor/contrib/placeholderText/browser/placeholderText.css",
+    "vs/editor/contrib/rename/browser/renameWidget.css",
+    "vs/editor/contrib/snippet/browser/snippetSession.css",
+    "vs/editor/contrib/stickyScroll/browser/stickyScroll.css",
+    "vs/editor/contrib/suggest/browser/media/suggest.css",
+    "vs/editor/contrib/symbolIcons/browser/symbolIcons.css",
+    "vs/editor/contrib/unicodeHighlighter/browser/bannerController.css",
+    "vs/editor/contrib/unicodeHighlighter/browser/unicodeHighlighter.css",
+    "vs/editor/contrib/wordHighlighter/browser/highlightDecorations.css",
+    "vs/editor/contrib/zoneWidget/browser/zoneWidget.css",
+    "vs/editor/standalone/browser/iPadShowKeyboard/iPadShowKeyboard.css",
+    "vs/editor/standalone/browser/inspectTokens/inspectTokens.css",
+    "vs/editor/standalone/browser/quickInput/standaloneQuickInput.css",
+    "vs/editor/standalone/browser/standalone-tokens.css",
+    "vs/platform/actionWidget/browser/actionWidget.css",
+    "vs/platform/actions/browser/menuEntryActionViewItem.css",
+    "vs/platform/files/test/node/fixtures/resolver/site.css",
+    "vs/platform/files/test/node/fixtures/service/some_utf16le.css",
+    "vs/platform/opener/browser/link.css",
+    "vs/platform/quickinput/browser/media/quickInput.css",
+    "vs/workbench/browser/actions/media/actions.css",
+    "vs/workbench/browser/media/part.css",
+    "vs/workbench/browser/media/style.css",
+    "vs/workbench/browser/parts/activitybar/media/activityaction.css",
+    "vs/workbench/browser/parts/activitybar/media/activitybarpart.css",
+    "vs/workbench/browser/parts/auxiliarybar/media/auxiliaryBarPart.css",
+    "vs/workbench/browser/parts/banner/media/bannerpart.css",
+    "vs/workbench/browser/parts/editor/media/breadcrumbscontrol.css",
+    "vs/workbench/browser/parts/editor/media/editordroptarget.css",
+    "vs/workbench/browser/parts/editor/media/editorgroupview.css",
+    "vs/workbench/browser/parts/editor/media/editorplaceholder.css",
+    "vs/workbench/browser/parts/editor/media/editorquickaccess.css",
+    "vs/workbench/browser/parts/editor/media/editorstatus.css",
+    "vs/workbench/browser/parts/editor/media/editortabscontrol.css",
+    "vs/workbench/browser/parts/editor/media/editortitlecontrol.css",
+    "vs/workbench/browser/parts/editor/media/multieditortabscontrol.css",
+    "vs/workbench/browser/parts/editor/media/sidebysideeditor.css",
+    "vs/workbench/browser/parts/editor/media/singleeditortabscontrol.css",
+    "vs/workbench/browser/parts/headerbar/media/headerbarpart.css",
+    "vs/workbench/browser/parts/media/compositepart.css",
+    "vs/workbench/browser/parts/media/paneCompositePart.css",
+    "vs/workbench/browser/parts/notifications/media/notificationsActions.css",
+    "vs/workbench/browser/parts/notifications/media/notificationsCenter.css",
+    "vs/workbench/browser/parts/notifications/media/notificationsList.css",
+    "vs/workbench/browser/parts/notifications/media/notificationsToasts.css",
+    "vs/workbench/browser/parts/panel/media/panelpart.css",
+    "vs/workbench/browser/parts/sidebar/media/sidebarpart.css",
+    "vs/workbench/browser/parts/simulator/media/simulatorpart.css",
+    "vs/workbench/browser/parts/statusbar/media/statusbarpart.css",
+    "vs/workbench/browser/parts/titlebar/media/menubarControl.css",
+    "vs/workbench/browser/parts/titlebar/media/titlebarpart.css",
+    "vs/workbench/browser/parts/views/media/paneviewlet.css",
+    "vs/workbench/browser/parts/views/media/views.css",
+    "vs/workbench/contrib/bulkEdit/browser/preview/bulkEdit.css",
+    "vs/workbench/contrib/callHierarchy/browser/media/callHierarchy.css",
+    "vs/workbench/contrib/chat/browser/chatContentParts/media/chatConfirmationWidget.css",
+    "vs/workbench/contrib/chat/browser/chatContentParts/media/chatExtensionsContent.css",
+    "vs/workbench/contrib/chat/browser/codeBlockPart.css",
+    "vs/workbench/contrib/chat/browser/contrib/media/editorHoverWrapper.css",
+    "vs/workbench/contrib/chat/browser/media/chat.css",
+    "vs/workbench/contrib/chat/browser/media/chatAgentHover.css",
+    "vs/workbench/contrib/chat/browser/media/chatCodeBlockPill.css",
+    "vs/workbench/contrib/chat/browser/media/chatEditingEditorOverlay.css",
+    "vs/workbench/contrib/chat/browser/media/chatEditorController.css",
+    "vs/workbench/contrib/chat/browser/media/chatInlineAnchorWidget.css",
+    "vs/workbench/contrib/chat/browser/media/chatSetup.css",
+    "vs/workbench/contrib/chat/browser/media/chatStatus.css",
+    "vs/workbench/contrib/chat/browser/media/chatViewWelcome.css",
+    "vs/workbench/contrib/chat/browser/media/simpleBrowserOverlay.css",
+    "vs/workbench/contrib/chat/electron-sandbox/actions/media/voiceChatActions.css",
+    "vs/workbench/contrib/codeEditor/browser/accessibility/accessibility.css",
+    "vs/workbench/contrib/codeEditor/browser/dictation/editorDictation.css",
+    "vs/workbench/contrib/codeEditor/browser/emptyTextEditorHint/emptyTextEditorHint.css",
+    "vs/workbench/contrib/codeEditor/browser/find/simpleFindWidget.css",
+    "vs/workbench/contrib/codeEditor/browser/inspectEditorTokens/inspectEditorTokens.css",
+    "vs/workbench/contrib/codeEditor/browser/outline/documentSymbolsTree.css",
+    "vs/workbench/contrib/codeEditor/browser/suggestEnabledInput/suggestEnabledInput.css",
+    "vs/workbench/contrib/comments/browser/media/panel.css",
+    "vs/workbench/contrib/comments/browser/media/review.css",
+    "vs/workbench/contrib/customEditor/browser/media/customEditor.css",
+    "vs/workbench/contrib/debug/browser/media/breakpointWidget.css",
+    "vs/workbench/contrib/debug/browser/media/callStackEditorContribution.css",
+    "vs/workbench/contrib/debug/browser/media/callStackWidget.css",
+    "vs/workbench/contrib/debug/browser/media/debug.contribution.css",
+    "vs/workbench/contrib/debug/browser/media/debugHover.css",
+    "vs/workbench/contrib/debug/browser/media/debugToolBar.css",
+    "vs/workbench/contrib/debug/browser/media/debugViewlet.css",
+    "vs/workbench/contrib/debug/browser/media/exceptionWidget.css",
+    "vs/workbench/contrib/debug/browser/media/repl.css",
+    "vs/workbench/contrib/extensions/browser/media/extension.css",
+    "vs/workbench/contrib/extensions/browser/media/extensionActions.css",
+    "vs/workbench/contrib/extensions/browser/media/extensionEditor.css",
+    "vs/workbench/contrib/extensions/browser/media/extensionsViewlet.css",
+    "vs/workbench/contrib/extensions/browser/media/extensionsWidgets.css",
+    "vs/workbench/contrib/extensions/browser/media/runtimeExtensionsEditor.css",
+    "vs/workbench/contrib/files/browser/media/explorerviewlet.css",
+    "vs/workbench/contrib/files/browser/views/media/openeditors.css",
+    "vs/workbench/contrib/inlineChat/browser/media/inlineChat.css",
+    "vs/workbench/contrib/interactive/browser/interactiveEditor.css",
+    "vs/workbench/contrib/interactive/browser/media/interactive.css",
+    "vs/workbench/contrib/issue/browser/media/issueReporter.css",
+    "vs/workbench/contrib/issue/electron-sandbox/media/issueReporter.css",
+    "vs/workbench/contrib/languageStatus/browser/media/languageStatus.css",
+    "vs/workbench/contrib/markers/browser/markersViewActions.css",
+    "vs/workbench/contrib/markers/browser/media/markers.css",
+    "vs/workbench/contrib/mergeEditor/browser/view/media/mergeEditor.css",
+    "vs/workbench/contrib/notebook/browser/contrib/find/media/notebookFind.css",
+    "vs/workbench/contrib/notebook/browser/contrib/find/notebookFindReplaceWidget.css",
+    "vs/workbench/contrib/notebook/browser/diff/notebookDiff.css",
+    "vs/workbench/contrib/notebook/browser/media/notebook.css",
+    "vs/workbench/contrib/notebook/browser/media/notebookCellChat.css",
+    "vs/workbench/contrib/notebook/browser/media/notebookCellEditorHint.css",
+    "vs/workbench/contrib/notebook/browser/media/notebookCellInsertToolbar.css",
+    "vs/workbench/contrib/notebook/browser/media/notebookCellOutput.css",
+    "vs/workbench/contrib/notebook/browser/media/notebookCellStatusBar.css",
+    "vs/workbench/contrib/notebook/browser/media/notebookCellTitleToolbar.css",
+    "vs/workbench/contrib/notebook/browser/media/notebookChatEditController.css",
+    "vs/workbench/contrib/notebook/browser/media/notebookChatEditorOverlay.css",
+    "vs/workbench/contrib/notebook/browser/media/notebookDnd.css",
+    "vs/workbench/contrib/notebook/browser/media/notebookEditorStickyScroll.css",
+    "vs/workbench/contrib/notebook/browser/media/notebookFocusIndicator.css",
+    "vs/workbench/contrib/notebook/browser/media/notebookFolding.css",
+    "vs/workbench/contrib/notebook/browser/media/notebookKernelActionViewItem.css",
+    "vs/workbench/contrib/notebook/browser/media/notebookOutline.css",
+    "vs/workbench/contrib/notebook/browser/media/notebookToolbar.css",
+    "vs/workbench/contrib/outline/browser/outlinePane.css",
+    "vs/workbench/contrib/output/browser/output.css",
+    "vs/workbench/contrib/preferences/browser/media/keybindings.css",
+    "vs/workbench/contrib/preferences/browser/media/keybindingsEditor.css",
+    "vs/workbench/contrib/preferences/browser/media/settingsEditor2.css",
+    "vs/workbench/contrib/preferences/browser/media/settingsWidgets.css",
+    "vs/workbench/contrib/remote/browser/media/remoteViewlet.css",
+    "vs/workbench/contrib/remote/browser/media/tunnelView.css",
+    "vs/workbench/contrib/replNotebook/browser/interactiveEditor.css",
+    "vs/workbench/contrib/replNotebook/browser/media/interactive.css",
+    "vs/workbench/contrib/scm/browser/media/dirtydiffDecorator.css",
+    "vs/workbench/contrib/scm/browser/media/scm.css",
+    "vs/workbench/contrib/search/browser/media/anythingQuickAccess.css",
+    "vs/workbench/contrib/search/browser/media/searchview.css",
+    "vs/workbench/contrib/searchEditor/browser/media/searchEditor.css",
+    "vs/workbench/contrib/share/browser/share.css",
+    "vs/workbench/contrib/terminal/browser/media/terminal.css",
+    "vs/workbench/contrib/terminal/browser/media/terminalVoice.css",
+    "vs/workbench/contrib/terminal/browser/media/widgets.css",
+    "vs/workbench/contrib/terminal/browser/media/xterm.css",
+    "vs/workbench/contrib/terminalContrib/chat/browser/media/terminalChatWidget.css",
+    "vs/workbench/contrib/terminalContrib/chat/browser/media/terminalInitialHint.css",
+    "vs/workbench/contrib/terminalContrib/developer/browser/media/developer.css",
+    "vs/workbench/contrib/terminalContrib/find/browser/media/terminalFind.css",
+    "vs/workbench/contrib/terminalContrib/quickFix/browser/media/terminalQuickFix.css",
+    "vs/workbench/contrib/terminalContrib/stickyScroll/browser/media/stickyScroll.css",
+    "vs/workbench/contrib/terminalContrib/suggest/browser/media/terminalSymbolIcons.css",
+    "vs/workbench/contrib/testing/browser/media/testMessageColorizer.css",
+    "vs/workbench/contrib/testing/browser/media/testing.css",
+    "vs/workbench/contrib/testing/browser/testResultsView/testResultsViewContent.css",
+    "vs/workbench/contrib/timeline/browser/media/timelinePane.css",
+    "vs/workbench/contrib/typeHierarchy/browser/media/typeHierarchy.css",
+    "vs/workbench/contrib/update/browser/media/releasenoteseditor.css",
+    "vs/workbench/contrib/userDataProfile/browser/media/userDataProfilesEditor.css",
+    "vs/workbench/contrib/welcomeGettingStarted/browser/media/gettingStarted.css",
+    "vs/workbench/contrib/welcomeWalkthrough/browser/media/walkThroughPart.css",
+    "vs/workbench/contrib/workspace/browser/media/workspaceTrustEditor.css",
+    "vs/workbench/electron-sandbox/actions/media/actions.css",
+    "vs/workbench/electron-sandbox/media/window.css",
+    "vs/workbench/services/extensionManagement/common/media/extensionManagement.css",
+    "vs/workbench/services/progress/browser/media/progressService.css",
+    "vs/workbench/services/search/test/node/fixtures/site.css",
+    "vs/workbench/services/search/test/node/fixtures/some_utf16be.css",
+    "vs/workbench/services/search/test/node/fixtures/some_utf16le.css",
+    "vs/workbench/services/suggest/browser/media/suggest.css",
+    "vs/workbench/services/textfile/test/node/encoding/fixtures/some_ansi.css",
+    "vs/workbench/services/textfile/test/node/encoding/fixtures/some_file.css",
+    "vs/workbench/services/textfile/test/node/encoding/fixtures/some_utf16be.css",
+    "vs/workbench/services/textfile/test/node/encoding/fixtures/some_utf16le.css",
+    "vs/workbench/services/textfile/test/node/encoding/fixtures/some_utf8.css",
+    "vs/workbench/services/userDataProfile/browser/media/userDataProfileView.css"
+  ]
+}

@@ -337,6 +337,9 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 		this.statusBarService = accessor.get(IStatusbarService);
 		accessor.get(IBannerService);
 
+		console.log(this.simulatorService);
+		console.log(this.headerBarService);
+
 		// Listeners
 		this.registerLayoutListeners();
 

@@ -478,7 +478,6 @@ export class WindowsMainService extends Disposable implements IWindowsMainServic
 		foldersToAdd: ISingleFolderWorkspacePathToOpen[],
 		foldersToRemove: ISingleFolderWorkspacePathToOpen[]
 	): Promise<{ windows: ICodeWindow[]; filesOpenedInWindow: ICodeWindow | undefined }> {
-
 		// Keep track of used windows and remember
 		// if files have been opened in one of them
 		const usedWindows: ICodeWindow[] = [];
@@ -1647,6 +1646,8 @@ export class WindowsMainService extends Disposable implements IWindowsMainServic
 		}
 
 		// Load it
+		console.log('configuration: ', configuration);
+		fs.writeFileSync('/Users/lee/Project/vscode/how-vscode-work/configuration.json', JSON.stringify(configuration, null, 2));
 		window.load(configuration);
 	}
 

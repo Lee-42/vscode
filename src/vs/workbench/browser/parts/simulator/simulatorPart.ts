@@ -15,7 +15,7 @@ import { ACTIVITY_BAR_BACKGROUND } from '../../../common/theme.js';
 import { SelectBox } from '../../../../base/browser/ui/selectBox/selectBox.js';
 import { IContextViewService } from '../../../../platform/contextview/browser/contextView.js';
 import { defaultSelectBoxStyles } from '../../../../platform/theme/browser/defaultStyles.js';
-import { FileAccess } from '../../../../base/common/network.js';
+// import { FileAccess } from '../../../../base/common/network.js';
 
 export class SimulatorPart extends Part implements ISimulatorService {
 	declare readonly _serviceBrand: undefined;

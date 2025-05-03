@@ -16,7 +16,7 @@ import { ACTIVITY_BAR_BACKGROUND, ACTIVITY_BAR_TOP_BACKGROUND } from '../../../c
 import { Codicon } from '../../../../base/common/codicons.js';
 import { ICommandService } from '../../../../platform/commands/common/commands.js';
 import { IContextKeyService } from '../../../../platform/contextkey/common/contextkey.js';
-import { PanelVisibleContext, SimulatorVisibleContext } from '../../../common/contextkeys.js';
+// import { PanelVisibleContext, SimulatorVisibleContext } from '../../../common/contextkeys.js';
 import { ButtonWithIconAndDescription } from '../../../../base/browser/ui/button/custom-button.js';
 
 export class HeaderbarPart extends Part implements IHeaderBarService {
