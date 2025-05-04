@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { app, protocol, session, Session, systemPreferences, WebFrameMain } from 'electron';
+import { app, ipcMain, protocol, session, Session, systemPreferences, WebFrameMain } from 'electron';
 import { addUNCHostToAllowlist, disableUNCAccessRestrictions } from '../../base/node/unc.js';
 import { validatedIpcMain } from '../../base/parts/ipc/electron-main/ipcMain.js';
 import { hostname, release } from 'os';
@@ -513,6 +513,26 @@ export class CodeApplication extends Disposable {
 			const window = this.windowsMainService?.getWindowByWebContents(event.sender);
 			if (window) {
 				window.notifyZoomLevel(zoomLevel);
+			}
+		});
+
+		// 添加新的 IPC 事件处理程序，用于打开新窗口
+		ipcMain.handle('vscode:openNewWindow', async (event, folderPath?: string) => {
+			if (this.windowsMainService) {
+				if (folderPath) {
+					// 如果提供了文件夹路径，则打开该文件夹
+					return this.windowsMainService.open({
+						context: OpenContext.API,
+						cli: this.environmentMainService.args,
+						urisToOpen: [{ folderUri: URI.file(folderPath) }],
+						forceNewWindow: true
+					});
+				} else {
+					// 如果没有提供路径，则打开空窗口
+					return this.windowsMainService.openEmptyWindow({
+						context: OpenContext.API
+					});
+				}
 			}
 		});
 
@@ -1338,20 +1358,6 @@ export class CodeApplication extends Disposable {
 		}
 
 		// default: read paths from cli
-		console.log('default: read paths from cli: ', {
-			context,
-			cli: args,
-			forceNewWindow: args['new-window'],
-			diffMode: args.diff,
-			mergeMode: args.merge,
-			noRecentEntry,
-			waitMarkerFileURI,
-			gotoLineMode: args.goto,
-			initialStartup: true,
-			remoteAuthority,
-			forceProfile,
-			forceTempProfile
-		});
 		return windowsMainService.open({
 			context,
 			cli: args,

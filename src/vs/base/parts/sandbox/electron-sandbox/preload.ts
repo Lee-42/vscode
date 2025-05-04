@@ -101,7 +101,6 @@
 	// #######################################################################
 
 	const globals = {
-
 		/**
 		 * A minimal set of methods exposed from Electron's `ipcRenderer`
 		 * to support communication to main process.

@@ -249,6 +249,7 @@ export const nodeModulesAsarPath: AppResourcePath = 'vs/../../node_modules.asar'
 export const nodeModulesAsarUnpackedPath: AppResourcePath = 'vs/../../node_modules.asar.unpacked';
 
 export const VSCODE_AUTHORITY = 'vscode-app';
+export const VSCODE_AUTHORITY_VITE = 'localhost:5173';
 
 class FileAccessImpl {
 

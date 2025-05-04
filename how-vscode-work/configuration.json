@@ -62,15 +62,15 @@
   "allow-insecure-localhost": false,
   "disable-dev-shm-usage": false,
   "profile-temp": false,
-  "logsPath": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250503T233539",
+  "logsPath": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250504T162117",
   "machineId": "93a65419073b63d34e1199a5f3dcf90c762bc6a5e8df2be4beaf63e6d253a749",
   "sqmId": "",
   "devDeviceId": "b9504a95-f01d-42b5-87d6-a0a59836d5eb",
-  "windowId": 1,
-  "mainPid": 13342,
+  "windowId": 3,
+  "mainPid": 82882,
   "appRoot": "/Users/lee/Project/vscode",
   "execPath": "/Users/lee/Project/vscode/.build/electron/Code - OSS.app/Contents/MacOS/Electron",
-  "backupPath": "/Users/lee/Library/Application Support/code-oss-dev/Backups/2909721be095db19faa2c906b07fe896",
+  "backupPath": "/Users/lee/Library/Application Support/code-oss-dev/Backups/351bf3aa28e7d7984491caac08b1e10d",
   "profiles": {
     "home": {
       "$mid": 1,
@@ -162,6 +162,16 @@
             "$mid": 1,
             "path": "/Users/lee/Project/aechoterm",
             "scheme": "file"
+          },
+          {
+            "$mid": 1,
+            "path": "/Users/lee/Project/ide",
+            "scheme": "file"
+          },
+          {
+            "$mid": 1,
+            "path": "/Users/lee/Project/ide-重构/ide",
+            "scheme": "file"
           }
         ]
       }
@@ -250,6 +260,16 @@
           "$mid": 1,
           "path": "/Users/lee/Project/aechoterm",
           "scheme": "file"
+        },
+        {
+          "$mid": 1,
+          "path": "/Users/lee/Project/ide",
+          "scheme": "file"
+        },
+        {
+          "$mid": 1,
+          "path": "/Users/lee/Project/ide-重构/ide",
+          "scheme": "file"
         }
       ]
     }
@@ -258,12 +278,11 @@
   "tmpDir": "/var/folders/br/f8xfsmv50_d493ly1xfzxzlh0000gn/T",
   "userDataDir": "/Users/lee/Library/Application Support/code-oss-dev",
   "workspace": {
-    "id": "27407758fdd0f5cd358945a6b8612976",
+    "id": "9e4f41a30a95a6cdedc86de2ab6dda4c",
     "uri": {
       "$mid": 1,
-      "fsPath": "/Users/lee/Project/aechoterm",
-      "external": "file:///Users/lee/Project/aechoterm",
-      "path": "/Users/lee/Project/aechoterm",
+      "fsPath": "/Users/lee/Project/ide-重构/ide",
+      "path": "/Users/lee/Project/ide-重构/ide",
       "scheme": "file"
     }
   },
@@ -279,13 +298,70 @@
     {
       "resource": {
         "$mid": 1,
-        "fsPath": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250503T233539/main.log",
-        "external": "file:///Users/lee/Library/Application%20Support/code-oss-dev/logs/20250503T233539/main.log",
-        "path": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250503T233539/main.log",
+        "fsPath": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250504T162117/main.log",
+        "external": "file:///Users/lee/Library/Application%20Support/code-oss-dev/logs/20250504T162117/main.log",
+        "path": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250504T162117/main.log",
         "scheme": "file"
       },
       "id": "main",
       "name": "Main"
+    },
+    {
+      "resource": {
+        "$mid": 1,
+        "fsPath": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250504T162117/sharedprocess.log",
+        "external": "file:///Users/lee/Library/Application%20Support/code-oss-dev/logs/20250504T162117/sharedprocess.log",
+        "path": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250504T162117/sharedprocess.log",
+        "scheme": "file"
+      },
+      "id": "sharedprocess",
+      "name": "Shared",
+      "group": {
+        "id": "shared",
+        "name": "Shared"
+      }
+    },
+    {
+      "resource": {
+        "$mid": 1,
+        "fsPath": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250504T162117/network-shared.log",
+        "external": "file:///Users/lee/Library/Application%20Support/code-oss-dev/logs/20250504T162117/network-shared.log",
+        "path": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250504T162117/network-shared.log",
+        "scheme": "file"
+      },
+      "id": "network-shared",
+      "name": "Network",
+      "group": {
+        "id": "shared",
+        "name": "Shared"
+      }
+    },
+    {
+      "resource": {
+        "$mid": 1,
+        "fsPath": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250504T162117/telemetry.log",
+        "external": "file:///Users/lee/Library/Application%20Support/code-oss-dev/logs/20250504T162117/telemetry.log",
+        "path": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250504T162117/telemetry.log",
+        "scheme": "file"
+      },
+      "id": "telemetry",
+      "name": "Telemetry (Not Sent)",
+      "hidden": true,
+      "group": {
+        "id": "telemetry",
+        "name": "Telemetry"
+      }
+    },
+    {
+      "resource": {
+        "$mid": 1,
+        "fsPath": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250504T162117/userDataSync.log",
+        "external": "file:///Users/lee/Library/Application%20Support/code-oss-dev/logs/20250504T162117/userDataSync.log",
+        "path": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250504T162117/userDataSync.log",
+        "scheme": "file"
+      },
+      "id": "userDataSync",
+      "name": "Settings Sync"
     }
   ],
   "product": {
@@ -375,67 +451,90 @@
     ],
     "version": "1.100.0"
   },
-  "isInitialStartup": true,
   "perfMarks": [
     {
       "name": "code/timeOrigin",
-      "startTime": 1746286539491.242
+      "startTime": 1746346876694.326
     },
     {
       "name": "code/didStartMain",
-      "startTime": 1746286539669
+      "startTime": 1746346876919
     },
     {
       "name": "code/willLoadMainBundle",
-      "startTime": 1746286539491
+      "startTime": 1746346876694
     },
     {
       "name": "code/didLoadMainBundle",
-      "startTime": 1746286539669
+      "startTime": 1746346876919
     },
     {
       "name": "code/willStartCrashReporter",
-      "startTime": 1746286539670
+      "startTime": 1746346876921
     },
     {
       "name": "code/didStartCrashReporter",
-      "startTime": 1746286539693
-    },
-    {
-      "name": "code/mainAppReady",
-      "startTime": 1746286539727
+      "startTime": 1746346876936
     },
     {
       "name": "code/willGenerateNls",
-      "startTime": 1746286539727
+      "startTime": 1746346877042
     },
     {
       "name": "code/didGenerateNls",
-      "startTime": 1746286539727
+      "startTime": 1746346877042
     },
     {
       "name": "code/willLoadNls",
-      "startTime": 1746286539728
+      "startTime": 1746346877042
     },
     {
       "name": "code/registerFilesystem/file",
-      "startTime": 1746286539907
+      "startTime": 1746346877334
     },
     {
       "name": "code/registerFilesystem/vscode-userdata",
-      "startTime": 1746286539908
+      "startTime": 1746346877335
     },
     {
       "name": "code/didRunMainBundle",
-      "startTime": 1746286539925
+      "startTime": 1746346877339
     },
     {
       "name": "code/willStartMainServer",
-      "startTime": 1746286539934
+      "startTime": 1746346877347
     },
     {
       "name": "code/didStartMainServer",
-      "startTime": 1746286539937
+      "startTime": 1746346877348
+    },
+    {
+      "name": "code/willCreateCodeWindow",
+      "startTime": 1746346877459
+    },
+    {
+      "name": "code/willRestoreCodeWindowState",
+      "startTime": 1746346877460
+    },
+    {
+      "name": "code/didRestoreCodeWindowState",
+      "startTime": 1746346877460
+    },
+    {
+      "name": "code/willCreateCodeBrowserWindow",
+      "startTime": 1746346877460
+    },
+    {
+      "name": "code/didCreateCodeBrowserWindow",
+      "startTime": 1746346877469
+    },
+    {
+      "name": "code/didCreateCodeWindow",
+      "startTime": 1746346877470
+    },
+    {
+      "name": "code/willOpenNewWindow",
+      "startTime": 1746346877472
     }
   ],
   "os": {
@@ -451,6 +550,51 @@
     "highContrast": false
   },
   "policiesData": {
+    "ExtensionGalleryServiceUrl": {
+      "definition": {
+        "type": "string"
+      }
+    },
+    "AllowedExtensions": {
+      "definition": {
+        "type": "string"
+      }
+    },
+    "ChatToolsAutoApprove": {
+      "definition": {
+        "type": "boolean",
+        "previewFeature": true,
+        "defaultValue": false
+      }
+    },
+    "ChatMCP": {
+      "definition": {
+        "type": "boolean",
+        "previewFeature": true,
+        "defaultValue": false
+      }
+    },
+    "ChatAgentExtensionTools": {
+      "definition": {
+        "type": "boolean",
+        "previewFeature": true,
+        "defaultValue": false
+      }
+    },
+    "ChatAgentMode": {
+      "definition": {
+        "type": "boolean",
+        "previewFeature": false,
+        "defaultValue": false
+      }
+    },
+    "ChatPromptFiles": {
+      "definition": {
+        "type": "boolean",
+        "previewFeature": true,
+        "defaultValue": false
+      }
+    },
     "UpdateMode": {
       "definition": {
         "type": "string"
@@ -464,11 +608,6 @@
     "EnableFeedback": {
       "definition": {
         "type": "boolean"
-      }
-    },
-    "AllowedExtensions": {
-      "definition": {
-        "type": "string"
       }
     }
   },

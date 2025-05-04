@@ -1646,7 +1646,6 @@ export class WindowsMainService extends Disposable implements IWindowsMainServic
 		}
 
 		// Load it
-		console.log('configuration: ', configuration);
 		fs.writeFileSync('/Users/lee/Project/vscode/how-vscode-work/configuration.json', JSON.stringify(configuration, null, 2));
 		window.load(configuration);
 	}

@@ -10,7 +10,7 @@ import { performance } from 'perf_hooks';
 import { configurePortable } from './bootstrap-node.js';
 import { bootstrapESM } from './bootstrap-esm.js';
 import { fileURLToPath } from 'url';
-import { app, protocol, crashReporter, Menu, contentTracing, BrowserWindow } from 'electron';
+import { app, protocol, crashReporter, Menu, contentTracing, BrowserWindow, ipcMain } from 'electron';
 import minimist from 'minimist';
 import { product } from './bootstrap-meta.js';
 import { parse } from './vs/base/common/jsonc.js';
@@ -20,6 +20,8 @@ import { resolveNLSConfiguration } from './vs/base/node/nls.js';
 import { getUNCHost, addUNCHostToAllowlist } from './vs/base/node/unc.js';
 import { INLSConfiguration } from './vs/nls.js';
 import { NativeParsedArgs } from './vs/platform/environment/common/argv.js';
+import { FileAccess } from './vs/base/common/network.js';
+import { ProtocolMainService } from './vs/platform/protocol/electron-main/protocolMainService.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -186,26 +188,25 @@ app.once('ready', function () {
 });
 
 async function onReady() {
-
-	console.log('onReady');
-
 	const win = new BrowserWindow({
 		width: 330,
 		height: 470,
+		webPreferences: {
+			preload: FileAccess.asFileUri('vs/base/parts/sandbox/electron-sandbox/preload2.js').fsPath,
+		}
 	});
-	win.loadURL('https://www.baidu.com');
+	win.loadURL('http://localhost:5173');
+	win.webContents.openDevTools();
+	try {
+		const [, nlsConfig] = await Promise.all([
+			mkdirpIgnoreError(codeCachePath),
+			resolveNlsConfiguration()
+		]);
+		await startup(codeCachePath, nlsConfig);
+	} catch (error) {
+		console.error(error);
+	}
 
-	// perf.mark('code/mainAppReady');
-
-	// try {
-	// 	const [, nlsConfig] = await Promise.all([
-	// 		mkdirpIgnoreError(codeCachePath),
-	// 		resolveNlsConfiguration()
-	// 	]);
-	// 	await startup(codeCachePath, nlsConfig);
-	// } catch (error) {
-	// 	console.error(error);
-	// }
 }
 
 /**

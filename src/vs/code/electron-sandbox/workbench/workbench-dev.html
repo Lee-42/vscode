@@ -1,10 +1,11 @@
 <!-- Copyright (C) Microsoft Corporation. All rights reserved. -->
 <!DOCTYPE html>
 <html>
-
-<head>
-	<meta charset="utf-8" />
-	<meta http-equiv="Content-Security-Policy" content="
+	<head>
+		<meta charset="utf-8" />
+		<meta
+			http-equiv="Content-Security-Policy"
+			content="
 				default-src
 					'none'
 				;
@@ -63,16 +64,13 @@
 					tokenizeToString
 					notebookChatEditController
 				;
-		" />
-</head>
+		"/>
+	</head>
 
-<body aria-label="">
-	<button id="btn" style="position: fixed; top: 100px; right: 100px; z-index: 1000000;">按钮</button>
-</body>
+	<body aria-label="">
+	</body>
 
-<!-- Startup (do not modify order of script tags!) -->
-<script src="../../../../bootstrap-window.js"></script>
-<script src="./workbench.js"></script>
-<script src="./btn.js"></script>
-
+	<!-- Startup (do not modify order of script tags!) -->
+	<script src="../../../../bootstrap-window.js"></script>
+	<script src="./workbench.js"></script>
 </html>
