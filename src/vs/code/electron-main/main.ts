@@ -72,6 +72,7 @@ import { massageMessageBoxOptions } from '../../platform/dialogs/common/dialogs.
 import { SaveStrategy, StateService } from '../../platform/state/node/stateService.js';
 import { FileUserDataProvider } from '../../platform/userData/common/fileUserDataProvider.js';
 import { addUNCHostToAllowlist, getUNCHost } from '../../base/node/unc.js';
+import { LifecycleMainPhase } from '../../platform/lifecycle/electron-main/lifecycleMainService.js';
 
 /**
  * The main VS Code entry point.
@@ -136,6 +137,7 @@ class CodeMain {
 
 				// Lifecycle
 				Event.once(lifecycleMainService.onWillShutdown)(evt => {
+					console.log('❎❎❎❎❎❎❎❎❎❎ TODO 销毁所有的小程序');
 					fileService.dispose();
 					configurationService.dispose();
 					evt.join('instanceLockfile', promises.unlink(environmentMainService.mainLockfile).catch(() => { /* ignored */ }));

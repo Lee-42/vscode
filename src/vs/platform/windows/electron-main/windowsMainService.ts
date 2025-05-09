@@ -267,6 +267,13 @@ export class WindowsMainService extends Disposable implements IWindowsMainServic
 				}
 			}
 		}));
+
+		this.lifecycleMainService.onWillLoadWindow(() => {
+			console.log('🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀', this.workspacesManagementMainService.getUntitledWorkspaces());
+		});
+		this.lifecycleMainService.onBeforeCloseWindow(() => {
+			console.log('💀💀💀💀💀💀💀💀💀💀', this.workspacesManagementMainService.getUntitledWorkspaces());
+		});
 	}
 
 	openEmptyWindow(openConfig: IOpenEmptyConfiguration, options?: IOpenEmptyWindowOptions): Promise<ICodeWindow[]> {
