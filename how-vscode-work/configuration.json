@@ -62,15 +62,15 @@
   "allow-insecure-localhost": false,
   "disable-dev-shm-usage": false,
   "profile-temp": false,
-  "logsPath": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250509T173136",
+  "logsPath": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250509T224021",
   "machineId": "93a65419073b63d34e1199a5f3dcf90c762bc6a5e8df2be4beaf63e6d253a749",
   "sqmId": "",
   "devDeviceId": "b9504a95-f01d-42b5-87d6-a0a59836d5eb",
-  "windowId": 4,
-  "mainPid": 87118,
+  "windowId": 2,
+  "mainPid": 21195,
   "appRoot": "/Users/lee/Project/vscode",
   "execPath": "/Users/lee/Project/vscode/.build/electron/Code - OSS.app/Contents/MacOS/Electron",
-  "backupPath": "/Users/lee/Library/Application Support/code-oss-dev/Backups/c69605140b41d9d4d502f5b3d9ffe1e8",
+  "backupPath": "/Users/lee/Library/Application Support/code-oss-dev/Backups/1746782930759",
   "profiles": {
     "home": {
       "$mid": 1,
@@ -130,61 +130,73 @@
         "workspaces": [
           {
             "$mid": 1,
+            "external": "file:///Users/lee",
             "path": "/Users/lee",
             "scheme": "file"
           },
           {
             "$mid": 1,
+            "external": "file:///Users/lee/Project/coco",
             "path": "/Users/lee/Project/coco",
             "scheme": "file"
           },
           {
             "$mid": 1,
+            "external": "file:///Volumes/T7/ide_vue",
             "path": "/Volumes/T7/ide_vue",
             "scheme": "file"
           },
           {
             "$mid": 1,
+            "external": "file:///Users/lee/Documents",
             "path": "/Users/lee/Documents",
             "scheme": "file"
           },
           {
             "$mid": 1,
+            "external": "file:///Volumes/T7/900",
             "path": "/Volumes/T7/900",
             "scheme": "file"
           },
           {
             "$mid": 1,
+            "external": "file:///Users/lee/Project/vscode",
             "path": "/Users/lee/Project/vscode",
             "scheme": "file"
           },
           {
             "$mid": 1,
+            "external": "file:///Users/lee/Project/aechoterm",
             "path": "/Users/lee/Project/aechoterm",
             "scheme": "file"
           },
           {
             "$mid": 1,
+            "external": "file:///Users/lee/Project/ide",
             "path": "/Users/lee/Project/ide",
             "scheme": "file"
           },
           {
             "$mid": 1,
+            "external": "file:///Users/lee/Project/ide-%E9%87%8D%E6%9E%84/ide",
             "path": "/Users/lee/Project/ide-重构/ide",
             "scheme": "file"
           },
           {
             "$mid": 1,
+            "external": "file:///Users/lee/Project/%E5%B0%8F%E7%A8%8B%E5%BA%8F/project1",
             "path": "/Users/lee/Project/小程序/project1",
             "scheme": "file"
           },
           {
             "$mid": 1,
+            "external": "file:///Users/lee/Project/%E5%B0%8F%E7%A8%8B%E5%BA%8F/project3",
             "path": "/Users/lee/Project/小程序/project3",
             "scheme": "file"
           },
           {
             "$mid": 1,
+            "external": "file:///Users/lee/Project/%E5%B0%8F%E7%A8%8B%E5%BA%8F/project2",
             "path": "/Users/lee/Project/小程序/project2",
             "scheme": "file"
           }
@@ -243,61 +255,73 @@
       "workspaces": [
         {
           "$mid": 1,
+          "external": "file:///Users/lee",
           "path": "/Users/lee",
           "scheme": "file"
         },
         {
           "$mid": 1,
+          "external": "file:///Users/lee/Project/coco",
           "path": "/Users/lee/Project/coco",
           "scheme": "file"
         },
         {
           "$mid": 1,
+          "external": "file:///Volumes/T7/ide_vue",
           "path": "/Volumes/T7/ide_vue",
           "scheme": "file"
         },
         {
           "$mid": 1,
+          "external": "file:///Users/lee/Documents",
           "path": "/Users/lee/Documents",
           "scheme": "file"
         },
         {
           "$mid": 1,
+          "external": "file:///Volumes/T7/900",
           "path": "/Volumes/T7/900",
           "scheme": "file"
         },
         {
           "$mid": 1,
+          "external": "file:///Users/lee/Project/vscode",
           "path": "/Users/lee/Project/vscode",
           "scheme": "file"
         },
         {
           "$mid": 1,
+          "external": "file:///Users/lee/Project/aechoterm",
           "path": "/Users/lee/Project/aechoterm",
           "scheme": "file"
         },
         {
           "$mid": 1,
+          "external": "file:///Users/lee/Project/ide",
           "path": "/Users/lee/Project/ide",
           "scheme": "file"
         },
         {
           "$mid": 1,
+          "external": "file:///Users/lee/Project/ide-%E9%87%8D%E6%9E%84/ide",
           "path": "/Users/lee/Project/ide-重构/ide",
           "scheme": "file"
         },
         {
           "$mid": 1,
+          "external": "file:///Users/lee/Project/%E5%B0%8F%E7%A8%8B%E5%BA%8F/project1",
           "path": "/Users/lee/Project/小程序/project1",
           "scheme": "file"
         },
         {
           "$mid": 1,
+          "external": "file:///Users/lee/Project/%E5%B0%8F%E7%A8%8B%E5%BA%8F/project3",
           "path": "/Users/lee/Project/小程序/project3",
           "scheme": "file"
         },
         {
           "$mid": 1,
+          "external": "file:///Users/lee/Project/%E5%B0%8F%E7%A8%8B%E5%BA%8F/project2",
           "path": "/Users/lee/Project/小程序/project2",
           "scheme": "file"
         }
@@ -307,16 +331,6 @@
   "homeDir": "/Users/lee",
   "tmpDir": "/var/folders/br/f8xfsmv50_d493ly1xfzxzlh0000gn/T",
   "userDataDir": "/Users/lee/Library/Application Support/code-oss-dev",
-  "workspace": {
-    "id": "3fb4dd071744aade604e7293fa508ef4",
-    "uri": {
-      "$mid": 1,
-      "fsPath": "/Users/lee/Project/小程序/project3",
-      "external": "file:///Users/lee/Project/%E5%B0%8F%E7%A8%8B%E5%BA%8F/project3",
-      "path": "/Users/lee/Project/小程序/project3",
-      "scheme": "file"
-    }
-  },
   "userEnv": {
     "VSCODE_IPC_HOOK": "/Users/lee/Library/Application Support/code-oss-dev/1.10-main.sock",
     "VSCODE_NLS_CONFIG": "{\"userLocale\":\"zh-cn\",\"osLocale\":\"zh-cn\",\"resolvedLanguage\":\"en\",\"defaultMessagesFile\":\"/Users/lee/Project/vscode/out/nls.messages.json\",\"locale\":\"zh-cn\",\"availableLanguages\":{}}"
@@ -329,70 +343,13 @@
     {
       "resource": {
         "$mid": 1,
-        "fsPath": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250509T173136/main.log",
-        "external": "file:///Users/lee/Library/Application%20Support/code-oss-dev/logs/20250509T173136/main.log",
-        "path": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250509T173136/main.log",
+        "fsPath": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250509T224021/main.log",
+        "external": "file:///Users/lee/Library/Application%20Support/code-oss-dev/logs/20250509T224021/main.log",
+        "path": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250509T224021/main.log",
         "scheme": "file"
       },
       "id": "main",
       "name": "Main"
-    },
-    {
-      "resource": {
-        "$mid": 1,
-        "fsPath": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250509T173136/sharedprocess.log",
-        "external": "file:///Users/lee/Library/Application%20Support/code-oss-dev/logs/20250509T173136/sharedprocess.log",
-        "path": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250509T173136/sharedprocess.log",
-        "scheme": "file"
-      },
-      "id": "sharedprocess",
-      "name": "Shared",
-      "group": {
-        "id": "shared",
-        "name": "Shared"
-      }
-    },
-    {
-      "resource": {
-        "$mid": 1,
-        "fsPath": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250509T173136/network-shared.log",
-        "external": "file:///Users/lee/Library/Application%20Support/code-oss-dev/logs/20250509T173136/network-shared.log",
-        "path": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250509T173136/network-shared.log",
-        "scheme": "file"
-      },
-      "id": "network-shared",
-      "name": "Network",
-      "group": {
-        "id": "shared",
-        "name": "Shared"
-      }
-    },
-    {
-      "resource": {
-        "$mid": 1,
-        "fsPath": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250509T173136/telemetry.log",
-        "external": "file:///Users/lee/Library/Application%20Support/code-oss-dev/logs/20250509T173136/telemetry.log",
-        "path": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250509T173136/telemetry.log",
-        "scheme": "file"
-      },
-      "id": "telemetry",
-      "name": "Telemetry (Not Sent)",
-      "hidden": true,
-      "group": {
-        "id": "telemetry",
-        "name": "Telemetry"
-      }
-    },
-    {
-      "resource": {
-        "$mid": 1,
-        "fsPath": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250509T173136/userDataSync.log",
-        "external": "file:///Users/lee/Library/Application%20Support/code-oss-dev/logs/20250509T173136/userDataSync.log",
-        "path": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250509T173136/userDataSync.log",
-        "scheme": "file"
-      },
-      "id": "userDataSync",
-      "name": "Settings Sync"
     }
   ],
   "product": {
@@ -482,90 +439,63 @@
     ],
     "version": "1.100.0"
   },
+  "isInitialStartup": true,
   "perfMarks": [
     {
       "name": "code/timeOrigin",
-      "startTime": 1746783095809.433
+      "startTime": 1746801620586.233
     },
     {
       "name": "code/didStartMain",
-      "startTime": 1746783096050
+      "startTime": 1746801620790
     },
     {
       "name": "code/willLoadMainBundle",
-      "startTime": 1746783095809
+      "startTime": 1746801620586
     },
     {
       "name": "code/didLoadMainBundle",
-      "startTime": 1746783096050
+      "startTime": 1746801620790
     },
     {
       "name": "code/willStartCrashReporter",
-      "startTime": 1746783096052
+      "startTime": 1746801620792
     },
     {
       "name": "code/didStartCrashReporter",
-      "startTime": 1746783096066
+      "startTime": 1746801620809
     },
     {
       "name": "code/willGenerateNls",
-      "startTime": 1746783096118
+      "startTime": 1746801620864
     },
     {
       "name": "code/didGenerateNls",
-      "startTime": 1746783096118
+      "startTime": 1746801620864
     },
     {
       "name": "code/willLoadNls",
-      "startTime": 1746783096119
+      "startTime": 1746801620865
     },
     {
       "name": "code/registerFilesystem/file",
-      "startTime": 1746783096337
+      "startTime": 1746801621032
     },
     {
       "name": "code/registerFilesystem/vscode-userdata",
-      "startTime": 1746783096338
+      "startTime": 1746801621033
     },
     {
       "name": "code/didRunMainBundle",
-      "startTime": 1746783096355
+      "startTime": 1746801621085
     },
     {
       "name": "code/willStartMainServer",
-      "startTime": 1746783096504
+      "startTime": 1746801621183
     },
     {
       "name": "code/didStartMainServer",
-      "startTime": 1746783096505
-    },
-    {
-      "name": "code/willCreateCodeWindow",
-      "startTime": 1746783096594
-    },
-    {
-      "name": "code/willRestoreCodeWindowState",
-      "startTime": 1746783096594
-    },
-    {
-      "name": "code/didRestoreCodeWindowState",
-      "startTime": 1746783096594
-    },
-    {
-      "name": "code/willCreateCodeBrowserWindow",
-      "startTime": 1746783096594
-    },
-    {
-      "name": "code/didCreateCodeBrowserWindow",
-      "startTime": 1746783096607
-    },
-    {
-      "name": "code/didCreateCodeWindow",
-      "startTime": 1746783096608
-    },
-    {
-      "name": "code/willOpenNewWindow",
-      "startTime": 1746783096610
+      "startTime": 1746801621184
     }
   ],
   "os": {
@@ -581,51 +511,6 @@
     "highContrast": false
   },
   "policiesData": {
-    "ExtensionGalleryServiceUrl": {
-      "definition": {
-        "type": "string"
-      }
-    },
-    "AllowedExtensions": {
-      "definition": {
-        "type": "string"
-      }
-    },
-    "ChatToolsAutoApprove": {
-      "definition": {
-        "type": "boolean",
-        "previewFeature": true,
-        "defaultValue": false
-      }
-    },
-    "ChatMCP": {
-      "definition": {
-        "type": "boolean",
-        "previewFeature": true,
-        "defaultValue": false
-      }
-    },
-    "ChatAgentExtensionTools": {
-      "definition": {
-        "type": "boolean",
-        "previewFeature": true,
-        "defaultValue": false
-      }
-    },
-    "ChatAgentMode": {
-      "definition": {
-        "type": "boolean",
-        "previewFeature": false,
-        "defaultValue": false
-      }
-    },
-    "ChatPromptFiles": {
-      "definition": {
-        "type": "boolean",
-        "previewFeature": true,
-        "defaultValue": false
-      }
-    },
     "UpdateMode": {
       "definition": {
         "type": "string"
@@ -639,6 +524,11 @@
     "EnableFeedback": {
       "definition": {
         "type": "boolean"
+      }
+    },
+    "AllowedExtensions": {
+      "definition": {
+        "type": "string"
       }
     }
   },

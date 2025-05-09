@@ -10,12 +10,12 @@ const routes: Array<RouteRecordRaw> = [
         name: 'login',
         component: () => import('../views/login/index.vue'),
         meta: {
-            width: 330,
-            height: 350,
-            resizable: false,
-            devtool: true,
-            keepAlive: false,
-            start: true,
+            width: 300,
+			height: 450,
+			resizable: false,
+			devtool: true,
+			keepAlive: false,
+			start: true,
         },
     },
     {

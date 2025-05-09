@@ -6,8 +6,8 @@ export const routes = [
 	{
 		name: 'login',
 		meta: {
-			width: 330,
-			height: 350,
+			width: 300,
+			height: 450,
 			resizable: false,
 			devtool: true,
 			keepAlive: false,
