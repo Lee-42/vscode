@@ -5,6 +5,8 @@
 
 'use strict';
 
+
+
 const gulp = require('gulp');
 const fs = require('fs');
 const path = require('path');
@@ -35,6 +37,7 @@ const { compileNonNativeExtensionsBuildTask, compileNativeExtensionsBuildTask, c
 const { promisify } = require('util');
 const glob = promisify(require('glob'));
 const rcedit = promisify(require('rcedit'));
+const { viteBuildTask } = require('./gulpfile.vite');
 
 // Build
 const vscodeEntryPoints = [
@@ -61,6 +64,7 @@ const vscodeResourceIncludes = [
 
 	// Electron Preload
 	'out-build/vs/base/parts/sandbox/electron-sandbox/preload.js',
+	'out-build/vs/base/parts/sandbox/electron-sandbox/preload2.js',
 	'out-build/vs/base/parts/sandbox/electron-sandbox/preload-aux.js',
 
 	// Node Scripts
@@ -237,6 +241,7 @@ function packageTask(platform, arch, sourceFolderName, destinationFolderName, op
 
 		const checksums = computeChecksums(out, [
 			'vs/base/parts/sandbox/electron-sandbox/preload.js',
+			'vs/base/parts/sandbox/electron-sandbox/preload2.js',
 			'vs/workbench/workbench.desktop.main.js',
 			'vs/workbench/workbench.desktop.main.css',
 			'vs/workbench/api/node/extensionHostProcess.js',
@@ -509,6 +514,7 @@ BUILD_TARGETS.forEach(buildTarget => {
 			compileNonNativeExtensionsBuildTask,
 			compileExtensionMediaBuildTask,
 			minified ? minifyVSCodeTask : bundleVSCodeTask,
+			viteBuildTask,
 			vscodeTaskCI
 		));
 		gulp.task(vscodeTask);

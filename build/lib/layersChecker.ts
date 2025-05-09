@@ -241,6 +241,21 @@ const RULES: IRule[] = [
 			'@types/node'	// no node.js
 		]
 	},
+	// Common: vs/base/parts/sandbox/electron-sandbox/preload2.ts
+	{
+		target: '**/vs/base/parts/sandbox/electron-sandbox/preload2.ts',
+		allowedTypes: [
+			...CORE_TYPES,
+
+			// Safe access to a very small subset of node.js
+			'process',
+			'NodeJS'
+		],
+		disallowedTypes: NATIVE_TYPES,
+		disallowedDefinitions: [
+			'@types/node'	// no node.js
+		]
+	},
 
 	// Common
 	{

@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { app, ipcMain, protocol, session, Session, systemPreferences, WebFrameMain } from 'electron';
+import { app, protocol, session, Session, systemPreferences, WebFrameMain } from 'electron';
 import { addUNCHostToAllowlist, disableUNCAccessRestrictions } from '../../base/node/unc.js';
 import { validatedIpcMain } from '../../base/parts/ipc/electron-main/ipcMain.js';
 import { hostname, release } from 'os';
@@ -122,7 +122,7 @@ import { NativeMcpDiscoveryHelperService } from '../../platform/mcp/node/nativeM
 import { IWebContentExtractorService } from '../../platform/webContentExtractor/common/webContentExtractor.js';
 import { NativeWebContentExtractorService } from '../../platform/webContentExtractor/electron-main/webContentExtractorService.js';
 import ErrorTelemetry from '../../platform/telemetry/electron-main/errorTelemetry.js';
-
+import customIpcManager from '../../../custom/ipc-manager.js';
 /**
  * The main VS Code application. There will only ever be one instance,
  * even if the user starts many instances (e.g. from the command line).
@@ -516,26 +516,6 @@ export class CodeApplication extends Disposable {
 			}
 		});
 
-		// 添加新的 IPC 事件处理程序，用于打开新窗口
-		ipcMain.handle('vscode:openNewWindow', async (event, folderPath?: string) => {
-			if (this.windowsMainService) {
-				if (folderPath) {
-					// 如果提供了文件夹路径，则打开该文件夹
-					return this.windowsMainService.open({
-						context: OpenContext.API,
-						cli: this.environmentMainService.args,
-						urisToOpen: [{ folderUri: URI.file(folderPath) }],
-						forceNewWindow: true
-					});
-				} else {
-					// 如果没有提供路径，则打开空窗口
-					return this.windowsMainService.openEmptyWindow({
-						context: OpenContext.API
-					});
-				}
-			}
-		});
-
 		//#endregion
 	}
 
@@ -668,7 +648,7 @@ export class CodeApplication extends Disposable {
 
 		const initialProtocolUrls = await this.resolveInitialProtocolUrls(windowsMainService, dialogMainService);
 		this._register(new ElectronURLListener(initialProtocolUrls?.urls, urlService, windowsMainService, this.environmentMainService, this.productService, this.logService));
-
+		customIpcManager.openNewWindow(windowsMainService, this.environmentMainService);
 		return initialProtocolUrls;
 	}
 

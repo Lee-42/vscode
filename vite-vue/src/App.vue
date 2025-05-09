@@ -1,16 +1,19 @@
 <template>
-	<n-button type="primary" @click="callVscode()">调起vscode</n-button>
+	<n-config-provider :theme="darkTheme">
+		<n-message-provider>
+			<div class="app">
+				<router-view></router-view>
+			</div>
+		</n-message-provider>
+	</n-config-provider>
 </template>
 
 <script setup lang="ts">
-import { NButton } from 'naive-ui'
-
-const callVscode = () => {
-	console.log('call vscode');
-	(window as any).vscode.ipcRenderer.invoke('vscode:openNewWindow', '/Users/lee/Project/ide-重构/ide')
-}
+import { NMessageProvider, NConfigProvider, darkTheme } from "naive-ui";
 </script>
 
 <style scoped>
-
+.app {
+	height: 100vh;
+}
 </style>

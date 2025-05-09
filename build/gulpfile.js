@@ -14,6 +14,8 @@ const task = require('./lib/task');
 const { transpileClientSWC, transpileTask, compileTask, watchTask, compileApiProposalNamesTask, watchApiProposalNamesTask } = require('./lib/compilation');
 const { monacoTypecheckTask/* , monacoTypecheckWatchTask */ } = require('./gulpfile.editor');
 const { compileExtensionsTask, watchExtensionsTask, compileExtensionMediaTask } = require('./gulpfile.extensions');
+const { viteTask } = require('./gulpfile.vite')
+const path = require('path');
 
 // API proposal names
 gulp.task(compileApiProposalNamesTask);
