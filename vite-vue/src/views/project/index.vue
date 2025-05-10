@@ -13,7 +13,6 @@ import ProjectNew from "./new.vue";
 import { ref } from "vue";
 
 const isNew = ref(false);
-
 </script>
 
 <style scoped>

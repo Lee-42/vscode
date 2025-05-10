@@ -201,6 +201,9 @@ async function onReady() {
 		CustomIpcManager.closewin(windowsManager);
 		CustomIpcManager.maximizewin(windowsManager);
 		CustomIpcManager.unmaximizewin(windowsManager);
+		CustomIpcManager.openFolder();
+		CustomIpcManager.createProject();
+		CustomIpcManager.getTheme();
 	} catch (error) {
 		console.error(error);
 	}

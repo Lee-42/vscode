@@ -1338,20 +1338,22 @@ export class CodeApplication extends Disposable {
 		}
 
 		// default: read paths from cli
-		return windowsMainService.open({
-			context,
-			cli: args,
-			forceNewWindow: args['new-window'],
-			diffMode: args.diff,
-			mergeMode: args.merge,
-			noRecentEntry,
-			waitMarkerFileURI,
-			gotoLineMode: args.goto,
-			initialStartup: true,
-			remoteAuthority,
-			forceProfile,
-			forceTempProfile
-		});
+		// return windowsMainService.open({
+		// 	context,
+		// 	cli: args,
+		// 	forceNewWindow: args['new-window'],
+		// 	diffMode: args.diff,
+		// 	mergeMode: args.merge,
+		// 	noRecentEntry,
+		// 	waitMarkerFileURI,
+		// 	gotoLineMode: args.goto,
+		// 	initialStartup: true,
+		// 	remoteAuthority,
+		// 	forceProfile,
+		// 	forceTempProfile
+		// });
+
+		return Promise.resolve([]);
 	}
 
 	private afterWindowOpen(): void {

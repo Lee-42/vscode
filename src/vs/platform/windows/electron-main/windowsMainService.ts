@@ -276,6 +276,7 @@ export class WindowsMainService extends Disposable implements IWindowsMainServic
 		});
 	}
 
+
 	openEmptyWindow(openConfig: IOpenEmptyConfiguration, options?: IOpenEmptyWindowOptions): Promise<ICodeWindow[]> {
 		const cli = this.environmentMainService.args;
 		const remoteAuthority = options?.remoteAuthority || undefined;

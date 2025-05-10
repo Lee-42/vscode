@@ -393,6 +393,7 @@ export class WorkbenchThemeService extends Disposable implements IWorkbenchTheme
 
 	public setColorTheme(themeIdOrTheme: string | undefined | IWorkbenchColorTheme, settingsTarget: ThemeSettingTarget): Promise<IWorkbenchColorTheme | null> {
 		return this.colorThemeSequencer.queue(async () => {
+			console.log('🎨🎨🎨🎨🎨🎨🎨🎨🎨🎨🎨🎨🎨', themeIdOrTheme, settingsTarget);
 			return this.internalSetColorTheme(themeIdOrTheme, settingsTarget);
 		});
 	}

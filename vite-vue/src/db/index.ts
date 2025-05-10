@@ -2,16 +2,14 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { createApp } from 'vue';
-import './style.css';
-import App from './App.vue';
-import router from './router';
-import './db';
-import { createPinia } from 'pinia';
-import { draggable } from './directives/draggable';
+import Dexie, { type EntityTable } from "dexie";
+import type { ProjectProps } from "../types/index.ts";
 
-const app = createApp(App);
-app.use(router);
-app.use(createPinia());
-app.directive('draggable', draggable);
-app.mount('#app');
+export const db = new Dexie("miniProgramDatabase") as Dexie & {
+  projects: EntityTable<ProjectProps, "id">;
+};
+
+db.version(1).stores({
+  projects: "++id",
+});
+

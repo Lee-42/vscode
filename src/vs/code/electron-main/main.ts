@@ -72,7 +72,6 @@ import { massageMessageBoxOptions } from '../../platform/dialogs/common/dialogs.
 import { SaveStrategy, StateService } from '../../platform/state/node/stateService.js';
 import { FileUserDataProvider } from '../../platform/userData/common/fileUserDataProvider.js';
 import { addUNCHostToAllowlist, getUNCHost } from '../../base/node/unc.js';
-import { LifecycleMainPhase } from '../../platform/lifecycle/electron-main/lifecycleMainService.js';
 
 /**
  * The main VS Code entry point.
