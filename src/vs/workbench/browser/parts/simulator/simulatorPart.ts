@@ -50,10 +50,11 @@ export class SimulatorPart extends Part implements ISimulatorService {
 		this.element = parent;
 		const container = document.createElement('div');
 		container.className = 'simulator-container';
+		container.id = 'simulator-container';
 
-		this.initHeader(container);
-		this.initBody(container);
-		this.initFooter(container);
+		// this.initHeader(container);
+		// this.initBody(container);
+		// this.initFooter(container);
 
 		this.element.appendChild(container);
 		return this.element;

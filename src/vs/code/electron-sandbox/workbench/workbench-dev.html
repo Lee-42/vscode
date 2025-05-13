@@ -29,15 +29,18 @@
 					'unsafe-eval'
 					blob:
 					'nonce-0c6a828f1297'
+					http://localhost:5173
 				;
 				style-src
 					'self'
 					'unsafe-inline'
+					http://localhost:5173
 				;
 				connect-src
 					'self'
 					https:
 					ws:
+					http://localhost:5173
 				;
 				font-src
 					'self'
@@ -63,8 +66,12 @@
 					stickyScrollViewLayer
 					tokenizeToString
 					notebookChatEditController
+					vue
+					vue-loader
+					vue-template-compiler
 				;
 		"/>
+
 	</head>
 
 	<body aria-label="">
@@ -73,4 +80,6 @@
 	<!-- Startup (do not modify order of script tags!) -->
 	<script src="../../../../bootstrap-window.js"></script>
 	<script src="./workbench.js"></script>
+	<script type="module" src="http://localhost:5173/@vite/client"></script>
+	<script type="module" src="http://localhost:5173/src/main.ts"></script>
 </html>

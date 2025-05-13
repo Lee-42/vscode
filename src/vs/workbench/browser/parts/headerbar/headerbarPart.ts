@@ -63,12 +63,13 @@ export class HeaderbarPart extends Part implements IHeaderBarService {
 		// 创建主容器
 		this.container = document.createElement('div');
 		this.container.className = 'headerbar-container';
-		this.updateStyles();
+		this.container.id = 'headerbar-container';
+		// this.updateStyles();
 
 		// 初始化左中右区域的内容
 		this.initLeftContent(this.container);
-		this.initCenterContent(this.container);
-		this.initRightContent(this.container);
+		// this.initCenterContent(this.container);
+		// this.initRightContent(this.container);
 
 		this.element.appendChild(this.container);
 		return this.element;

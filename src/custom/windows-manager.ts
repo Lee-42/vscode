@@ -33,7 +33,7 @@ export class WindowsManager {
 		} else {
 			win.loadURL(FileAccess.asBrowserUri(`vs/code/electron-sandbox/dist/index.html`).toString(true) + `#/${id}`);
 		}
-		// win.webContents.openDevTools();
+		win.webContents.openDevTools();
 		win.on('closed', () => {
 			console.log('window closed', id);
 			this.windows.delete(id.toString());
