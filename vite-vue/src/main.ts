@@ -5,7 +5,7 @@
 import { createApp } from 'vue';
 import './style.css';
 import App from './App.vue';
-import HeaderBar from './components/HeaderBar.vue';
+import HeaderBar from './components/headerbar/index.vue';
 import router from './router';
 import './db';
 import { createPinia } from 'pinia';

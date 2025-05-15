@@ -42,7 +42,7 @@ const router = createRouter({
         const winArgs = routes.find((route) => route.path === path);
         console.log('winArgs winArgs: ', winArgs);
         delete winArgs?.component;
-        (window as any).vscode.ipcRenderer.invoke('vscode:open-win', winArgs);
+        (window as any).api.ipcRenderer.invoke('vscode:open-win', winArgs);
         resolve(true);
     });
 };
@@ -51,7 +51,7 @@ const router = createRouter({
     return new Promise((resolve) => {
         const winArgs = routes.find((route) => route.path === path);
         delete winArgs?.component;
-        (window as any).vscode.ipcRenderer.invoke('vscode:close-win', winArgs?.name);
+        (window as any).api.ipcRenderer.invoke('vscode:close-win', winArgs?.name);
         resolve(true);
     });
 };

@@ -393,7 +393,6 @@ export class WorkbenchThemeService extends Disposable implements IWorkbenchTheme
 
 	public setColorTheme(themeIdOrTheme: string | undefined | IWorkbenchColorTheme, settingsTarget: ThemeSettingTarget): Promise<IWorkbenchColorTheme | null> {
 		return this.colorThemeSequencer.queue(async () => {
-			console.log('🎨🎨🎨🎨🎨🎨🎨🎨🎨🎨🎨🎨🎨', themeIdOrTheme, settingsTarget);
 			return this.internalSetColorTheme(themeIdOrTheme, settingsTarget);
 		});
 	}
@@ -471,14 +470,14 @@ export class WorkbenchThemeService extends Disposable implements IWorkbenchTheme
 		ruleCollector.addRule(`.monaco-workbench { forced-color-adjust: none; }`);
 		themingRegistry.getThemingParticipants().forEach(p => p(themeData, ruleCollector, this.environmentService));
 
-		const colorVariables: string[] = [];
+		const colorVariables: { [key: string]: string } = {};
 		for (const item of getColorRegistry().getColors()) {
 			const color = themeData.getColor(item.id, true);
 			if (color) {
-				colorVariables.push(`${asCssVariableName(item.id)}: ${color.toString()};`);
+				colorVariables[asCssVariableName(item.id)] = color.toString();
 			}
 		}
-		ruleCollector.addRule(`.monaco-workbench { ${colorVariables.join('\n')} }`);
+		ruleCollector.addRule(`.monaco-workbench { ${Object.entries(colorVariables).map(([name, value]) => `${name}: ${value};`).join('\n')} }`);
 
 		_applyRules([...cssRules].join('\n'), colorThemeRulesClassName);
 	}
@@ -809,3 +808,5 @@ registerProductIconThemeSchemas();
 // last used colors / icons from storage. This needs to happen as quickly as possible
 // for a flicker-free startup experience.
 registerSingleton(IWorkbenchThemeService, WorkbenchThemeService, InstantiationType.Eager);
+
+

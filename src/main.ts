@@ -22,6 +22,7 @@ import { INLSConfiguration } from './vs/nls.js';
 import { NativeParsedArgs } from './vs/platform/environment/common/argv.js';
 import CustomIpcManager from './custom/ipc-manager.js';
 import { WindowsManager } from './custom/windows-manager.js';
+import { mainWindow } from './vs/base/browser/window.js';
 
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -203,7 +204,7 @@ async function onReady() {
 		CustomIpcManager.unmaximizewin(windowsManager);
 		CustomIpcManager.openFolder();
 		CustomIpcManager.createProject();
-		CustomIpcManager.getTheme();
+		CustomIpcManager.updateTheme();
 	} catch (error) {
 		console.error(error);
 	}

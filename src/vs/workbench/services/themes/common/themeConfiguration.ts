@@ -17,6 +17,7 @@ import { IConfigurationService, ConfigurationTarget } from '../../../../platform
 import { isWeb } from '../../../../base/common/platform.js';
 import { ColorScheme } from '../../../../platform/theme/common/theme.js';
 import { IHostColorSchemeService } from './hostColorSchemeService.js';
+import { mainWindow } from '../../../../base/browser/window.js';
 
 // Configuration: Themes
 const configurationRegistry = Registry.as<IConfigurationRegistry>(ConfigurationExtensions.Configuration);
@@ -329,7 +330,29 @@ export class ThemeConfiguration {
 	}
 
 	public async setColorTheme(theme: IWorkbenchColorTheme, settingsTarget: ThemeSettingTarget): Promise<IWorkbenchColorTheme> {
+		// 获取所有主题变量
+		function updateThemeVariables() {
+			// 获取所有vscode带有主题变量的样式表
+			const themeStyles = mainWindow.document.head.getElementsByClassName(
+				'contributedColorTheme'
+			);
+			if (themeStyles.length > 0) {
+				const styleElement = themeStyles[0] as HTMLStyleElement;
+				const cssText = styleElement.textContent || '';
+
+				const variables: { [key: string]: string } = {};
+				const matches = cssText.match(/--[^:]+:\s*[^;]+;/g) || [];
+
+				matches.forEach((match) => {
+					const [name, value] = match.split(':').map((s) => s.trim());
+					variables[name] = value.replace(';', '');
+				});
+				return variables;
+			}
+			return {};
+		}
 		await this.writeConfiguration(this.getColorThemeSettingId(), theme.settingsId, settingsTarget);
+		(mainWindow as any).api.ipcRenderer.invoke('vscode:initTheme', updateThemeVariables());
 		return theme;
 	}
 

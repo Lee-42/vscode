@@ -20,7 +20,7 @@ export class WindowsManager {
 			height: 100,
 			titleBarStyle: platform() === 'darwin' ? 'hiddenInset' : 'hidden',
 			webPreferences: {
-				preload: FileAccess.asFileUri('vs/base/parts/sandbox/electron-sandbox/preload2.js').fsPath,
+				preload: FileAccess.asFileUri('vs/base/parts/sandbox/electron-sandbox/preload.js').fsPath,
 			}
 		};
 		const win = new BrowserWindow({

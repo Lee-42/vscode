@@ -1118,7 +1118,7 @@ export class SplitView<TLayoutContext = undefined, TView extends IView<TLayoutCo
 
 		try {
 			// Add view
-			const container = $('.split-view-view');
+			const container = $('.split-view-view', { id: `split-view-${index}` });
 
 			if (index === this.viewItems.length) {
 				this.viewContainer.appendChild(container);

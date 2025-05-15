@@ -18,8 +18,7 @@ import { onMounted } from "vue";
 onMounted(() => {
 	const projectStore = useProjectStore();
 	projectStore.fetchProjects();
-	console.log('获取主题');
-	(window as any).vscode.ipcRenderer.invoke('vscode:getTheme').then((result: any) => {
+	(window as any).api.ipcRenderer.invoke('vscode:getTheme').then((result: any) => {
 		console.log('result: ', result);
 	})
 });

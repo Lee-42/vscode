@@ -104,11 +104,11 @@ const handleValidateClick = (e: MouseEvent) => {
 				enginePath: "",
 				projectType: "",
 			});
-			(window as any).vscode.ipcRenderer
+			(window as any).api.ipcRenderer
 				.invoke("vscode:createProject", toRaw(form.value))
 				.then((result: any) => {
 					projectStore.updateProject(result.id, result);
-					(window as any).vscode.ipcRenderer.invoke('vscode:openNewWindow', result.projectPath).then(() => {
+					(window as any).api.ipcRenderer.invoke('vscode:openNewWindow', result.projectPath).then(() => {
 						(router as any).closewin("/project");
 					})
 				});
@@ -119,7 +119,7 @@ const handleValidateClick = (e: MouseEvent) => {
 };
 
 const handleSelectPath = () => {
-	(window as any).vscode.ipcRenderer
+	(window as any).api.ipcRenderer
 		.invoke("vscode:openFolder")
 		.then((result: string) => {
 			console.log("result: ", result);

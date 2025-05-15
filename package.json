@@ -104,6 +104,7 @@
     "jschardet": "3.1.4",
     "kerberos": "2.1.1",
     "minimist": "^1.2.6",
+    "mitt": "^3.0.1",
     "native-is-elevated": "0.7.0",
     "native-keymap": "^3.3.5",
     "native-watchdog": "^1.4.1",

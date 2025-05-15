@@ -57,13 +57,20 @@ class CustomIpcManager {
 			};
 		});
 	}
-	getTheme() {
-		ipcMain.handle('vscode:getTheme', async (event) => {
+	updateTheme() {
+		let _themes = {};
+		ipcMain.handle('vscode:initTheme', async (event, themes) => {
 			// TODO 获取主题
-			console.log('获取主题');
-			return {
-				theme: 'light',
-			};
+			if (themes) {
+				_themes = themes;
+				// 广播到所有窗口
+				BrowserWindow.getAllWindows().forEach(window => {
+					if (!window.isDestroyed()) {
+						window.webContents.send('vscode:updateTheme', _themes);
+					}
+				});
+			}
+			return _themes;
 		});
 	}
 	openNewWindow(windowsMainService: IWindowsMainService, environmentMainService: IEnvironmentMainService) {

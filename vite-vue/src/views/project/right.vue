@@ -61,7 +61,7 @@ const newProject = () => {
 };
 
 const openProject = (item: any) => {
-	(window as any).vscode.ipcRenderer.invoke("vscode:openNewWindow", item.projectPath).then(() => {
+	(window as any).api.ipcRenderer.invoke("vscode:openNewWindow", item.projectPath).then(() => {
 		(router as any).closewin("/project");
 	})
 };
