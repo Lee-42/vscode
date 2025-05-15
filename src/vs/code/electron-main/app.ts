@@ -122,7 +122,7 @@ import { NativeMcpDiscoveryHelperService } from '../../platform/mcp/node/nativeM
 import { IWebContentExtractorService } from '../../platform/webContentExtractor/common/webContentExtractor.js';
 import { NativeWebContentExtractorService } from '../../platform/webContentExtractor/electron-main/webContentExtractorService.js';
 import ErrorTelemetry from '../../platform/telemetry/electron-main/errorTelemetry.js';
-import customIpcManager from '../../../custom/ipc-manager.js';
+import { openNewWindow } from '../../../custom/ipc/index.js';
 /**
  * The main VS Code application. There will only ever be one instance,
  * even if the user starts many instances (e.g. from the command line).
@@ -648,7 +648,7 @@ export class CodeApplication extends Disposable {
 
 		const initialProtocolUrls = await this.resolveInitialProtocolUrls(windowsMainService, dialogMainService);
 		this._register(new ElectronURLListener(initialProtocolUrls?.urls, urlService, windowsMainService, this.environmentMainService, this.productService, this.logService));
-		customIpcManager.openNewWindow(windowsMainService, this.environmentMainService);
+		openNewWindow(windowsMainService, this.environmentMainService);
 		return initialProtocolUrls;
 	}
 

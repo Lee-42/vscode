@@ -20,10 +20,9 @@ import { resolveNLSConfiguration } from './vs/base/node/nls.js';
 import { getUNCHost, addUNCHostToAllowlist } from './vs/base/node/unc.js';
 import { INLSConfiguration } from './vs/nls.js';
 import { NativeParsedArgs } from './vs/platform/environment/common/argv.js';
-import CustomIpcManager from './custom/ipc-manager.js';
 import { WindowsManager } from './custom/windows-manager.js';
-import { mainWindow } from './vs/base/browser/window.js';
-
+import "./custom/ipc/index.js";
+import { initWindowIpc } from './custom/ipc/index.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -197,14 +196,7 @@ async function onReady() {
 		]);
 		await startup(codeCachePath, nlsConfig);
 		const windowsManager = new WindowsManager();
-		CustomIpcManager.quitApp(app);
-		CustomIpcManager.openwin(windowsManager);
-		CustomIpcManager.closewin(windowsManager);
-		CustomIpcManager.maximizewin(windowsManager);
-		CustomIpcManager.unmaximizewin(windowsManager);
-		CustomIpcManager.openFolder();
-		CustomIpcManager.createProject();
-		CustomIpcManager.updateTheme();
+		initWindowIpc(windowsManager);
 	} catch (error) {
 		console.error(error);
 	}

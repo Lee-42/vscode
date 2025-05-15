@@ -3,24 +3,14 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue';
-import path from 'path';
+interface HTMLWebviewElement extends HTMLElement {
+    src: string;
+    insertCSS(css: string): void;
+    addEventListener(type: string, listener: EventListener): void;
+}
 
-// https://vite.dev/config/
-export default defineConfig({
-	base: './',
-	plugins: [vue()],
-	resolve: {
-		alias: {
-			'@': path.resolve(__dirname, './src')
-		}
-	},
-	server: {
-		port: 5173,
-		cors: true,
-		hmr: {
-			protocol: 'ws'
-		}
-	}
-});
+declare global {
+    interface HTMLElementTagNameMap {
+        'webview': HTMLWebviewElement;
+    }
+} 

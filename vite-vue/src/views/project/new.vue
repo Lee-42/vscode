@@ -54,11 +54,11 @@ import {
 import { useProjectStore } from "../../stores/project.ts";
 import { FolderOpen20Filled } from "@vicons/fluent";
 import { basename } from "path-browserify";
-import { ref, toRaw } from "vue";
+import { ref } from "vue";
 import type { ProjectProps } from "../../types";
-import { useRouter } from "vue-router";
+import devices from "../../components/simulator/body/devices";
+import { CommonChannel } from "../../../../src/custom/ipc/channel";
 
-const router = useRouter();
 const projectStore = useProjectStore();
 const projects = ref(projectStore.items);
 const message = useMessage();
@@ -90,6 +90,7 @@ const handleValidateClick = (e: MouseEvent) => {
 		if (!errors) {
 			const projectName = form.value.projectName.trim();
 			if (
+				projects.value.length > 0 &&
 				projects.value.find(
 					(item: ProjectProps) => item.projectName === projectName
 				)
@@ -103,15 +104,8 @@ const handleValidateClick = (e: MouseEvent) => {
 				appId: form.value.appId,
 				enginePath: "",
 				projectType: "",
+				device: devices[0],
 			});
-			(window as any).api.ipcRenderer
-				.invoke("vscode:createProject", toRaw(form.value))
-				.then((result: any) => {
-					projectStore.updateProject(result.id, result);
-					(window as any).api.ipcRenderer.invoke('vscode:openNewWindow', result.projectPath).then(() => {
-						(router as any).closewin("/project");
-					})
-				});
 		} else {
 			console.log(errors);
 		}
@@ -120,7 +114,7 @@ const handleValidateClick = (e: MouseEvent) => {
 
 const handleSelectPath = () => {
 	(window as any).api.ipcRenderer
-		.invoke("vscode:openFolder")
+		.invoke(CommonChannel.OPEN_FOLDER)
 		.then((result: string) => {
 			console.log("result: ", result);
 			if (!form.value.projectName) {

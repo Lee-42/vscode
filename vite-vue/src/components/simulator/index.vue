@@ -1,5 +1,5 @@
 <template>
-	<NConfigProvider :theme-overrides="themeOverrides">
+	<NConfigProvider :theme-overrides="themeOverrides" class="provider">
 		<div class="simulator-container">
 			<Toolbar />
 			<Body />
@@ -12,10 +12,13 @@
 import Toolbar from "./toolbar/index.vue";
 import Footer from "./footer/index.vue";
 import Body from "./body/index.vue";
-import { NConfigProvider } from "naive-ui";
+import { NConfigProvider, type GlobalThemeOverrides } from "naive-ui";
 import { onMounted, ref } from "vue";
+import { ThemeChannel } from "../../../../src/custom/ipc/channel";
+import { useProjectStore } from "../../stores/project";
 
-const themeOverrides = ref({});
+const themeOverrides = ref<GlobalThemeOverrides>({});
+const projectStore = useProjectStore();
 
 const updateTheme = (themes: any) => {
 	themeOverrides.value = {
@@ -33,28 +36,43 @@ const updateTheme = (themes: any) => {
 			textColor2: themes["--vscode-descriptionForeground"],
 			textColor3: themes["--vscode-disabledForeground"],
 			modalColor: themes["--vscode-editor-background"],
-		}
+		},
+		Layout: {
+			headerColor: themes["--vscode-titleBar-activeBackground"],
+			headerBorderColor: themes["--vscode-titleBar-border"],
+			siderColor: themes["--vscode-sideBar-background"],
+			siderBorderColor: themes["--vscode-sideBar-border"],
+			footerColor: themes["--vscode-statusBar-background"],
+			footerBorderColor: themes["--vscode-statusBar-border"],
+			color: themes["--vscode-editor-background"],
+		},
+		Card: {
+			color: themes["--vscode-menu-background"],
+		},
 	};
 };
 
 onMounted(() => {
+	projectStore.fetchProjects().then((projects) => {
+		console.log("projects: ", projects);
+	});
 	// 初始化主题变量
 	(window as any).api.ipcRenderer
-		.invoke("vscode:initTheme")
+		.invoke(ThemeChannel.UPDATE)
 		.then((themes: any) => updateTheme(themes));
 
 	(window as any).api.ipcRenderer.on(
-		"vscode:updateTheme",
-		(_: any, themes: any) => updateTheme(themes)
+		ThemeChannel.GET,
+		(_: any, themes: any) => {
+			updateTheme(themes);
+		}
 	);
 });
 </script>
 
 <style lang="postcss" scoped>
 .simulator-container {
-	background: var(--vscode-editor-background);
-	webview {
-		height: 100%;
-	}
+	width: 100%;
+	height: 100%;
 }
 </style>

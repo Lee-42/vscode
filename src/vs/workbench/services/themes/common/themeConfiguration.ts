@@ -18,6 +18,7 @@ import { isWeb } from '../../../../base/common/platform.js';
 import { ColorScheme } from '../../../../platform/theme/common/theme.js';
 import { IHostColorSchemeService } from './hostColorSchemeService.js';
 import { mainWindow } from '../../../../base/browser/window.js';
+import { ThemeChannel } from '../../../../../custom/ipc/channel.js';
 
 // Configuration: Themes
 const configurationRegistry = Registry.as<IConfigurationRegistry>(ConfigurationExtensions.Configuration);
@@ -352,7 +353,7 @@ export class ThemeConfiguration {
 			return {};
 		}
 		await this.writeConfiguration(this.getColorThemeSettingId(), theme.settingsId, settingsTarget);
-		(mainWindow as any).api.ipcRenderer.invoke('vscode:initTheme', updateThemeVariables());
+		(mainWindow as any).api.ipcRenderer.invoke(ThemeChannel.UPDATE, updateThemeVariables());
 		return theme;
 	}
 

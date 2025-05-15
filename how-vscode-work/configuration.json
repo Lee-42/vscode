@@ -62,15 +62,15 @@
   "allow-insecure-localhost": false,
   "disable-dev-shm-usage": false,
   "profile-temp": false,
-  "logsPath": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250515T093210",
+  "logsPath": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250515T224939",
   "machineId": "93a65419073b63d34e1199a5f3dcf90c762bc6a5e8df2be4beaf63e6d253a749",
   "sqmId": "",
   "devDeviceId": "b9504a95-f01d-42b5-87d6-a0a59836d5eb",
   "windowId": 3,
-  "mainPid": 14812,
+  "mainPid": 86092,
   "appRoot": "/Users/lee/Project/vscode",
   "execPath": "/Users/lee/Project/vscode/.build/electron/Code - OSS.app/Contents/MacOS/Electron",
-  "backupPath": "/Users/lee/Library/Application Support/code-oss-dev/Backups/6856376b78868490f53dd0f0c4453ec2",
+  "backupPath": "/Users/lee/Library/Application Support/code-oss-dev/Backups/d6b28e3700dc3f8b5d42946a1750f28c",
   "profiles": {
     "home": {
       "$mid": 1,
@@ -130,93 +130,82 @@
         "workspaces": [
           {
             "$mid": 1,
-            "external": "file:///Users/lee",
             "path": "/Users/lee",
             "scheme": "file"
           },
           {
             "$mid": 1,
-            "external": "file:///Users/lee/Project/coco",
             "path": "/Users/lee/Project/coco",
             "scheme": "file"
           },
           {
             "$mid": 1,
-            "external": "file:///Volumes/T7/ide_vue",
             "path": "/Volumes/T7/ide_vue",
             "scheme": "file"
           },
           {
             "$mid": 1,
-            "external": "file:///Users/lee/Documents",
             "path": "/Users/lee/Documents",
             "scheme": "file"
           },
           {
             "$mid": 1,
-            "external": "file:///Volumes/T7/900",
             "path": "/Volumes/T7/900",
             "scheme": "file"
           },
           {
             "$mid": 1,
-            "external": "file:///Users/lee/Project/vscode",
             "path": "/Users/lee/Project/vscode",
             "scheme": "file"
           },
           {
             "$mid": 1,
-            "external": "file:///Users/lee/Project/aechoterm",
             "path": "/Users/lee/Project/aechoterm",
             "scheme": "file"
           },
           {
             "$mid": 1,
-            "external": "file:///Users/lee/Project/ide",
             "path": "/Users/lee/Project/ide",
             "scheme": "file"
           },
           {
             "$mid": 1,
-            "external": "file:///Users/lee/Project/ide-%E9%87%8D%E6%9E%84/ide",
             "path": "/Users/lee/Project/ide-重构/ide",
             "scheme": "file"
           },
           {
             "$mid": 1,
-            "external": "file:///Users/lee/Project/%E5%B0%8F%E7%A8%8B%E5%BA%8F/project1",
             "path": "/Users/lee/Project/小程序/project1",
             "scheme": "file"
           },
           {
             "$mid": 1,
-            "external": "file:///Users/lee/Project/%E5%B0%8F%E7%A8%8B%E5%BA%8F/project3",
             "path": "/Users/lee/Project/小程序/project3",
             "scheme": "file"
           },
           {
             "$mid": 1,
-            "external": "file:///Users/lee/Project/%E5%B0%8F%E7%A8%8B%E5%BA%8F/project2",
             "path": "/Users/lee/Project/小程序/project2",
             "scheme": "file"
           },
           {
             "$mid": 1,
-            "external": "file:///Volumes/T7/ide_mobile2",
             "path": "/Volumes/T7/ide_mobile2",
             "scheme": "file"
           },
           {
             "$mid": 1,
-            "external": "file:///Volumes/T7/ide_mobile1",
             "path": "/Volumes/T7/ide_mobile1",
             "scheme": "file"
           },
           {
             "$mid": 1,
-            "fsPath": "/Users/lee/ide_mobile_lee",
-            "external": "file:///Users/lee/ide_mobile_lee",
             "path": "/Users/lee/ide_mobile_lee",
+            "scheme": "file"
+          },
+          {
+            "$mid": 1,
+            "path": "/Volumes/T7/ide_mobile_0",
             "scheme": "file"
           }
         ]
@@ -274,93 +263,82 @@
       "workspaces": [
         {
           "$mid": 1,
-          "external": "file:///Users/lee",
           "path": "/Users/lee",
           "scheme": "file"
         },
         {
           "$mid": 1,
-          "external": "file:///Users/lee/Project/coco",
           "path": "/Users/lee/Project/coco",
           "scheme": "file"
         },
         {
           "$mid": 1,
-          "external": "file:///Volumes/T7/ide_vue",
           "path": "/Volumes/T7/ide_vue",
           "scheme": "file"
         },
         {
           "$mid": 1,
-          "external": "file:///Users/lee/Documents",
           "path": "/Users/lee/Documents",
           "scheme": "file"
         },
         {
           "$mid": 1,
-          "external": "file:///Volumes/T7/900",
           "path": "/Volumes/T7/900",
           "scheme": "file"
         },
         {
           "$mid": 1,
-          "external": "file:///Users/lee/Project/vscode",
           "path": "/Users/lee/Project/vscode",
           "scheme": "file"
         },
         {
           "$mid": 1,
-          "external": "file:///Users/lee/Project/aechoterm",
           "path": "/Users/lee/Project/aechoterm",
           "scheme": "file"
         },
         {
           "$mid": 1,
-          "external": "file:///Users/lee/Project/ide",
           "path": "/Users/lee/Project/ide",
           "scheme": "file"
         },
         {
           "$mid": 1,
-          "external": "file:///Users/lee/Project/ide-%E9%87%8D%E6%9E%84/ide",
           "path": "/Users/lee/Project/ide-重构/ide",
           "scheme": "file"
         },
         {
           "$mid": 1,
-          "external": "file:///Users/lee/Project/%E5%B0%8F%E7%A8%8B%E5%BA%8F/project1",
           "path": "/Users/lee/Project/小程序/project1",
           "scheme": "file"
         },
         {
           "$mid": 1,
-          "external": "file:///Users/lee/Project/%E5%B0%8F%E7%A8%8B%E5%BA%8F/project3",
           "path": "/Users/lee/Project/小程序/project3",
           "scheme": "file"
         },
         {
           "$mid": 1,
-          "external": "file:///Users/lee/Project/%E5%B0%8F%E7%A8%8B%E5%BA%8F/project2",
           "path": "/Users/lee/Project/小程序/project2",
           "scheme": "file"
         },
         {
           "$mid": 1,
-          "external": "file:///Volumes/T7/ide_mobile2",
           "path": "/Volumes/T7/ide_mobile2",
           "scheme": "file"
         },
         {
           "$mid": 1,
-          "external": "file:///Volumes/T7/ide_mobile1",
           "path": "/Volumes/T7/ide_mobile1",
           "scheme": "file"
         },
         {
           "$mid": 1,
-          "fsPath": "/Users/lee/ide_mobile_lee",
-          "external": "file:///Users/lee/ide_mobile_lee",
           "path": "/Users/lee/ide_mobile_lee",
+          "scheme": "file"
+        },
+        {
+          "$mid": 1,
+          "path": "/Volumes/T7/ide_mobile_0",
           "scheme": "file"
         }
       ]
@@ -370,12 +348,12 @@
   "tmpDir": "/var/folders/br/f8xfsmv50_d493ly1xfzxzlh0000gn/T",
   "userDataDir": "/Users/lee/Library/Application Support/code-oss-dev",
   "workspace": {
-    "id": "164cae6845afba9e43b8c91880164c63",
+    "id": "89dac5d0dfbba0dec0b121ac11e90da5",
     "uri": {
       "$mid": 1,
-      "fsPath": "/Users/lee/ide_mobile_lee",
-      "external": "file:///Users/lee/ide_mobile_lee",
-      "path": "/Users/lee/ide_mobile_lee",
+      "fsPath": "/Volumes/T7/ide_mobile_0",
+      "external": "file:///Volumes/T7/ide_mobile_0",
+      "path": "/Volumes/T7/ide_mobile_0",
       "scheme": "file"
     }
   },
@@ -391,9 +369,9 @@
     {
       "resource": {
         "$mid": 1,
-        "fsPath": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250515T093210/main.log",
-        "external": "file:///Users/lee/Library/Application%20Support/code-oss-dev/logs/20250515T093210/main.log",
-        "path": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250515T093210/main.log",
+        "fsPath": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250515T224939/main.log",
+        "external": "file:///Users/lee/Library/Application%20Support/code-oss-dev/logs/20250515T224939/main.log",
+        "path": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250515T224939/main.log",
         "scheme": "file"
       },
       "id": "main",
@@ -490,59 +468,59 @@
   "perfMarks": [
     {
       "name": "code/timeOrigin",
-      "startTime": 1747272729863.075
+      "startTime": 1747320578532.439
     },
     {
       "name": "code/didStartMain",
-      "startTime": 1747272730083
+      "startTime": 1747320578823
     },
     {
       "name": "code/willLoadMainBundle",
-      "startTime": 1747272729863
+      "startTime": 1747320578532
     },
     {
       "name": "code/didLoadMainBundle",
-      "startTime": 1747272730083
+      "startTime": 1747320578823
     },
     {
       "name": "code/willStartCrashReporter",
-      "startTime": 1747272730084
+      "startTime": 1747320578825
     },
     {
       "name": "code/didStartCrashReporter",
-      "startTime": 1747272730097
+      "startTime": 1747320578839
     },
     {
       "name": "code/willGenerateNls",
-      "startTime": 1747272730120
+      "startTime": 1747320578867
     },
     {
       "name": "code/didGenerateNls",
-      "startTime": 1747272730120
+      "startTime": 1747320578867
     },
     {
       "name": "code/willLoadNls",
-      "startTime": 1747272730120
+      "startTime": 1747320578867
     },
     {
       "name": "code/registerFilesystem/file",
-      "startTime": 1747272730279
+      "startTime": 1747320579065
     },
     {
       "name": "code/registerFilesystem/vscode-userdata",
-      "startTime": 1747272730280
+      "startTime": 1747320579066
     },
     {
       "name": "code/didRunMainBundle",
-      "startTime": 1747272730294
+      "startTime": 1747320579083
     },
     {
       "name": "code/willStartMainServer",
-      "startTime": 1747272730406
+      "startTime": 1747320579184
     },
     {
       "name": "code/didStartMainServer",
-      "startTime": 1747272730407
+      "startTime": 1747320579186
     }
   ],
   "os": {

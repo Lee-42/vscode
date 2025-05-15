@@ -13,9 +13,6 @@ import { draggable } from './directives/draggable';
 import Simulator from './components/simulator/index.vue';
 
 setTimeout(() => {
-	const headerbarContainer = document.getElementById('headerbar-container');
-	console.log('headerbarContainer: ', headerbarContainer);
-	console.log('fuck you');
 	const app = createApp(App);
 	app.use(router);
 	app.use(createPinia());

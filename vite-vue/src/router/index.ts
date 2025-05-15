@@ -3,6 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 import { createRouter, createWebHashHistory, type RouteRecordRaw } from 'vue-router';
+import { WindowChannel } from '../../../src/custom/ipc/channel';
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -40,9 +41,8 @@ const router = createRouter({
 (router as any).openwin = (path: string) => {
     return new Promise((resolve) => {
         const winArgs = routes.find((route) => route.path === path);
-        console.log('winArgs winArgs: ', winArgs);
         delete winArgs?.component;
-        (window as any).api.ipcRenderer.invoke('vscode:open-win', winArgs);
+        (window as any).api.ipcRenderer.invoke(WindowChannel.OPEN_WIN, winArgs);
         resolve(true);
     });
 };
@@ -51,7 +51,7 @@ const router = createRouter({
     return new Promise((resolve) => {
         const winArgs = routes.find((route) => route.path === path);
         delete winArgs?.component;
-        (window as any).api.ipcRenderer.invoke('vscode:close-win', winArgs?.name);
+        (window as any).api.ipcRenderer.invoke(WindowChannel.CLOSE_WIN, winArgs?.name);
         resolve(true);
     });
 };

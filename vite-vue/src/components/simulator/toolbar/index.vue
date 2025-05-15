@@ -26,12 +26,17 @@ import Operation from "./operation.vue";
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	height: 22px;
+	background: var(--vscode-statusBar-background);
+	
 	.toolbar-left {
 		display: flex;
+		height: 100%;
 	}
 	.toolbar-right {
 		display: flex;
 		align-items: center;
+		height: 100%;
 		div {
 			margin-right: 10px;
 		}

@@ -5,6 +5,7 @@
 import { defineStore } from 'pinia';
 import { db } from '../db';
 import type { ProjectProps } from '../types/index.ts';
+import { ProjectChannel } from '../../../src/custom/ipc/channel.ts';
 
 export interface ProjectStore {
     items: ProjectProps[];
@@ -16,16 +17,21 @@ export const useProjectStore = defineStore('project', {
     }),
     actions: {
         async fetchProjects() {
-            const items = await db.projects.toArray();
-            this.items = items;
+            return new Promise((resolve, reject) => {
+                (window as any).api.ipcRenderer.invoke(ProjectChannel.GET_ALL).then((items: ProjectProps[]) => {
+                    this.items = items;
+                    resolve(items);
+                });
+            });
         },
         async createProject(createdData: Omit<ProjectProps, 'id'>) {
-            const newPId = await db.projects.add(createdData);
-            this.items.push({
-                id: newPId,
-                ...createdData,
+            return new Promise((resolve, reject) => {
+                (window as any).api.ipcRenderer.invoke(ProjectChannel.CREATE, createdData).then((result: any) => {
+                    console.log("result: ", result);
+                    this.items.push(result);
+                    resolve(result);
+                });
             });
-            return newPId;
         },
         async deleteProject(id: number) {
             await db.projects.delete(id);

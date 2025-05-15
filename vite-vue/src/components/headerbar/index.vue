@@ -34,8 +34,11 @@ import {
 } from "naive-ui";
 import type { GlobalThemeOverrides } from "naive-ui";
 import { onMounted, ref } from "vue";
+import { useProjectStore } from "../../stores/project";
+import { ThemeChannel } from "../../../../src/custom/ipc/channel";
 
 const themeOverrides = ref<GlobalThemeOverrides>({});
+const projectStore = useProjectStore();
 
 const updateTheme = (themes: any) => {
 	themeOverrides.value = {
@@ -54,16 +57,26 @@ const updateTheme = (themes: any) => {
 			textColor3: themes["--vscode-disabledForeground"],
 			modalColor: themes["--vscode-editor-background"],
 		},
+		Layout: {
+			headerColor: themes["--vscode-titleBar-activeBackground"],
+			headerBorderColor: themes["--vscode-titleBar-border"],
+			siderColor: themes["--vscode-sideBar-background"],
+			siderBorderColor: themes["--vscode-sideBar-border"],
+			footerColor: themes["--vscode-statusBar-background"],
+			footerBorderColor: themes["--vscode-statusBar-border"],
+			color: themes['--vscode-editor-background']
+		}
 	};
 };
 
 onMounted(() => {
+	console.log('projectStoreprojectStore: ', projectStore.items);
 	// 初始化主题变量
 	(window as any).api.ipcRenderer
-		.invoke("vscode:initTheme")
+		.invoke(ThemeChannel.UPDATE)
 		.then((themes: any) => updateTheme(themes));
 
-	(window as any).api.ipcRenderer.on("vscode:updateTheme", (_: any, themes: any) => {
+	(window as any).api.ipcRenderer.on(ThemeChannel.GET, (_: any, themes: any) => {
 		console.log("themes: ", themes);
 		updateTheme(themes);
 	});

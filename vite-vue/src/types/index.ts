@@ -9,6 +9,18 @@ export interface ProjectProps {
   projectPath: string;
   enginePath: string;
   projectType: string;
+  device: DeviceProps;
+}
+
+export interface DeviceProps {
+  screenWidth: number;
+  screenHeight: number;
+  winWidth: number;
+  winHeight: number;
+  padding: number[];
+  statusHeight: number;
+  borderRadius: string;
+  frame: string;
 }
 export interface ConversationProps {
   id: number;

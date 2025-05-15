@@ -1,4 +1,6 @@
 <template>
+	<n-layout>
+
 	<div class="project-right">
 		<div class="project-header">
 			<n-input size="small" placeholder="输入项目名称" v-model="search">	</n-input>
@@ -9,9 +11,9 @@
 			</div>
 			</div>
 		<div class="project-body">
-			<div class="project-item project-new" @click="newProject">
+			<n-card class="project-item project-new" @click="newProject">
 				<n-icon size="36" :component="Add12Regular" />
-			</div>
+			</n-card>
 			<div
 				v-for="(item, index) in projects"
 				:key="index"
@@ -26,14 +28,16 @@
 			<n-button size="small" v-if="selectedProjects.length > 0" @click="deleteProject" >删除</n-button>
 		</div>
 	</div>
+</n-layout>
 </template>
 
 <script setup lang="ts">
-import { NIcon, NButton, useDialog, NInput } from "naive-ui";
+import { NIcon, NButton, useDialog, NInput, NLayout, NCard } from "naive-ui";
 import { Add12Regular } from "@vicons/fluent";
 import { useProjectStore } from "../../stores/project.ts";
 import { ref, watch } from "vue";
 import { useRouter } from "vue-router";
+import { CommonChannel } from "../../../../src/custom/ipc/channel";
 
 const router = useRouter();
 const projectStore = useProjectStore();
@@ -61,7 +65,7 @@ const newProject = () => {
 };
 
 const openProject = (item: any) => {
-	(window as any).api.ipcRenderer.invoke("vscode:openNewWindow", item.projectPath).then(() => {
+	(window as any).api.ipcRenderer.invoke(CommonChannel.OPEN_NEW_WINDOW, item.projectPath).then(() => {
 		(router as any).closewin("/project");
 	})
 };
