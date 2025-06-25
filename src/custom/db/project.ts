@@ -3,35 +3,25 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 import Store from 'electron-store';
-
+import { ProjectProps } from '../types/project.js';
 const _store = new Store();
 
-
-// 项目相关的类型定义
-interface Project {
-	id: string;
-	name: string;
-	path: string;
-	createdAt: number;
-	updatedAt: number;
-	[key: string]: any;
-}
-
-// 创建项目
-const createProject = (project: Project) => {
-	const projects = _store.get('projects') as Project[] || [];
+// create project
+const createProject = (project: ProjectProps) => {
+	const projects = _store.get('projects') as ProjectProps[] || [];
 	projects.push({
 		...project,
-		createdAt: Date.now(),
-		updatedAt: Date.now()
+		id: project.projectPath,
+		createdAt: new Date(Date.now()),
+		updatedAt: new Date(Date.now())
 	});
 	_store.set('projects', projects);
 	return project;
 };
 
-// 更新项目
-const updateProject = (id: string, updates: Partial<Project>) => {
-	const projects = _store.get('projects') as Project[] || [];
+// update project
+const updateProject = (id: string, updates: Partial<ProjectProps>) => {
+	const projects = _store.get('projects') as ProjectProps[] || [];
 	const index = projects.findIndex(p => p.id === id);
 
 	if (index === -1) {
@@ -41,28 +31,30 @@ const updateProject = (id: string, updates: Partial<Project>) => {
 	projects[index] = {
 		...projects[index],
 		...updates,
-		updatedAt: Date.now()
+		updatedAt: new Date(Date.now())
 	};
-
 	_store.set('projects', projects);
 	return projects[index];
 };
 
-// 删除项目
-const deleteProject = (id: string) => {
-	const projects = _store.get('projects') as Project[] || [];
-	const filteredProjects = projects.filter(p => p.id !== id);
+// delete project
+const deleteProject = (project: ProjectProps) => {
+	const projects = _store.get('projects') as ProjectProps[] || [];
+	const filteredProjects = projects.filter(p => p.id !== project.id);
 	_store.set('projects', filteredProjects);
+	return {
+		message: 'success',
+	};
 };
 
-// 获取所有项目
+// get all projects
 const getAllProjects = () => {
-	return _store.get('projects') as Project[] || [];
+	return _store.get('projects') as ProjectProps[] || [];
 };
 
-// 根据ID获取项目
+// get project by id
 const getProjectById = (id: string) => {
-	const projects = _store.get('projects') as Project[] || [];
+	const projects = _store.get('projects') as ProjectProps[] || [];
 	return projects.find(p => p.id === id);
 };
 
@@ -72,5 +64,5 @@ export {
 	deleteProject,
 	getAllProjects,
 	getProjectById,
-	type Project
+	type ProjectProps
 };

@@ -2,7 +2,6 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-
 /* eslint-disable no-restricted-globals */
 
 (async function () {
@@ -75,7 +74,6 @@
 		style.className = 'initialShellColors';
 		window.document.head.appendChild(style);
 		style.textContent = `body {	background-color: ${shellBackground}; color: ${shellForeground}; margin: 0; padding: 0; }`;
-		console.log('preloadGlobals: ', preloadGlobals);
 		// set zoom level as soon as possible
 		if (typeof data?.zoomLevel === 'number' && typeof preloadGlobals?.webFrame?.setZoomLevel === 'function') {
 			preloadGlobals.webFrame.setZoomLevel(data.zoomLevel);
@@ -309,4 +307,5 @@
 
 	// Load workbench
 	result.main(configuration);
+	(window as any).api.ipcRenderer.invoke('project:willMount');
 }());

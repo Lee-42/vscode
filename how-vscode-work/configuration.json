@@ -62,15 +62,15 @@
   "allow-insecure-localhost": false,
   "disable-dev-shm-usage": false,
   "profile-temp": false,
-  "logsPath": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250515T224939",
+  "logsPath": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250625T145457",
   "machineId": "93a65419073b63d34e1199a5f3dcf90c762bc6a5e8df2be4beaf63e6d253a749",
   "sqmId": "",
   "devDeviceId": "b9504a95-f01d-42b5-87d6-a0a59836d5eb",
   "windowId": 3,
-  "mainPid": 86092,
+  "mainPid": 97560,
   "appRoot": "/Users/lee/Project/vscode",
   "execPath": "/Users/lee/Project/vscode/.build/electron/Code - OSS.app/Contents/MacOS/Electron",
-  "backupPath": "/Users/lee/Library/Application Support/code-oss-dev/Backups/d6b28e3700dc3f8b5d42946a1750f28c",
+  "backupPath": "/Users/lee/Library/Application Support/code-oss-dev/Backups/65009ad6a835155a7daa442d84aa55e1",
   "profiles": {
     "home": {
       "$mid": 1,
@@ -207,6 +207,21 @@
             "$mid": 1,
             "path": "/Volumes/T7/ide_mobile_0",
             "scheme": "file"
+          },
+          {
+            "$mid": 1,
+            "path": "/Volumes/T7/ide_mobile",
+            "scheme": "file"
+          },
+          {
+            "$mid": 1,
+            "path": "/Volumes/T7/ide_mobile0",
+            "scheme": "file"
+          },
+          {
+            "$mid": 1,
+            "path": "/Users/lee/Desktop/ide_mobile",
+            "scheme": "file"
           }
         ]
       }
@@ -340,6 +355,21 @@
           "$mid": 1,
           "path": "/Volumes/T7/ide_mobile_0",
           "scheme": "file"
+        },
+        {
+          "$mid": 1,
+          "path": "/Volumes/T7/ide_mobile",
+          "scheme": "file"
+        },
+        {
+          "$mid": 1,
+          "path": "/Volumes/T7/ide_mobile0",
+          "scheme": "file"
+        },
+        {
+          "$mid": 1,
+          "path": "/Users/lee/Desktop/ide_mobile",
+          "scheme": "file"
         }
       ]
     }
@@ -348,12 +378,12 @@
   "tmpDir": "/var/folders/br/f8xfsmv50_d493ly1xfzxzlh0000gn/T",
   "userDataDir": "/Users/lee/Library/Application Support/code-oss-dev",
   "workspace": {
-    "id": "89dac5d0dfbba0dec0b121ac11e90da5",
+    "id": "a5161fad0895849ba463663a75031527",
     "uri": {
       "$mid": 1,
-      "fsPath": "/Volumes/T7/ide_mobile_0",
-      "external": "file:///Volumes/T7/ide_mobile_0",
-      "path": "/Volumes/T7/ide_mobile_0",
+      "fsPath": "/Volumes/T7/ide_mobile0",
+      "external": "file:///Volumes/T7/ide_mobile0",
+      "path": "/Volumes/T7/ide_mobile0",
       "scheme": "file"
     }
   },
@@ -369,9 +399,9 @@
     {
       "resource": {
         "$mid": 1,
-        "fsPath": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250515T224939/main.log",
-        "external": "file:///Users/lee/Library/Application%20Support/code-oss-dev/logs/20250515T224939/main.log",
-        "path": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250515T224939/main.log",
+        "fsPath": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250625T145457/main.log",
+        "external": "file:///Users/lee/Library/Application%20Support/code-oss-dev/logs/20250625T145457/main.log",
+        "path": "/Users/lee/Library/Application Support/code-oss-dev/logs/20250625T145457/main.log",
         "scheme": "file"
       },
       "id": "main",
@@ -463,69 +493,78 @@
         }
       }
     ],
+    "extensionsGallery": {
+      "serviceUrl": "https://marketplace.visualstudio.com/_apis/public/gallery",
+      "cacheUrl": "https://vscode.blob.core.windows.net/gallery/index",
+      "itemUrl": "https://marketplace.visualstudio.com/items"
+    },
     "version": "1.100.0"
   },
   "perfMarks": [
     {
       "name": "code/timeOrigin",
-      "startTime": 1747320578532.439
+      "startTime": 1750834497172.055
     },
     {
       "name": "code/didStartMain",
-      "startTime": 1747320578823
+      "startTime": 1750834497543
     },
     {
       "name": "code/willLoadMainBundle",
-      "startTime": 1747320578532
+      "startTime": 1750834497172
     },
     {
       "name": "code/didLoadMainBundle",
-      "startTime": 1747320578823
+      "startTime": 1750834497543
     },
     {
       "name": "code/willStartCrashReporter",
-      "startTime": 1747320578825
+      "startTime": 1750834497544
     },
     {
       "name": "code/didStartCrashReporter",
-      "startTime": 1747320578839
+      "startTime": 1750834497563
     },
     {
       "name": "code/willGenerateNls",
-      "startTime": 1747320578867
+      "startTime": 1750834497646
     },
     {
       "name": "code/didGenerateNls",
-      "startTime": 1747320578867
+      "startTime": 1750834497646
     },
     {
       "name": "code/willLoadNls",
-      "startTime": 1747320578867
+      "startTime": 1750834497646
     },
     {
       "name": "code/registerFilesystem/file",
-      "startTime": 1747320579065
+      "startTime": 1750834497844
     },
     {
       "name": "code/registerFilesystem/vscode-userdata",
-      "startTime": 1747320579066
+      "startTime": 1750834497846
     },
     {
       "name": "code/didRunMainBundle",
-      "startTime": 1747320579083
+      "startTime": 1750834497893
     },
     {
       "name": "code/willStartMainServer",
-      "startTime": 1747320579184
+      "startTime": 1750834498054
+    },
+    {
+      "name": "code/willStartMainServer",
+      "startTime": 1750834498056
     },
     {
       "name": "code/didStartMainServer",
-      "startTime": 1747320579186
+      "startTime": 1750834498057
     }
   ],
   "os": {
     "release": "22.3.0",
-    "hostname": "LeedeMacBook-Pro.local",
+    "hostname": "LeedeMBP",
     "arch": "arm64"
   },
   "autoDetectHighContrast": true,
@@ -727,6 +766,7 @@
     "vs/workbench/contrib/comments/browser/media/panel.css",
     "vs/workbench/contrib/comments/browser/media/review.css",
     "vs/workbench/contrib/customEditor/browser/media/customEditor.css",
+    "vs/workbench/contrib/daimonion/media/daimonion.css",
     "vs/workbench/contrib/debug/browser/media/breakpointWidget.css",
     "vs/workbench/contrib/debug/browser/media/callStackEditorContribution.css",
     "vs/workbench/contrib/debug/browser/media/callStackWidget.css",
@@ -736,6 +776,7 @@
     "vs/workbench/contrib/debug/browser/media/debugViewlet.css",
     "vs/workbench/contrib/debug/browser/media/exceptionWidget.css",
     "vs/workbench/contrib/debug/browser/media/repl.css",
+    "vs/workbench/contrib/devtool/media/devtool.css",
     "vs/workbench/contrib/extensions/browser/media/extension.css",
     "vs/workbench/contrib/extensions/browser/media/extensionActions.css",
     "vs/workbench/contrib/extensions/browser/media/extensionEditor.css",
@@ -788,6 +829,7 @@
     "vs/workbench/contrib/search/browser/media/searchview.css",
     "vs/workbench/contrib/searchEditor/browser/media/searchEditor.css",
     "vs/workbench/contrib/share/browser/share.css",
+    "vs/workbench/contrib/simulator/media/simulator.css",
     "vs/workbench/contrib/terminal/browser/media/terminal.css",
     "vs/workbench/contrib/terminal/browser/media/terminalVoice.css",
     "vs/workbench/contrib/terminal/browser/media/widgets.css",

@@ -177,6 +177,15 @@ import './contrib/emergencyAlert/electron-sandbox/emergencyAlert.contribution.js
 // MCP
 import './contrib/mcp/electron-sandbox/mcp.contribution.js';
 
+// Devtool
+import './contrib/devtool/browser/devtool.contribution.js';
+
+// Simulator
+import './contrib/simulator/browser/simulator.contribution.js';
+
+// Daimonion
+import './contrib/daimonion/browser/daimonion.contribution.js';
+
 //#endregion
 
 

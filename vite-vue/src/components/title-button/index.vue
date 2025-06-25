@@ -1,6 +1,6 @@
 <template>
 	<div class="title-button" :class="{ active }">
-		<n-button type="primary" :secondary="!active" size="small">
+		<n-button type="primary" :secondary="!active" size="tiny" style="padding: 0 10px">
 			<template #icon>
 				<n-icon>
 					<component :is="icon" />
@@ -38,5 +38,5 @@ withDefaults(defineProps<{
 	transition: color 0.3s ease;
 }
 
-</style>         
+</style>
 

@@ -21,8 +21,9 @@ import { getUNCHost, addUNCHostToAllowlist } from './vs/base/node/unc.js';
 import { INLSConfiguration } from './vs/nls.js';
 import { NativeParsedArgs } from './vs/platform/environment/common/argv.js';
 import { WindowsManager } from './custom/windows-manager.js';
-import "./custom/ipc/index.js";
+import './custom/ipc/index.js';
 import { initWindowIpc } from './custom/ipc/index.js';
+import { devtool_remote_init } from './custom/util/index.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -148,6 +149,8 @@ if (process.platform === 'win32' || process.platform === 'linux') {
 	const electronLocale = (!userLocale || userLocale === 'qps-ploc') ? 'en' : userLocale;
 	app.commandLine.appendSwitch('lang', electronLocale);
 }
+
+devtool_remote_init(app);
 
 // Load our code once ready
 app.once('ready', function () {
@@ -408,7 +411,7 @@ function createDefaultArgvConfigSync(argvConfigPath: string): void {
 			'{',
 			'	// Use software rendering instead of hardware accelerated rendering.',
 			'	// This can help in cases where you see rendering issues in VS Code.',
-			'	// "disable-hardware-acceleration": true',
+			'	// "disable - hardware - acceleration": true',
 			'}'
 		];
 
@@ -502,9 +505,9 @@ function configureCrashReporter(): void {
 				if (endOfArgsMarkerIndex === -1) {
 					argv.push('--crash-reporter-id', crashReporterId);
 				} else {
-					// if the we have an argument "--" (end of argument marker)
+					// if the we have an argument '--' (end of argument marker)
 					// we cannot add arguments at the end. rather, we add
-					// arguments before the "--" marker.
+					// arguments before the '--' marker.
 					argv.splice(endOfArgsMarkerIndex, 0, '--crash-reporter-id', crashReporterId);
 				}
 			}

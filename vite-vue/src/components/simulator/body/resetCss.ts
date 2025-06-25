@@ -154,4 +154,4 @@ body {
     border-radius: 10px;
     background-color: rgb(186, 186, 186);
 }
-`
+`;

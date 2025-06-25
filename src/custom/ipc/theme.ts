@@ -11,7 +11,7 @@ ipcMain.handle(ThemeChannel.UPDATE, async (event, themes) => {
 	if (themes) {
 		_themes = themes;
 		setTheme(_themes);
-		// 广播到所有窗口
+		// broadcast to all windows
 		BrowserWindow.getAllWindows().forEach(window => {
 			if (!window.isDestroyed()) {
 				window.webContents.send(ThemeChannel.GET, _themes);

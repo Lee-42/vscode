@@ -21,3 +21,7 @@ vscode.db
 product.overrides.json
 *.snap.actual
 .vscode-test
+vite-vue/dist
+vite-vue/public
+extensions/wayou.vscode-icons-mac-7.25.3
+docs

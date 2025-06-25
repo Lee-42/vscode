@@ -4,13 +4,14 @@
 			<n-modal-provider>
 				<n-dialog-provider>
 					<n-message-provider>
-						<div class="header-bar">
+						<div class="header-bar" id="header-bar">
 							<LayoutController />
 							<CompileSelector />
+							<Picasso />
 							<CacheCleaner />
+							<RemoteDebug />
 							<Uploader />
 							<Message />
-							<div class="test"></div>
 						</div>
 					</n-message-provider>
 				</n-dialog-provider>
@@ -24,7 +25,9 @@ import LayoutController from "./layout-controller.vue";
 import CompileSelector from "./compile-selector.vue";
 import CacheCleaner from "./cache-cleaner.vue";
 import Uploader from "./uploader.vue";
+import Picasso from "./picasso.vue";
 import Message from "./message.vue";
+import RemoteDebug from "./remote-debug.vue";
 import {
 	NMessageProvider,
 	NModalProvider,
@@ -34,11 +37,16 @@ import {
 } from "naive-ui";
 import type { GlobalThemeOverrides } from "naive-ui";
 import { onMounted, ref } from "vue";
+import {
+	ProjectChannel,
+	ThemeChannel,
+} from "../../../../src/custom/ipc/channel";
 import { useProjectStore } from "../../stores/project";
-import { ThemeChannel } from "../../../../src/custom/ipc/channel";
+import type { ProjectProps } from "../../types";
+
+const projectStore = useProjectStore();
 
 const themeOverrides = ref<GlobalThemeOverrides>({});
-const projectStore = useProjectStore();
 
 const updateTheme = (themes: any) => {
 	themeOverrides.value = {
@@ -50,7 +58,8 @@ const updateTheme = (themes: any) => {
 			inputColor: themes["--vscode-input-background"],
 			borderRadius: "2px",
 			hoverColor: themes["--vscode-list-hoverBackground"],
-			borderColor: themes["--vscode-button-background"],
+			// borderColor: themes["--vscode-button-background"],
+			borderColor: "transparent",
 			popoverColor: themes["--vscode-input-background"],
 			textColor1: themes["--vscode-editor-foreground"],
 			textColor2: themes["--vscode-descriptionForeground"],
@@ -64,38 +73,52 @@ const updateTheme = (themes: any) => {
 			siderBorderColor: themes["--vscode-sideBar-border"],
 			footerColor: themes["--vscode-statusBar-background"],
 			footerBorderColor: themes["--vscode-statusBar-border"],
-			color: themes['--vscode-editor-background']
+			color: themes["--vscode-editor-background"],
+		},
+		Card: {
+			color: themes["--vscode-menu-background"],
+			borderColor: "transparent",
+		},
+		Drawer: {
+			color: themes["--vscode-dropdown-background"],
 		}
 	};
 };
 
 onMounted(() => {
-	console.log('projectStoreprojectStore: ', projectStore.items);
+	// 初始化state
+	(window as any).api.ipcRenderer
+		.invoke(ProjectChannel.INIT_PROJECT)
+		.then((project: ProjectProps) => {
+			projectStore.initProjects(project);
+		});
 	// 初始化主题变量
 	(window as any).api.ipcRenderer
 		.invoke(ThemeChannel.UPDATE)
 		.then((themes: any) => updateTheme(themes));
 
-	(window as any).api.ipcRenderer.on(ThemeChannel.GET, (_: any, themes: any) => {
-		console.log("themes: ", themes);
-		updateTheme(themes);
-	});
+	// 监听主题变量变化
+	(window as any).api.ipcRenderer.on(
+		ThemeChannel.GET,
+		(_: any, themes: any) => {
+			updateTheme(themes);
+		}
+	);
 });
 </script>
 
 <style lang="postcss" scoped>
 .n-config-provider {
 	width: 100%;
+	height: 100%;
+	padding: 10px 20px;
+	box-sizing: border-box;
 	.header-bar {
 		width: 100%;
+		height: 100%;
 		display: flex;
 		align-items: flex-start;
 		justify-content: space-between;
-	}
-
-	.test {
-		width: 20px;
-		height: 20px;
 	}
 }
 </style>

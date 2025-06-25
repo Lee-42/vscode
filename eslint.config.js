@@ -157,6 +157,7 @@ export default tseslint.config(
 	{
 		files: [
 			'src/**/*.ts',
+			'./vite-vue/src/**/*.ts',
 		],
 		languageOptions: {
 			parser: tseslint.parser,

@@ -1045,6 +1045,7 @@ export abstract class AbstractExtensionGalleryService implements IExtensionGalle
 
 		const runQuery = async (query: Query, token: CancellationToken) => {
 			const { extensions, total } = await this.queryGalleryExtensions(query, { targetPlatform: CURRENT_TARGET_PLATFORM, compatible: false, includePreRelease: !!options.includePreRelease, productVersion: options.productVersion ?? { version: this.productService.version, date: this.productService.date } }, extensionGalleryManifest, token);
+			// console.log('extensions: ', JSON.stringify(extensions));
 			extensions.forEach((e, index) => setTelemetry(e, ((query.pageNumber - 1) * query.pageSize) + index, options.source));
 			return { extensions, total };
 		};

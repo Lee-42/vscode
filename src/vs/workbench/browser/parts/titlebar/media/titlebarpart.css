@@ -7,6 +7,9 @@
 .monaco-workbench .part.titlebar {
 	display: flex;
 	flex-direction: row;
+	/* 盖住抽屉 */
+	z-index: 7;
+	position: relative;
 }
 
 .monaco-workbench.mac .part.titlebar {

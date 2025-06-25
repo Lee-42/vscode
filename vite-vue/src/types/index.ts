@@ -3,16 +3,24 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 export interface ProjectProps {
-  id: number;
+  id: string;
   appId: string;
   projectName: string;
   projectPath: string;
   enginePath: string;
   projectType: string;
   device: DeviceProps;
+  createdAt: Date;
+  updatedAt: Date;
+  simulationVisible: boolean;
+  editorVisible: boolean;
+  devtoolVisible: boolean;
+  scale: number;
 }
 
 export interface DeviceProps {
+  value: string;
+  label: string;
   screenWidth: number;
   screenHeight: number;
   winWidth: number;
@@ -21,7 +29,14 @@ export interface DeviceProps {
   statusHeight: number;
   borderRadius: string;
   frame: string;
+  statusBarType: string;
 }
+
+export interface ScaleProps {
+  value: number;
+  label: string;
+}
+
 export interface ConversationProps {
   id: number;
   title: string;

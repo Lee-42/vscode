@@ -5,42 +5,44 @@
 
 import './media/headerbarpart.css';
 import { Part } from '../../part.js';
-import { $, append } from '../../../../base/browser/dom.js';
-import { IInstantiationService } from '../../../../platform/instantiation/common/instantiation.js';
+// import { $, append } from '../../../../base/browser/dom.js';
+// import { IInstantiationService } from '../../../../platform/instantiation/common/instantiation.js';
 import { IWorkbenchLayoutService, Parts } from '../../../services/layout/browser/layoutService.js';
 import { IStorageService } from '../../../../platform/storage/common/storage.js';
 import { IThemeService } from '../../../../platform/theme/common/themeService.js';
 import { IHeaderBarService } from '../../../../workbench/services/headerBar/browser/headerBarService.js';
 import { InstantiationType, registerSingleton } from '../../../../platform/instantiation/common/extensions.js';
 import { ACTIVITY_BAR_BACKGROUND, ACTIVITY_BAR_TOP_BACKGROUND } from '../../../common/theme.js';
-import { Codicon } from '../../../../base/common/codicons.js';
+// import { Codicon } from '../../../../base/common/codicons.js';
 import { ICommandService } from '../../../../platform/commands/common/commands.js';
-import { IContextKeyService } from '../../../../platform/contextkey/common/contextkey.js';
-// import { PanelVisibleContext, SimulatorVisibleContext } from '../../../common/contextkeys.js';
-import { ButtonWithIconAndDescription } from '../../../../base/browser/ui/button/custom-button.js';
+// import { IContextKeyService } from '../../../../platform/contextkey/common/contextkey.js';
+// import { ButtonWithIconAndDescription } from '../../../../base/browser/ui/button/custom-button.js';
+import { mainWindow } from '../../../../base/browser/window.js';
+// eslint-disable-next-line local/code-import-patterns
+import { ProjectChannel } from '../../../../../custom/ipc/channel.js';
 
 export class HeaderbarPart extends Part implements IHeaderBarService {
 	declare readonly _serviceBrand: undefined;
 
 	readonly minimumWidth: number = 0;
 	readonly maximumWidth!: number;
-	readonly minimumHeight: number = 80;
-	readonly maximumHeight: number = 80;
+	readonly minimumHeight: number = 60;
+	readonly maximumHeight: number = 60;
 
 	private container: HTMLElement | undefined;
-	private leftContainer: HTMLElement | undefined;
-	private centerContainer: HTMLElement | undefined;
-	private rightContainer: HTMLElement | undefined;
+	// private leftContainer: HTMLElement | undefined;
+	// private centerContainer: HTMLElement | undefined;
+	// private rightContainer: HTMLElement | undefined;
 	private readonly commandService: ICommandService;
-	private readonly contextKeyService: IContextKeyService;
+	// private readonly contextKeyService: IContextKeyService;
 
 	constructor(
 		@IStorageService storageService: IStorageService,
 		@IThemeService themeService: IThemeService,
 		@IWorkbenchLayoutService layoutService: IWorkbenchLayoutService,
-		@IInstantiationService instantiationService: IInstantiationService,
+		// @IInstantiationService instantiationService: IInstantiationService,
 		@ICommandService commandService: ICommandService,
-		@IContextKeyService contextKeyService: IContextKeyService
+		// @IContextKeyService contextKeyService: IContextKeyService
 	) {
 		super(
 			Parts.HEADERBAR_PART,
@@ -51,7 +53,7 @@ export class HeaderbarPart extends Part implements IHeaderBarService {
 		);
 
 		this.commandService = commandService;
-		this.contextKeyService = contextKeyService;
+		// this.contextKeyService = contextKeyService;
 
 		// 注册主题变更监听
 		this._register(this.themeService.onDidColorThemeChange(() => this.updateStyles()));
@@ -62,151 +64,155 @@ export class HeaderbarPart extends Part implements IHeaderBarService {
 
 		// 创建主容器
 		this.container = document.createElement('div');
-		this.container.className = 'headerbar-container';
-		this.container.id = 'headerbar-container';
+		this.container.className = 'headerbar-part';
+		this.container.id = 'headerbar-part';
 		// this.updateStyles();
 
 		// 初始化左中右区域的内容
-		this.initLeftContent(this.container);
+		// this.initLeftContent(this.container);
 		// this.initCenterContent(this.container);
 		// this.initRightContent(this.container);
+
+		(mainWindow as any).api.ipcRenderer.on(ProjectChannel.TOGGLE_SIMULATOR, () => {
+			this.commandService.executeCommand('workbench.action.toggleSimulator');
+		});
+
+		(mainWindow as any).api.ipcRenderer.on(ProjectChannel.TOGGLE_DEVTOOL, () => {
+			this.commandService.executeCommand('workbench.action.togglePanel');
+		});
 
 		this.element.appendChild(this.container);
 		return this.element;
 	}
 
 	// 初始化左区域的内容
-	private initLeftContent(container: HTMLElement): void {
-		this.leftContainer = document.createElement('div');
-		this.leftContainer.className = 'headerbar-left';
+	// private initLeftContent(container: HTMLElement): void {
+	// 	this.leftContainer = document.createElement('div');
+	// 	this.leftContainer.className = 'headerbar-left';
 
-		this.avatar(this.leftContainer);
-		this.simulatorSwitcher(this.leftContainer);
-		this.editortSwitcher(this.leftContainer);
-		this.devtoolSwitcher(this.leftContainer);
+	// 	this.avatar(this.leftContainer);
+	// 	this.simulatorSwitcher(this.leftContainer);
+	// 	this.editortSwitcher(this.leftContainer);
+	// 	this.devtoolSwitcher(this.leftContainer);
 
-		// 将左中右区域添加到主容器
-		container.appendChild(this.leftContainer);
-	}
+	// 	// 将左中右区域添加到主容器
+	// 	container.appendChild(this.leftContainer);
+	// }
 
-	private avatar(container: HTMLElement) {
-		// 添加头像
-		const img = document.createElement('img');
-		img.className = 'avatar-container';
-		img.src = 'https://avatars.githubusercontent.com/u/95179300?v=4&size=64';
-		container.appendChild(img);
-	}
+	// private avatar(container: HTMLElement) {
+	// 	// 添加头像
+	// 	const img = document.createElement('img');
+	// 	img.className = 'avatar-container';
+	// 	img.src = 'https://avatars.githubusercontent.com/u/95179300?v=4&size=64';
+	// 	container.appendChild(img);
+	// }
 
-	private simulatorSwitcher(container: HTMLElement) {
-		// 添加图标描述按钮示例
-		const buttonContainer = append(container, $('.simulator-button'));
-		const button = new ButtonWithIconAndDescription(buttonContainer, {
-			supportIcons: true,
-		});
-		button.icon = Codicon.deviceMobile;
-		button.description = '模拟器';
+	// private simulatorSwitcher(container: HTMLElement) {
+
+	// Object.defineProperty(mainWindow, 'project', {
+	// 	get: () => { },
+	// 	set: (value) => {
+	// 		console.log('project: ', value);
+	// 	}
+	// });
+	// // 更新按钮状态
+	// const updateButtonState = () => {
+	// 	const isVisible = (mainWindow as any).project?.simulationVisible;
+	// 	console.log('siomulatorVisible: ', isVisible);
+	// 	if (isVisible) {
+	// 		this.commandService.executeCommand('workbench.action.toggleSimulator');
+	// 	} else {
+	// 		this.commandService.executeCommand('workbench.action.toggleSimulator');
+	// 	}
+	// };
+
+	// // 监听状态变化
+	// this._register(this.contextKeyService.onDidChangeContext(e => {
+	// 	if (e.affectsSome(new Set(['simulatorVisible']))) {
+	// 		updateButtonState();
+	// 	}
+	// }));
+
+	// // 初始化按钮状态
+	// updateButtonState();
+	// }
+
+	// private editortSwitcher(container: HTMLElement) {
+	// 	const buttonContainer = append(container, $('.editor-button'));
+	// 	const button = new ButtonWithIconAndDescription(buttonContainer, {
+	// 		supportIcons: true,
+	// 	});
+	// 	button.icon = Codicon.edit;
+	// 	button.description = '编辑器';
+	// 	button.onDidClick(() => {
+	// 		console.log('切换编辑器');
+	// 	});
+
+	// }
+	// private devtoolSwitcher(container: HTMLElement) {
 
 
-		// 更新按钮状态
-		const updateButtonState = () => {
-			const isVisible = this.layoutService.isVisible(Parts.SIMULATOR_PART);
-			console.log('siomulatorVisible: ', isVisible);
-			if (isVisible) {
-				button.active();
-			} else {
-				button.inactive();
-			}
-		};
+	// const buttonContainer = append(container, $('.devtool-button'));
+	// const button = new ButtonWithIconAndDescription(buttonContainer, {
+	// 	supportIcons: true,
+	// });
+	// button.icon = Codicon.terminal;
+	// button.description = '调试器';
 
-		// 监听状态变化
-		this._register(this.contextKeyService.onDidChangeContext(e => {
-			if (e.affectsSome(new Set(['simulatorVisible']))) {
-				updateButtonState();
-			}
-		}));
+	// // 更新按钮状态
+	// const updateButtonState = () => {
+	// 	const isVisible = this.layoutService.isVisible(Parts.PANEL_PART);
+	// 	if (isVisible) {
+	// 		button.active();
+	// 	} else {
+	// 		button.inactive();
+	// 	}
+	// };
 
-		// 初始化按钮状态
-		updateButtonState();
+	// // 监听状态变化
+	// this._register(this.contextKeyService.onDidChangeContext(e => {
+	// 	if (e.affectsSome(new Set(['panelVisible']))) {
+	// 		updateButtonState();
+	// 	}
+	// }));
 
-		button.onDidClick(() => {
-			this.commandService.executeCommand('workbench.action.toggleSimulator');
-		});
-	}
+	// // 初始化按钮状态
+	// updateButtonState();
 
-	private editortSwitcher(container: HTMLElement) {
-		const buttonContainer = append(container, $('.editor-button'));
-		const button = new ButtonWithIconAndDescription(buttonContainer, {
-			supportIcons: true,
-		});
-		button.icon = Codicon.edit;
-		button.description = '编辑器';
-		button.onDidClick(() => {
-			console.log('切换编辑器');
-		});
-
-	}
-	private devtoolSwitcher(container: HTMLElement) {
-		const buttonContainer = append(container, $('.devtool-button'));
-		const button = new ButtonWithIconAndDescription(buttonContainer, {
-			supportIcons: true,
-		});
-		button.icon = Codicon.terminal;
-		button.description = '调试器';
-
-		// 更新按钮状态
-		const updateButtonState = () => {
-			const isVisible = this.layoutService.isVisible(Parts.PANEL_PART);
-			if (isVisible) {
-				button.active();
-			} else {
-				button.inactive();
-			}
-		};
-
-		// 监听状态变化
-		this._register(this.contextKeyService.onDidChangeContext(e => {
-			if (e.affectsSome(new Set(['panelVisible']))) {
-				updateButtonState();
-			}
-		}));
-
-		// 初始化按钮状态
-		updateButtonState();
-
-		button.onDidClick(() => {
-			this.commandService.executeCommand('workbench.action.togglePanel');
-		});
-	}
+	// button.onDidClick(() => {
+	// 	this.commandService.executeCommand('workbench.action.togglePanel');
+	// });
+	// }
 
 
 	// 初始化中区域的内容
-	private initCenterContent(container: HTMLElement): void {
-		this.centerContainer = document.createElement('div');
-		this.centerContainer.className = 'headerbar-center';
+	// private initCenterContent(container: HTMLElement): void {
+	// 	this.centerContainer = document.createElement('div');
+	// 	this.centerContainer.className = 'headerbar-center';
 
-		// 添加标题
-		const title = document.createElement('div');
-		title.className = 'header-title';
-		title.textContent = 'VSCode';
-		this.centerContainer.appendChild(title);
-		container.appendChild(this.centerContainer);
-	}
+	// 	// 添加标题
+	// 	const title = document.createElement('div');
+	// 	title.className = 'header-title';
+	// 	title.textContent = 'VSCode';
+	// 	this.centerContainer.appendChild(title);
+	// 	container.appendChild(this.centerContainer);
+	// }
 
 	// 初始化右区域的内容
-	private initRightContent(container: HTMLElement): void {
-		this.rightContainer = document.createElement('div');
-		this.rightContainer.className = 'headerbar-right';
+	// private initRightContent(container: HTMLElement): void {
+	// 	this.rightContainer = document.createElement('div');
+	// 	this.rightContainer.className = 'headerbar-right';
 
-		// 添加图标描述按钮示例
-		const buttonContainer = append(container, $('.simulator-button'));
-		const button = new ButtonWithIconAndDescription(buttonContainer, {
-			supportIcons: true,
-		});
-		button.icon = Codicon.window;
-		button.description = '窗口';
-		button.onDidClick(() => {
-		});
-	}
+	// 	// 添加图标描述按钮示例
+	// 	const buttonContainer = append(container, $('.simulator-button'));
+	// 	const button = new ButtonWithIconAndDescription(buttonContainer, {
+	// 		supportIcons: true,
+	// 	});
+	// 	button.icon = Codicon.window;
+	// 	button.description = '窗口';
+	// 	button.onDidClick(() => {
+	// 	});
+	// }
 
 	public override updateStyles(): void {
 		super.updateStyles();

@@ -16,6 +16,7 @@
 					vscode-remote-resource:
 					vscode-managed-remote-resource:
 					https:
+					http:
 				;
 				media-src
 					'self'
@@ -40,13 +41,16 @@
 					'self'
 					https:
 					ws:
+					http:
 					http://localhost:5173
+					http://127.0.0.1:9222
 				;
 				font-src
 					'self'
 					vscode-remote-resource:
 					vscode-managed-remote-resource:
 					https://*.vscode-unpkg.net
+					http:
 				;
 				require-trusted-types-for
 					'script'

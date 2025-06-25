@@ -49,19 +49,18 @@ import {
 	NInput,
 	NInputGroup,
 	NIcon,
-	useMessage,
 } from "naive-ui";
 import { useProjectStore } from "../../stores/project.ts";
 import { FolderOpen20Filled } from "@vicons/fluent";
 import { basename } from "path-browserify";
-import { ref } from "vue";
-import type { ProjectProps } from "../../types";
-import devices from "../../components/simulator/body/devices";
+import { ref, toRaw } from "vue";
+import devices from "../../components/simulator/header/devices.ts";
 import { CommonChannel } from "../../../../src/custom/ipc/channel";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const projectStore = useProjectStore();
-const projects = ref(projectStore.items);
-const message = useMessage();
 const form = ref({
 	projectName: "",
 	projectPath: "",
@@ -89,23 +88,28 @@ const handleValidateClick = (e: MouseEvent) => {
 	formRef.value?.validate((errors: any) => {
 		if (!errors) {
 			const projectName = form.value.projectName.trim();
-			if (
-				projects.value.length > 0 &&
-				projects.value.find(
-					(item: ProjectProps) => item.projectName === projectName
-				)
-			) {
-				message.error("项目已存在");
-				return;
-			}
-			projectStore.createProject({
-				projectName: form.value.projectName,
-				projectPath: form.value.projectPath,
-				appId: form.value.appId,
-				enginePath: "",
-				projectType: "",
-				device: devices[0],
-			});
+			projectStore
+				.createProject({
+					projectName,
+					projectPath: form.value.projectPath,
+					appId: form.value.appId,
+					enginePath: "",
+					projectType: "",
+					device: devices[0],
+					createdAt: new Date(),
+					updatedAt: new Date(),
+					simulationVisible: true,
+					editorVisible: true,
+					devtoolVisible: true,
+					scale: 1,
+				})
+				.then((project) => {
+					(window as any).api.ipcRenderer
+						.invoke(CommonChannel.OPEN_NEW_WINDOW, toRaw(project))
+						.then(() => {
+							(router as any).closewin("/project");
+						});
+				});
 		} else {
 			console.log(errors);
 		}
@@ -116,7 +120,6 @@ const handleSelectPath = () => {
 	(window as any).api.ipcRenderer
 		.invoke(CommonChannel.OPEN_FOLDER)
 		.then((result: string) => {
-			console.log("result: ", result);
 			if (!form.value.projectName) {
 				form.value.projectName = basename(result);
 			}

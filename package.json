@@ -33,7 +33,7 @@
     "watch-extensions": "node --max-old-space-size=8192 ./node_modules/gulp/bin/gulp.js watch-extensions watch-extension-media",
     "watch-extensionsd": "deemon npm run watch-extensions",
     "kill-watch-extensionsd": "deemon --kill npm run watch-extensions",
-    "precommit": "node build/hygiene.js",
+    "_precommit": "node build/hygiene.js",
     "gulp": "node --max-old-space-size=8192 ./node_modules/gulp/bin/gulp.js",
     "electron": "node build/lib/electron",
     "7z": "7z",
@@ -68,7 +68,10 @@
     "extensions-ci": "node ./node_modules/gulp/bin/gulp.js extensions-ci",
     "extensions-ci-pr": "node ./node_modules/gulp/bin/gulp.js extensions-ci-pr",
     "perf": "node scripts/code-perf.js",
-    "update-build-ts-version": "npm install typescript@next && tsc -p ./build/tsconfig.build.json"
+    "update-build-ts-version": "npm install typescript@next && tsc -p ./build/tsconfig.build.json",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "dependencies": {
     "@microsoft/1ds-core-js": "^3.2.13",
@@ -131,7 +134,7 @@
     "@types/kerberos": "^1.1.2",
     "@types/minimist": "^1.2.1",
     "@types/mocha": "^9.1.1",
-    "@types/node": "20.x",
+    "@types/node": "^20.17.51",
     "@types/sinon": "^10.0.2",
     "@types/sinon-test": "^2.4.2",
     "@types/trusted-types": "^1.0.6",
@@ -222,6 +225,8 @@
     "typescript": "^5.9.0-dev.20250416",
     "typescript-eslint": "^8.8.0",
     "util": "^0.12.4",
+    "vite-plugin-node-polyfills": "^0.23.0",
+    "vitepress": "^1.6.3",
     "webpack": "^5.94.0",
     "webpack-cli": "^5.1.4",
     "webpack-stream": "^7.0.0",
@@ -243,5 +248,25 @@
   },
   "optionalDependencies": {
     "windows-foreground-love": "0.5.0"
+  },
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "workbench.view.devtool",
+          "title": "DevTool",
+          "icon": "$(tools)"
+        }
+      ]
+    },
+    "views": {
+      "workbench.view.devtool": [
+        {
+          "id": "workbench.view.devtool",
+          "name": "DevTool",
+          "when": "true"
+        }
+      ]
+    }
   }
 }

@@ -337,6 +337,9 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 		this.statusBarService = accessor.get(IStatusbarService);
 		accessor.get(IBannerService);
 
+		console.log('simulatorService: ', this.simulatorService);
+		console.log('headerBarService: ', this.headerBarService);
+
 		// Listeners
 		this.registerLayoutListeners();
 
@@ -2345,7 +2348,7 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 		const sideBarSize = this.stateModel.getRuntimeValue(LayoutStateKeys.SIDEBAR_HIDDEN) ? 0 : nodes.sideBar.size;
 		const auxiliaryBarSize = this.stateModel.getRuntimeValue(LayoutStateKeys.AUXILIARYBAR_HIDDEN) ? 0 : nodes.auxiliaryBar.size;
 		const panelSize = this.stateModel.getInitializationValue(LayoutStateKeys.PANEL_SIZE) ? 0 : nodes.panel.size;
-		const simulatorSize = this.simulatorPartView.minimumWidth;
+		// const simulatorSize = this.simulatorPartView.minimumWidth;
 
 		const panelPostion = this.stateModel.getRuntimeValue(LayoutStateKeys.PANEL_POSITION);
 		const sideBarPosition = this.stateModel.getRuntimeValue(LayoutStateKeys.SIDEBAR_POSITON);
@@ -2374,7 +2377,8 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 			const sideBarNextToEditor = !(panelAlignment === 'center' || (sideBarPosition === Position.LEFT && panelAlignment === 'right') || (sideBarPosition === Position.RIGHT && panelAlignment === 'left'));
 			const auxiliaryBarNextToEditor = !(panelAlignment === 'center' || (sideBarPosition === Position.RIGHT && panelAlignment === 'right') || (sideBarPosition === Position.LEFT && panelAlignment === 'left'));
 
-			const editorSectionWidth = availableWidth - activityBarSize - simulatorSize - (sideBarNextToEditor ? 0 : sideBarSize) - (auxiliaryBarNextToEditor ? 0 : auxiliaryBarSize);
+			// const editorSectionWidth = availableWidth - activityBarSize - simulatorSize - (sideBarNextToEditor ? 0 : sideBarSize) - (auxiliaryBarNextToEditor ? 0 : auxiliaryBarSize);
+			const editorSectionWidth = availableWidth - activityBarSize - (sideBarNextToEditor ? 0 : sideBarSize) - (auxiliaryBarNextToEditor ? 0 : auxiliaryBarSize);
 
 			const editorNodes = this.arrangeEditorNodes({
 				editor: nodes.editor,
@@ -2406,12 +2410,14 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 
 			if (sideBarPosition === Position.LEFT) {
 				result.splice(0, 0, nodes.activityBar);
+				// 模拟器在左
+				// result.unshift(nodes.simulator);
 			} else {
 				result.push(nodes.activityBar);
 			}
-			result.push(nodes.simulator);
 		}
-
+		// 模拟器在右
+		// result.push(nodes.simulator);
 		return result;
 	}
 

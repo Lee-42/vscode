@@ -1043,6 +1043,7 @@ export class CodeWindow extends BaseWindow implements ICodeWindow {
 
 		// Load URL
 		this._win.loadURL(FileAccess.asBrowserUri(`vs/code/electron-sandbox/workbench/workbench${this.environmentMainService.isBuilt ? '' : '-dev'}.html`).toString(true));
+		this._win.webContents.openDevTools();
 
 		// Remember that we did load
 		const wasLoaded = this.wasLoaded;

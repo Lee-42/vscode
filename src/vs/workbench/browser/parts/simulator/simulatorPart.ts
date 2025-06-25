@@ -49,8 +49,8 @@ export class SimulatorPart extends Part implements ISimulatorService {
 	protected override createContentArea(parent: HTMLElement): HTMLElement {
 		this.element = parent;
 		const container = document.createElement('div');
-		container.className = 'simulator-container';
-		container.id = 'simulator-container';
+		container.className = 'simulator-part';
+		// container.id = 'simulator-part';
 
 		// this.initHeader(container);
 		// this.initBody(container);
@@ -117,7 +117,7 @@ export class SimulatorPart extends Part implements ISimulatorService {
 			container.appendChild(body);
 
 			const bodyContainer = document.createElement('div');
-			bodyContainer.className = 'simulator-body-container';
+			bodyContainer.className = 'simulator-body-part';
 
 			// const backgroundImage = FileAccess.asFileUri('vs/workbench/browser/parts/simulator/resources/iphone-x.png').path;
 			// bodyContainer.style.backgroundImage = `url(${backgroundImage})`;

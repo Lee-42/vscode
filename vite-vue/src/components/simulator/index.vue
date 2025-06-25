@@ -1,24 +1,30 @@
 <template>
-	<NConfigProvider :theme-overrides="themeOverrides" class="provider">
-		<div class="simulator-container">
-			<Toolbar />
-			<Body />
-			<Footer />
-		</div>
+	<NConfigProvider
+		:theme-overrides="themeOverrides"
+		class="simulator-container"
+	>
+		<SimulatorHeader />
+		<SimulatorBody />
+		<SimulatorFooter />
 	</NConfigProvider>
 </template>
 
 <script setup lang="ts">
-import Toolbar from "./toolbar/index.vue";
-import Footer from "./footer/index.vue";
-import Body from "./body/index.vue";
+import SimulatorHeader from "./header/index.vue";
+import SimulatorFooter from "./footer/index.vue";
+import SimulatorBody from "./body/index.vue";
 import { NConfigProvider, type GlobalThemeOverrides } from "naive-ui";
 import { onMounted, ref } from "vue";
-import { ThemeChannel } from "../../../../src/custom/ipc/channel";
+import {
+	ProjectChannel,
+	ThemeChannel,
+} from "../../../../src/custom/ipc/channel";
+import type { ProjectProps } from "../../types";
 import { useProjectStore } from "../../stores/project";
 
-const themeOverrides = ref<GlobalThemeOverrides>({});
 const projectStore = useProjectStore();
+
+const themeOverrides = ref<GlobalThemeOverrides>({});
 
 const updateTheme = (themes: any) => {
 	themeOverrides.value = {
@@ -48,14 +54,24 @@ const updateTheme = (themes: any) => {
 		},
 		Card: {
 			color: themes["--vscode-menu-background"],
+			borderColor: "transparent",
+		},
+		Drawer: {
+			color: themes["--vscode-dropdown-background"],
+		},
+		Tooltip: {
+			padding: "4px",
 		},
 	};
 };
 
 onMounted(() => {
-	projectStore.fetchProjects().then((projects) => {
-		console.log("projects: ", projects);
-	});
+	// 初始化state
+	(window as any).api.ipcRenderer
+		.invoke(ProjectChannel.INIT_PROJECT)
+		.then((project: ProjectProps) => {
+			projectStore.initProjects(project);
+		});
 	// 初始化主题变量
 	(window as any).api.ipcRenderer
 		.invoke(ThemeChannel.UPDATE)
@@ -70,9 +86,11 @@ onMounted(() => {
 });
 </script>
 
-<style lang="postcss" scoped>
+<style lang="postcss">
 .simulator-container {
 	width: 100%;
 	height: 100%;
+	display: flex;
+	flex-direction: column;
 }
 </style>

@@ -1,10 +1,10 @@
 <template>
 	<div class="compile-mode">
-		<n-input-group>
+		<n-input-group size="tiny">
 			<n-select
 				v-model:value="selectedMode"
 				:options="modeOptions"
-				size="small"
+				size="tiny"
 				style="width: 120px"
 			/>
 			<title-button :icon="ArrowClockwise16Regular" title="编译"></title-button>

@@ -1,6 +1,6 @@
 <template>
     <TitleButton :icon="Alert16Regular" title="消息" @click="handleClick"/>
-    <n-drawer v-model:show="show" title="消息" :show-mask="false" :mask-closable="false" :width="300" :placement="'right'" :to="workbench || undefined">
+    <n-drawer v-model:show="show" title="消息" :show-mask="false" :mask-closable="false" :width="'100%'" :placement="'right'" :to="workbench || undefined">
         <div class="message-content">消息</div>
     </n-drawer>
 </template>

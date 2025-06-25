@@ -4,10 +4,10 @@
  *--------------------------------------------------------------------------------------------*/
 import Store from 'electron-store';
 
-// 主题类型定义
+// theme type
 export type ThemeType = 'light' | 'dark' | 'system';
 
-// 主题配置接口
+// theme config
 export interface ThemeConfig {
 	type: ThemeType;
 	lastUpdated: number;
@@ -19,12 +19,12 @@ export interface ThemeConfig {
 	};
 }
 
-// 存储配置接口
+// store config
 interface ThemeStoreSchema {
 	theme: ThemeConfig;
 }
 
-// 默认主题配置
+// default theme config
 const DEFAULT_THEME: ThemeConfig = {
 	type: 'system',
 	lastUpdated: Date.now(),
@@ -49,7 +49,7 @@ class ThemeManager {
 	}
 
 	/**
-	 * 获取当前主题配置
+	 * get current theme config
 	 */
 	getTheme(): ThemeConfig {
 		try {
@@ -61,7 +61,7 @@ class ThemeManager {
 	}
 
 	/**
-	 * 设置主题类型
+	 * set theme type
 	 */
 	setThemeType(type: ThemeType): void {
 		try {
@@ -81,7 +81,7 @@ class ThemeManager {
 	}
 
 	/**
-	 * 更新自定义颜色
+	 * update custom colors
 	 */
 	updateCustomColors(colors: Partial<ThemeConfig['customColors']>): void {
 		try {
@@ -104,7 +104,7 @@ class ThemeManager {
 	}
 
 	/**
-	 * 重置主题为默认配置
+	 * reset theme to default config
 	 */
 	resetTheme(): void {
 		try {
@@ -117,7 +117,7 @@ class ThemeManager {
 	}
 
 	/**
-	 * 获取主题最后更新时间
+	 * get theme last updated time
 	 */
 	getLastUpdated(): number {
 		const theme = this.getTheme();
@@ -125,7 +125,7 @@ class ThemeManager {
 	}
 
 	/**
-	 * 检查主题是否需要更新
+	 * check theme is outdated
 	 */
 	isThemeOutdated(maxAge: number): boolean {
 		const lastUpdated = this.getLastUpdated();
@@ -134,5 +134,5 @@ class ThemeManager {
 	}
 }
 
-// 导出单例实例
+// export singleton instance
 export const themeManager = new ThemeManager();
